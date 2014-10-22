@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
+<jardesc>
+    <jar path="MinesWeeperPanelBasedPattern/MinesWeeper.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/MinesWeeperPanelBasedPattern/MinesWeeper.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="true"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" mainClassHandleIdentifier="=MinesWeeperPanelBasedPattern/src&lt;view{DeminorView.java[DeminorView" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <folder path="/MinesWeeperPanelBasedPattern/input"/>
+        <folder path="/MinesWeeperPanelBasedPattern/images"/>
+        <javaElement handleIdentifier="=MinesWeeperPanelBasedPattern/src"/>
+        <file path="/MinesWeeperPanelBasedPattern/.classpath"/>
+        <file path="/MinesWeeperPanelBasedPattern/.project"/>
+        <file path="/MinesWeeperPanelBasedPattern/MinesWeeper.jardesc"/>
+        <folder path="/MinesWeeperPanelBasedPattern/META-INF"/>
+    </selectedElements>
+</jardesc>
