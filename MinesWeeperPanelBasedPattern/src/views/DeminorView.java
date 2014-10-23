@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -51,7 +52,7 @@ public class DeminorView extends JPanel
     private static void createAndShowGUI()
     {
         frame = new MenuFrame(DEMINOR_TITLE);
-        frame.setDefaultCloseOperation(3);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         createDeminorPanel(initialLevel);
         resize();
         frame.add(deminorPanel);

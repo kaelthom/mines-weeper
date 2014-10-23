@@ -78,7 +78,7 @@ public class HighscoreView extends JPanel
     private static void createAndShowGUI(JPanel panel)
     {
         JFrame frame = new JFrame(HIGHSCORES_TITLE);
-        frame.setDefaultCloseOperation(2);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(panel);
         frame.pack();
         frame.setVisible(true);
