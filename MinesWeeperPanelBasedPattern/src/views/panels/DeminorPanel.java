@@ -10,12 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import languages.LanguageFactory;
 import views.components.Cell;
 
 public class DeminorPanel extends JPanel {
 
-	private static final String GAMELOST = ResourceBundle.getBundle("labels").getString("main.gamelost");
-	private static final String GAMEWON = ResourceBundle.getBundle("labels").getString("main.gamewon");
+	private static final String GAMELOST = ResourceBundle.getBundle("labels",LanguageFactory.getInstance().getLocale()).getString("main.gamelost");
+	private static final String GAMEWON = ResourceBundle.getBundle("labels",LanguageFactory.getInstance().getLocale()).getString("main.gamewon");
 
 	private static final long serialVersionUID = 1L;
 
