@@ -11,13 +11,16 @@ import java.beans.PropertyVetoException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 // Referenced classes of package datas:
 //            Highscore
 
 public class HighscoreDAO
 {
-
+	private static final String NAME_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.name");
+	private static final String DATE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.date");
+	private static final String SCORE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.score");
     public HighscoreDAO()
     {
     }
@@ -36,9 +39,9 @@ public class HighscoreDAO
             int score;
             for(ResultSet rs = statement.executeQuery(query); rs.next(); highscores.add(new Highscore(name, date, score)))
             {
-                name = rs.getString("NAME");
-                date = rs.getString("DATE");
-                score = rs.getInt("SCORE");
+                name = rs.getString(NAME_COLUMN_NAME);
+                date = rs.getString(DATE_COLUMN_NAME);
+                score = rs.getInt(SCORE_COLUMN_NAME);
             }
 
         }
@@ -56,7 +59,12 @@ public class HighscoreDAO
         Connection conn = null;
         try {
 			conn = ConnexionFactory.getConnectionInstance();
-	        String query = (new StringBuilder("INSERT INTO HIGHSCORE VALUES ('")).append(highscore.getName()).append("','").append(highscore.getDate()).append("','").append(highscore.getScore()).toString();
+	        String query = (new StringBuilder("INSERT INTO HIGHSCORE VALUES ('"))
+	        		                  .append(highscore.getName()).append("','")
+	        		                  .append(highscore.getDate()).append("',")
+	        		                  .append(highscore.getScore())
+	        		                  .append(")").toString();
+	        System.out.println(query);
 	        Statement statement = conn.createStatement();
 	        int rs = statement.executeUpdate(query);
 	        return true;
