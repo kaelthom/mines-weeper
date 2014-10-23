@@ -3,14 +3,22 @@ package views.panels;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import languages.LanguageFactory;
+import views.OptionsView;
+
 public class CustomLevelPanel extends JPanel{
 
-	private static final long serialVersionUID = -622076559152117047L;
+    private static final String OPTIONS_CELLS_PER_WIDTH = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("options.cellsperwidth");
+    private static final String OPTIONS_CELLS_PER_HEIGHT = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("options.cellsperheight");
+    private static final String OPTIONS_NUMBER_OF_BOMBS = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("options.numberofbombs");
+
+    private static final long serialVersionUID = -622076559152117047L;
 	private static JTextField cellsPerColumnTextField;
 	private static JTextField cellsPerWidthTextField;
 	private static JTextField nBombsTextField;
@@ -48,7 +56,7 @@ public class CustomLevelPanel extends JPanel{
 			public void keyPressed(KeyEvent e) {
 			}
 		});
-		add(new JLabel("Cells per column"),0);
+		add(new JLabel(OPTIONS_CELLS_PER_HEIGHT),0);
 		add(cellsPerColumnTextField,1);
 
 		setCellsPerWidthTextField(new JTextField("0"));
@@ -68,7 +76,7 @@ public class CustomLevelPanel extends JPanel{
 			public void keyPressed(KeyEvent e) {
 			}
 		});
-		add(new JLabel("Cells per line"),2);
+		add(new JLabel(OPTIONS_CELLS_PER_WIDTH),2);
 		add(cellsPerWidthTextField,3);
 
 		setnBombsTextField(new JTextField("0"));
@@ -89,7 +97,7 @@ public class CustomLevelPanel extends JPanel{
 			public void keyPressed(KeyEvent e) {
 			}
 		});
-		add(new JLabel("Number of bombs"),4);
+		add(new JLabel(OPTIONS_NUMBER_OF_BOMBS),4);
 		add(nBombsTextField,5);
 	}
 

@@ -6,16 +6,23 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import languages.LanguageFactory;
+
 public class OptionsLevelPanel extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 4413639017518473446L;
 
-	private static String[] levelLabel = {"Easy","Intermediate","Expert","Custom"};
+    private static final String OPTIONS_LEVEL_EASY = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("options.level.easy");
+    private static final String OPTIONS_LEVEL_MEDIUM = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("options.level.medium");
+    private static final String OPTIONS_LEVEL_EXPERT = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("options.level.expert");
+    private static final String OPTIONS_LEVEL_CUSTOM = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("options.level.custom");
+	private static String[] levelLabel = {OPTIONS_LEVEL_EASY,OPTIONS_LEVEL_MEDIUM,OPTIONS_LEVEL_EXPERT,OPTIONS_LEVEL_CUSTOM};
 	private static int MnemonicByLevel[] = {KeyEvent.VK_E,KeyEvent.VK_I,KeyEvent.VK_H,KeyEvent.VK_C};
 	private static int bombsByLevel[] = {10,40,300,0};
 	private static int deminorCellsPerWidthByLevel[] = {10,15,40,0};

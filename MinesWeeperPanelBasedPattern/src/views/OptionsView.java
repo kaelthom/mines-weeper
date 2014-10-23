@@ -46,7 +46,7 @@ public class OptionsView extends JPanel
     private static void createAndShowGUI(JPanel panel)
     {
         frame = new JFrame(OPTIONS_TITLE);
-        frame.setDefaultCloseOperation(2);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(frameBounds);
         frame.add(panel);
         frame.setVisible(true);
@@ -70,10 +70,6 @@ public class OptionsView extends JPanel
         if(e.getActionCommand().equals("OK"))
         {
             int level = optionsLevelPanel.getLevel();
-            System.out.println((new StringBuilder("level : ")).append(level).toString());
-            System.out.println((new StringBuilder("cells per width  : ")).append(CustomLevelPanel.getCellsPerWidth()).toString());
-            System.out.println((new StringBuilder("cells per column : ")).append(CustomLevelPanel.getCellsPerColumn()).toString());
-            System.out.println((new StringBuilder("number of bombs  : ")).append(CustomLevelPanel.getnBombs()).toString());
             frame.setVisible(false);
             MenuFrame deminorFrame = DeminorView.getFrame();
             deminorFrame.setVisible(true);
