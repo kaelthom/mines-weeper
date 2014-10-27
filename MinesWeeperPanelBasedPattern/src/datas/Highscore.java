@@ -6,10 +6,10 @@
 package datas;
 
 
-public class Highscore
+public class Highscore implements Comparable<Highscore>
 {
 
-    public Highscore(String name, String date, int score)
+    public Highscore(String name, String date, long score)
     {
         this.date = date;
         this.name = name;
@@ -36,12 +36,12 @@ public class Highscore
         this.date = date;
     }
 
-    public int getScore()
+    public long getScore()
     {
         return score;
     }
 
-    public void setScore(int score)
+    public void setScore(long score)
     {
         this.score = score;
     }
@@ -59,5 +59,15 @@ public class Highscore
     private Long id;
     private String name;
     private String date;
-    private int score;
+    private long score;
+	@Override
+	public int compareTo(Highscore highscore) {
+		if (this.score<highscore.score) {
+			return -1;
+		} else if (this.score>highscore.score) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 }

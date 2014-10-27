@@ -3,6 +3,7 @@ package views.panels;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
@@ -12,6 +13,8 @@ import javax.swing.SwingUtilities;
 
 import languages.LanguageFactory;
 import views.components.Cell;
+import datas.DataManager;
+import datas.Highscore;
 
 public class DeminorPanel extends JPanel {
 
@@ -32,6 +35,8 @@ public class DeminorPanel extends JPanel {
 	private static Rectangle minesPanelBounds;
 	
 	private static CellsPanel cellsPanel;
+	private static long time;
+	private static long percent;
 	
 	public DeminorPanel() {
 	}
@@ -40,6 +45,8 @@ public class DeminorPanel extends JPanel {
 		int cellsPerWidth  = 0; 
 		int cellsPerHeight = 0;
 		int nBombs = 0;
+		time = System.currentTimeMillis();
+		percent = 0;
 		
 		if (iLevel >= 0 && iLevel <= 2) {
 			cellsPerWidth = OptionsLevelPanel.getDeminorCellsPerWidthByLevel()[iLevel];
@@ -97,6 +104,7 @@ public class DeminorPanel extends JPanel {
 											minedCell.showCell(cellsPanel);
 										}
 									}
+									time=System.currentTimeMillis()-time;time=time/1000;
 									JOptionPane.showMessageDialog(cellsPanel, GAMELOST);
 								} else {
 									cellsPanel.showCurrentAndNeighbourCells(cell.getxOcc(), cell.getyOcc(),cell);
@@ -104,6 +112,8 @@ public class DeminorPanel extends JPanel {
 									if (cellsPanel.getDiscoveredCells() == nCellsToWin) {
 										CellsPanel.setWon(true);
 										JOptionPane.showMessageDialog(cellsPanel, GAMEWON);
+										time=System.currentTimeMillis()-time;time=time/1000;
+										DataManager.insertHighscore(new Highscore("", new Date().toLocaleString(), time));
 									}
 								}
 							} else if (SwingUtilities.isRightMouseButton(arg0)) {

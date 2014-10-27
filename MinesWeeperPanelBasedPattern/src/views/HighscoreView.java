@@ -35,7 +35,7 @@ public class HighscoreView extends JPanel
         {
             data[i][0] = ((Highscore)highscores.get(i)).getName();
             data[i][1] = ((Highscore)highscores.get(i)).getDate();
-            data[i][2] = Integer.valueOf(((Highscore)highscores.get(i)).getScore());
+            data[i][2] = Long.valueOf(((Highscore)highscores.get(i)).getScore());
         }
 
         String columnNames[] = {

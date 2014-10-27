@@ -5,13 +5,19 @@
 
 package datas;
 
-import connections.ConnexionFactory;
-
 import java.beans.PropertyVetoException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import connections.ConnexionFactory;
+
 
 // Referenced classes of package datas:
 //            Highscore
@@ -54,26 +60,72 @@ public class HighscoreDAO
         return highscores;
     }
 
-    public boolean addHighscore(Highscore highscore)
+	public void addHighscore(Highscore highscore) {
+		List<Highscore> highscores = DataManager.getHighscores();
+		System.out.println("size table : " + highscores.size());
+		if (highscores.size()<10) {
+	    	addHighscore(highscore,null);
+		} else {
+			Highscore maxHighscore = Collections.max(highscores);
+			System.out.println("maxHighscore : " + maxHighscore.getScore());
+			System.out.println("highscore : " + highscore.getScore());
+			if (maxHighscore.getScore()>highscore.getScore()) {
+		    	addHighscore(highscore,maxHighscore);
+			}
+		}
+	}
+
+	public boolean addHighscore(Highscore highscore, Highscore maxHighscore)
     {
         Connection conn = null;
         try {
 			conn = ConnexionFactory.getConnectionInstance();
-	        String query = (new StringBuilder("INSERT INTO HIGHSCORE VALUES ('"))
-	        		                  .append(highscore.getName()).append("','")
-	        		                  .append(highscore.getDate()).append("',")
-	        		                  .append(highscore.getScore())
-	        		                  .append(")").toString();
-	        System.out.println(query);
-	        Statement statement = conn.createStatement();
-	        int rs = statement.executeUpdate(query);
+			if (maxHighscore!=null) deleteHighscore(maxHighscore, conn);
+	        insertHighscore(highscore, conn);
 	        return true;
-		} catch (PropertyVetoException | SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (SQLException e) {
+			try {
+				createTable(conn);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			addHighscore(highscore, null);
+			System.out.println(e.getErrorCode());
+			System.out.println(e.getMessage());
+			System.out.println(e.getLocalizedMessage());
+			e.printStackTrace();
+		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		} finally {
 	        if (conn != null) ConnexionFactory.close();
 		}
         return false;
     }
+
+	private void insertHighscore(Highscore highscore, Connection conn)
+			throws SQLException {
+		String query = (new StringBuilder("INSERT INTO HIGHSCORE VALUES ('"))
+                .append(highscore.getName()).append("','")
+                .append(highscore.getDate()).append("',")
+                .append(highscore.getScore())
+                .append(")").toString();;
+        		System.out.println(query);
+		Statement statement = conn.createStatement();
+		int rs = statement.executeUpdate(query);
+	}
+
+	private void createTable(Connection conn) throws SQLException {
+		String query = new StringBuilder("CREATE TABLE HIGHSCORE (NAME varchar(255),DATE varchar(255),SCORE int )").toString();
+		System.out.println(query);
+		Statement statement = conn.createStatement();
+		int rs = statement.executeUpdate(query);
+	}
+
+	public void deleteHighscore (Highscore highscore, Connection conn) throws SQLException {
+			String query = new StringBuilder("DELETE FROM HIGHSCORE WHERE SCORE = ?").toString();
+			System.out.println(query);
+	        PreparedStatement statement = conn.prepareStatement(query);
+	        statement.setLong(1, highscore.getScore());
+	        int rs = statement.executeUpdate();
+	}
 }
