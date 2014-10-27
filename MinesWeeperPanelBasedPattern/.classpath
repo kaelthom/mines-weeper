@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="datas"/>
 	<classpathentry kind="src" path="connections"/>
 	<classpathentry kind="src" path="images"/>
 	<classpathentry kind="src" path="messages"/>

@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import languages.LanguageFactory;
-import views.OptionsView;
 
 public class CustomLevelPanel extends JPanel{
 

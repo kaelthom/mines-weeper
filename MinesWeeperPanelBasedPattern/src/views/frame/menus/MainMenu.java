@@ -97,7 +97,9 @@ public class MainMenu
     };
     private JMenuItem items[][] = {
         {
-            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gamenew")), new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gameoptions")), new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gameclose"))
+            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gamenew")), 
+            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gameoptions")), 
+            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gameclose"))
         }, {
             new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.optionshighscore"))
         }
