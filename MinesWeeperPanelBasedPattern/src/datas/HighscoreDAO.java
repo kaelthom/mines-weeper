@@ -122,7 +122,7 @@ public class HighscoreDAO
 	}
 
 	public void deleteHighscore (Highscore highscore, Connection conn) throws SQLException {
-			String query = new StringBuilder("DELETE FROM HIGHSCORE WHERE SCORE = ?").toString();
+			String query = new StringBuilder("DELETE FROM HIGHSCORE WHERE SCORE = ? AND ROWNUM = 1").toString();
 			System.out.println(query);
 	        PreparedStatement statement = conn.prepareStatement(query);
 	        statement.setLong(1, highscore.getScore());
