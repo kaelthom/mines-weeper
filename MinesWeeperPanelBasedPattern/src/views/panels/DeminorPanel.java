@@ -41,7 +41,7 @@ public class DeminorPanel extends JPanel {
 	public DeminorPanel() {
 	}
 
-	public static DeminorPanel createDeminorPanel(int iLevel) {
+	public static DeminorPanel createPanel(int iLevel) {
 		int cellsPerWidth  = 0; 
 		int cellsPerHeight = 0;
 		int nBombs = 0;
@@ -117,6 +117,8 @@ public class DeminorPanel extends JPanel {
 										JOptionPane.showMessageDialog(cellsPanel, GAMEWON);
 										time=System.currentTimeMillis()-time;time=time/1000;
 										percent = 100;
+										System.out.println("time : " + time);
+										System.out.println("percent : " + percent);
 										DataManager.insertHighscore(new Highscore("", new Date().toLocaleString(), time, percent));
 									}
 								}
