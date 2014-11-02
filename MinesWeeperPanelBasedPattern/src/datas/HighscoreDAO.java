@@ -81,9 +81,11 @@ public class HighscoreDAO
 	    	addHighscore(highscore,null);
 		} else {
 			Highscore maxHighscore = Collections.max(highscores);
-			System.out.println("maxHighscore : " + maxHighscore.getScore());
-			System.out.println("highscore : " + highscore.getScore());
-			if (maxHighscore.getScore()>highscore.getScore()) {
+			System.out.println("maxscore : " + maxHighscore.getScore());
+			System.out.println("maxpercent : " + maxHighscore.getPercent());
+			System.out.println("score : " + highscore.getScore());
+			System.out.println("percent : " + highscore.getPercent());
+			if (maxHighscore.compareTo(highscore)==1) {
 		    	addHighscore(highscore,maxHighscore);
 			}
 		}
