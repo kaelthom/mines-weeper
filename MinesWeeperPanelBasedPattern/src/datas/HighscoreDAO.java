@@ -28,6 +28,7 @@ public class HighscoreDAO
 	private static final String NAME_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.name");
 	private static final String DATE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.date");
 	private static final String SCORE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.score");
+	private static final String PERCENT_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.percent");
     public HighscoreDAO()
     {
     }
@@ -40,18 +41,22 @@ public class HighscoreDAO
         try
         {
             conn = ConnexionFactory.getConnectionInstance();
-            String query = "SELECT * FROM HIGHSCORE_" + levelS + " ORDER BY SCORE";
+            String query = "SELECT * FROM HIGHSCORE_" + levelS;
             Statement statement = conn.createStatement();
             String name;
             String date;
-            int score;
-            for(ResultSet rs = statement.executeQuery(query); rs.next(); highscores.add(new Highscore(name, date, score)))
+            long score;
+            int percent;
+            for(ResultSet rs = statement.executeQuery(query); rs.next();)
             {
                 name = rs.getString(NAME_COLUMN_NAME);
                 date = rs.getString(DATE_COLUMN_NAME);
-                score = rs.getInt(SCORE_COLUMN_NAME);
+                score = rs.getLong(SCORE_COLUMN_NAME);
+                percent = rs.getInt(PERCENT_COLUMN_NAME);
+                
+                highscores.add(new Highscore(name, date, score, percent));
             }
-
+            Collections.sort(highscores);
         }
         catch(Exception e)
         {
@@ -93,12 +98,12 @@ public class HighscoreDAO
 	        insertHighscore(highscore, conn);
 	        return true;
 		} catch (SQLException e) {
-			try {
-				createTable(conn);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			addHighscore(highscore, null);
+//			try {
+//				createTable(conn);
+//			} catch (SQLException e1) {
+//				e1.printStackTrace();
+//			}
+//			addHighscore(highscore, null);
 			System.out.println(e.getErrorCode());
 			System.out.println(e.getMessage());
 			System.out.println(e.getLocalizedMessage());
@@ -116,12 +121,14 @@ public class HighscoreDAO
 		String level = Integer.toString(DeminorView.getLevel());
 		String query = new StringBuilder("INSERT INTO HIGHSCORE_")
 		        .append(level)
-		        .append("(NAME,DATE,SCORE) VALUES ('")
+		        .append("(NAME,DATE,SCORE,PERCENT) VALUES ('")
                 .append(highscore.getName())
                 .append("','")
                 .append(highscore.getDate())
                 .append("',")
                 .append(highscore.getScore())
+                .append(",")
+                .append(highscore.getPercent())
                 .append(")").toString();
         		System.out.println(query);
 		Statement statement = conn.createStatement();
@@ -135,7 +142,8 @@ public class HighscoreDAO
 		                                .append(" (MAP_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
 		                                		+ "NAME varchar(255),"
 		                                		+ "DATE varchar(255),"
-		                                		+ "SCORE int )").toString();
+		                                		+ "SCORE int,"
+				                                + "PERCENT int )").toString();
 		System.out.println(query);
 		Statement statement = conn.createStatement();
 		int rs = statement.executeUpdate(query);

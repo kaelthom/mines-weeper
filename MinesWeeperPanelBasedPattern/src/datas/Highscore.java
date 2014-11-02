@@ -9,14 +9,29 @@ package datas;
 public class Highscore implements Comparable<Highscore>
 {
 
-    public Highscore(String name, String date, long score)
+    private Long id;
+    private String name;
+    private String date;
+    private long score;
+	private int percent;
+
+	public Highscore(String name, String date, long score, int percent)
     {
         this.date = date;
         this.name = name;
         this.score = score;
+        this.percent = percent;
     }
 
-    public String getName()
+    public int getPercent() {
+		return percent;
+	}
+
+	public void setPercent(int percent) {
+		this.percent = percent;
+	}
+
+	public String getName()
     {
         return name;
     }
@@ -56,18 +71,20 @@ public class Highscore implements Comparable<Highscore>
         this.id = id;
     }
 
-    private Long id;
-    private String name;
-    private String date;
-    private long score;
 	@Override
 	public int compareTo(Highscore highscore) {
-		if (this.score<highscore.score) {
-			return -1;
-		} else if (this.score>highscore.score) {
+		if (this.percent<highscore.percent) {
 			return 1;
+		} else if (this.percent>highscore.percent) {
+			return -1;
 		} else {
-			return 0;
+			if (this.score<highscore.score) {
+				return -1;
+			} else if (this.score>highscore.score) {
+				return 1;
+			} else {
+				return 0;
+			}
 		}
 	}
 }

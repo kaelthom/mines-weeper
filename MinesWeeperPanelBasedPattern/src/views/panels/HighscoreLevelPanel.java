@@ -12,7 +12,7 @@ public class HighscoreLevelPanel extends JPanel {
 
     private HighscoreLevelPanel(String level)
     {
-        levelButton = new JButton(ResourceBundle.getBundle("labels").getString("options.level." + level));        
+    	levelButton = new JButton(ResourceBundle.getBundle("labels").getString("options.level." + level));
         add(levelButton);
     }
 

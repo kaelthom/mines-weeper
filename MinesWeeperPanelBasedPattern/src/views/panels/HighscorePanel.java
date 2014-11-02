@@ -18,6 +18,7 @@ public class HighscorePanel extends JPanel {
     public static final String NAME_COLUMN_NAME = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("highscores.columnname.name");
     public static final String DATE_COLUMN_NAME = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("highscores.columnname.date");
     public static final String SCORE_COLUMN_NAME = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("highscores.columnname.score");
+    public static final String PERCENT_COLUMN_NAME = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("highscores.columnname.percent");
 
 	private HighscorePanel(int level) {
         List<Highscore> highscores = DataManager.getHighscores(level);
@@ -31,12 +32,13 @@ public class HighscorePanel extends JPanel {
 	}
 
 	private JTable createTable(List<Highscore> highscores) {
-		Object data[][] = new Object[10][3];
+		Object data[][] = new Object[10][4];
 		for(int i = 0; i < highscores.size(); i++)
 		{
 		    data[i][0] = ((Highscore)highscores.get(i)).getName();
 		    data[i][1] = ((Highscore)highscores.get(i)).getDate();
 		    data[i][2] = Long.toString(((Highscore)highscores.get(i)).getScore());
+		    data[i][3] = Integer.toString(((Highscore)highscores.get(i)).getPercent());
 		}
 		if (highscores.size()<10) {
 			for(int i = highscores.size(); i < 10; i++)
@@ -44,12 +46,13 @@ public class HighscorePanel extends JPanel {
 			    data[i][0] = "";
 			    data[i][1] = "";
 			    data[i][2] = "";
+			    data[i][3] = "";
 			}
 		}
 		
 
 		String columnNames[] = {
-		    NAME_COLUMN_NAME, DATE_COLUMN_NAME, SCORE_COLUMN_NAME
+		    NAME_COLUMN_NAME, DATE_COLUMN_NAME, SCORE_COLUMN_NAME,PERCENT_COLUMN_NAME
 		};
 		final JTable table = new JTable(data, columnNames);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 11*15));
