@@ -1,6 +1,6 @@
 package views.panels;
 
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +14,7 @@ public class HighscoreMainPanel extends JPanel implements ActionListener{
 
     private HighscoreMainPanel(int level)
     {
-        super(new GridLayout(1, 2));
+        super(new BorderLayout(10, 10));
     	highscoreMainLevelPanel = HighscoreMainLevelPanel.createPanel();
     	highscoreMainLevelPanel.getHighscoreLevelEasyPanel().getLevelButton().setActionCommand("easy");
     	highscoreMainLevelPanel.getHighscoreLevelEasyPanel().getLevelButton().addActionListener(this);
@@ -23,8 +23,8 @@ public class HighscoreMainPanel extends JPanel implements ActionListener{
     	highscoreMainLevelPanel.getHighscoreLevelExpertPanel().getLevelButton().setActionCommand("expert");
     	highscoreMainLevelPanel.getHighscoreLevelExpertPanel().getLevelButton().addActionListener(this);
     	highscorePanel = HighscorePanel.createPanel(level);
-        add(highscoreMainLevelPanel);
-        add(highscorePanel);
+        add(highscoreMainLevelPanel,BorderLayout.NORTH);
+        add(highscorePanel,BorderLayout.CENTER);
     }
 
 	public static HighscoreMainPanel createPanel(int level) {

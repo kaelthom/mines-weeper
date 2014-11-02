@@ -12,7 +12,7 @@ public class HighscoreMainLevelPanel extends JPanel {
 
     private HighscoreMainLevelPanel()
     {
-    	setLayout(new GridLayout(3,1));
+    	setLayout(new GridLayout(1,3));
     	highscoreLevelEasyPanel = HighscoreLevelPanel.createPanel("easy");
     	highscoreLevelMediumPanel = HighscoreLevelPanel.createPanel("medium");
     	highscoreLevelExpertPanel = HighscoreLevelPanel.createPanel("expert");
