@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import views.DeminorView;
+
 // Referenced classes of package datas:
 //            HighscoreDAO
 
@@ -19,9 +21,9 @@ public class DataManager
     {
     }
 
-    public static List<Highscore> getHighscores()
+    public static List<Highscore> getHighscores(int level)
     {
-    	highscores = (new HighscoreDAO()).getHighscoreList();
+    	highscores = (new HighscoreDAO()).getHighscoreList(level);
         return highscores;
     }
 
@@ -33,7 +35,8 @@ public class DataManager
     private static List<Highscore> highscores = new ArrayList<>();
 
 	public static void insertHighscore(Highscore highscore) {
-		List<Highscore> highscores = DataManager.getHighscores();
+		int level = DeminorView.getLevel();
+		List<Highscore> highscores = DataManager.getHighscores(level);
 		System.out.println("size table : " + highscores.size());
 		if (highscores.size()<10) {
 	    	new HighscoreDAO().addHighscore(highscore);

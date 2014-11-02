@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import views.DeminorView;
 import connections.ConnexionFactory;
 
 
@@ -31,14 +32,15 @@ public class HighscoreDAO
     {
     }
 
-    public List<Highscore> getHighscoreList()
+    public List<Highscore> getHighscoreList(int level)
     {
-        List<Highscore> highscores = new ArrayList<>();
+        String levelS = Integer.toString(level);
+    	List<Highscore> highscores = new ArrayList<>();
         Connection conn = null;
         try
         {
             conn = ConnexionFactory.getConnectionInstance();
-            String query = "SELECT * FROM HIGHSCORE ORDER BY SCORE";
+            String query = "SELECT * FROM HIGHSCORE_" + levelS + " ORDER BY SCORE";
             Statement statement = conn.createStatement();
             String name;
             String date;
@@ -53,7 +55,13 @@ public class HighscoreDAO
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+			try {
+				createTable(conn);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			return null;
         } finally {
             if (conn != null) ConnexionFactory.close();
         }
@@ -61,7 +69,8 @@ public class HighscoreDAO
     }
 
 	public void addHighscore(Highscore highscore) {
-		List<Highscore> highscores = DataManager.getHighscores();
+		int level = DeminorView.getLevel();
+		List<Highscore> highscores = DataManager.getHighscores(level);
 		System.out.println("size table : " + highscores.size());
 		if (highscores.size()<10) {
 	    	addHighscore(highscore,null);
@@ -104,28 +113,45 @@ public class HighscoreDAO
 
 	private void insertHighscore(Highscore highscore, Connection conn)
 			throws SQLException {
-		String query = (new StringBuilder("INSERT INTO HIGHSCORE VALUES ('"))
-                .append(highscore.getName()).append("','")
-                .append(highscore.getDate()).append("',")
+		String level = Integer.toString(DeminorView.getLevel());
+		String query = new StringBuilder("INSERT INTO HIGHSCORE_")
+		        .append(level)
+		        .append("(NAME,DATE,SCORE) VALUES ('")
+                .append(highscore.getName())
+                .append("','")
+                .append(highscore.getDate())
+                .append("',")
                 .append(highscore.getScore())
-                .append(")").toString();;
+                .append(")").toString();
         		System.out.println(query);
 		Statement statement = conn.createStatement();
 		int rs = statement.executeUpdate(query);
 	}
 
 	private void createTable(Connection conn) throws SQLException {
-		String query = new StringBuilder("CREATE TABLE HIGHSCORE (NAME varchar(255),DATE varchar(255),SCORE int )").toString();
+		String level = Integer.toString(DeminorView.getLevel());
+		String query = new StringBuilder("CREATE TABLE HIGHSCORE_")
+		                                .append(level)
+		                                .append(" (MAP_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
+		                                		+ "NAME varchar(255),"
+		                                		+ "DATE varchar(255),"
+		                                		+ "SCORE int )").toString();
 		System.out.println(query);
 		Statement statement = conn.createStatement();
 		int rs = statement.executeUpdate(query);
 	}
 
 	public void deleteHighscore (Highscore highscore, Connection conn) throws SQLException {
-			String query = new StringBuilder("DELETE FROM HIGHSCORE WHERE SCORE = ? AND ROWNUM = 1").toString();
-			System.out.println(query);
-	        PreparedStatement statement = conn.prepareStatement(query);
-	        statement.setLong(1, highscore.getScore());
-	        int rs = statement.executeUpdate();
+		String level = Integer.toString(DeminorView.getLevel());
+		String highscoreTable = "HIGHSCORE_" + level;
+		String query = new StringBuilder("DELETE FROM ")
+		                                .append(highscoreTable)
+		                                .append(" WHERE SCORE IN (SELECT SCORE FROM ")
+		                                .append(highscoreTable)
+		                                .append(" WHERE SCORE = ? ORDER BY DATE FETCH FIRST 1 ROWS ONLY)").toString();
+		System.out.println(query);
+	    PreparedStatement statement = conn.prepareStatement(query);
+	    statement.setLong(1, highscore.getScore());
+	    int rs = statement.executeUpdate();
 	}
 }

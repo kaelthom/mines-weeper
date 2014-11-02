@@ -103,4 +103,8 @@ public class OptionsLevelPanel extends JPanel implements ActionListener{
 		}
 	}
 
+	public static String[] getLevelLabel() {
+		return levelLabel;
+	}
+
 }
