@@ -26,6 +26,27 @@ public class MainMenu
     implements ActionListener
 {
 
+
+    private JMenu menus[] = {
+        new JMenu(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.game")), new JMenu(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.options"))
+    };
+    private JMenuItem items[][] = {
+        {
+            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gamenew")), 
+            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gameoptions")), 
+            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gameclose"))
+        }, {
+            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.optionshighscore"))
+        }
+    };
+    private String actionCommands[][] = {
+        {
+            (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.game")))).append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.gamenew")).toString(), (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.game")))).append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.gameoptions")).toString(), (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.game")))).append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.gameclose")).toString()
+        }, {
+            (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.options")))).append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.optionshighscore")).toString()
+        }
+    };
+    JMenuBar menuBar;
     public MainMenu()
     {
         setMenuBar();
@@ -89,27 +110,6 @@ public class MainMenu
             deminorFrame.repaint();
         } else
         if(e.getActionCommand().equals("OptionsHighscores"))
-            HighscoreView.launchFrame(new HighscoreView(DataManager.getHighscores()));
+        	HighscoreView.launchFrame(new HighscoreView());
     }
-
-    private JMenu menus[] = {
-        new JMenu(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.game")), new JMenu(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.options"))
-    };
-    private JMenuItem items[][] = {
-        {
-            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gamenew")), 
-            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gameoptions")), 
-            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gameclose"))
-        }, {
-            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.optionshighscore"))
-        }
-    };
-    private String actionCommands[][] = {
-        {
-            (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.game")))).append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.gamenew")).toString(), (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.game")))).append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.gameoptions")).toString(), (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.game")))).append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.gameclose")).toString()
-        }, {
-            (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.options")))).append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.optionshighscore")).toString()
-        }
-    };
-    JMenuBar menuBar;
 }

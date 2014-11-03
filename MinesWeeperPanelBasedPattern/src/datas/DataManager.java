@@ -6,7 +6,6 @@
 package datas;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 // Referenced classes of package datas:
@@ -19,9 +18,9 @@ public class DataManager
     {
     }
 
-    public static List<Highscore> getHighscores()
+    public static List<Highscore> getHighscores(int level)
     {
-    	highscores = (new HighscoreDAO()).getHighscoreList();
+    	highscores = (new HighscoreDAO()).getHighscoreList(level);
         return highscores;
     }
 
@@ -33,18 +32,7 @@ public class DataManager
     private static List<Highscore> highscores = new ArrayList<>();
 
 	public static void insertHighscore(Highscore highscore) {
-		List<Highscore> highscores = DataManager.getHighscores();
-		System.out.println("size table : " + highscores.size());
-		if (highscores.size()<10) {
-	    	new HighscoreDAO().addHighscore(highscore);
-		} else {
-			Highscore maxHighscore = Collections.max(highscores);
-			System.out.println("maxHighscore : " + maxHighscore.getScore());
-			System.out.println("highscore : " + highscore.getScore());
-			if (maxHighscore.getScore()>highscore.getScore()) {
-		    	new HighscoreDAO().addHighscore(highscore);
-			}
-		}
+	   	new HighscoreDAO().addHighscore(highscore);
 	}
 
 }

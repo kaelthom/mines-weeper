@@ -34,7 +34,7 @@ public class DeminorView extends JPanel
     {
         setLevel(iLevel);
         ImageHandler.createImages();
-        deminorPanel = DeminorPanel.createDeminorPanel(iLevel);
+        deminorPanel = DeminorPanel.createPanel(iLevel);
         LanguageFactory.initLanguage();
     }
 

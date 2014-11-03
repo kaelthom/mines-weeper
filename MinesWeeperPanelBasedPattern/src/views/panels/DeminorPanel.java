@@ -23,8 +23,8 @@ public class DeminorPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private static int cellWidth = 25;
-	private static int cellHeight = 25;
+	private static int cellWidth = 23;
+	private static int cellHeight = 23;
 
 	private static int DeminorX = 0;
 	private static int DeminorY = 0;
@@ -36,12 +36,12 @@ public class DeminorPanel extends JPanel {
 	
 	private static CellsPanel cellsPanel;
 	private static long time;
-	private static long percent;
+	private static int percent;
 	
 	public DeminorPanel() {
 	}
 
-	public static DeminorPanel createDeminorPanel(int iLevel) {
+	public static DeminorPanel createPanel(int iLevel) {
 		int cellsPerWidth  = 0; 
 		int cellsPerHeight = 0;
 		int nBombs = 0;
@@ -106,6 +106,9 @@ public class DeminorPanel extends JPanel {
 									}
 									time=System.currentTimeMillis()-time;time=time/1000;
 									JOptionPane.showMessageDialog(cellsPanel, GAMELOST);
+									percent = (cellsPanel.getDiscoveredCells()-CellsPanel.getnBombs())*100/
+											  (CellsPanel.getCellsPerHeight()*CellsPanel.getCellsPerWidth()-CellsPanel.getnBombs());
+									DataManager.insertHighscore(new Highscore("", new Date().toLocaleString(), time, percent));
 								} else {
 									cellsPanel.showCurrentAndNeighbourCells(cell.getxOcc(), cell.getyOcc(),cell);
 									int nCellsToWin = CellsPanel.getCellsPerHeight()*CellsPanel.getCellsPerHeight()-CellsPanel.getnBombs();
@@ -113,7 +116,10 @@ public class DeminorPanel extends JPanel {
 										CellsPanel.setWon(true);
 										JOptionPane.showMessageDialog(cellsPanel, GAMEWON);
 										time=System.currentTimeMillis()-time;time=time/1000;
-										DataManager.insertHighscore(new Highscore("", new Date().toLocaleString(), time));
+										percent = 100;
+										System.out.println("time : " + time);
+										System.out.println("percent : " + percent);
+										DataManager.insertHighscore(new Highscore("", new Date().toLocaleString(), time, percent));
 									}
 								}
 							} else if (SwingUtilities.isRightMouseButton(arg0)) {
