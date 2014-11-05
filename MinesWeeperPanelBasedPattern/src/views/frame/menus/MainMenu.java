@@ -20,7 +20,6 @@ import views.DeminorView;
 import views.HighscoreView;
 import views.OptionsView;
 import views.frame.MenuFrame;
-import datas.DataManager;
 
 public class MainMenu
     implements ActionListener
@@ -89,27 +88,31 @@ public class MainMenu
     {
         System.out.println("actionPerformed from MainMenu called!");
         System.out.println((new StringBuilder("actionCommand : ")).append(e.getActionCommand()).toString());
-        if(e.getActionCommand().equals("FileClose"))
+        if(e.getActionCommand().equals("FileClose")) {
             System.exit(0);
-        else
-        if(e.getActionCommand().equals("FileOptions"))
-        {
-            JFrame optionsFrame = OptionsView.getFrame();
-            if(optionsFrame == null)
-                OptionsView.launchFrame(new OptionsView());
-            else
-                optionsFrame.setVisible(true);
-        } else
-        if(e.getActionCommand().equals("FileNew"))
-        {
+        } else if(e.getActionCommand().equals("FileOptions")) {
+        	JFrame optionsFrame = OptionsView.getFrame();
+        	if(optionsFrame == null) {
+        		OptionsView.launchFrame(new OptionsView());
+        	}
+        	else {
+        		optionsFrame.setVisible(true);
+        	}
+        } else if(e.getActionCommand().equals("FileNew")) {
             int level = DeminorView.getLevel();
             MenuFrame deminorFrame = DeminorView.getFrame();
             deminorFrame.getContentPane().removeAll();
             DeminorView.createDeminorPanel(level);
             deminorFrame.add(DeminorView.getDeminorPanel());
             deminorFrame.repaint();
-        } else
-        if(e.getActionCommand().equals("OptionsHighscores"))
-        	HighscoreView.launchFrame(new HighscoreView());
+        } else if(e.getActionCommand().equals("OptionsHighscores")) {
+        	JFrame highscoreFrame = HighscoreView.getFrame();
+        	if(highscoreFrame == null) {
+            	HighscoreView.launchFrame(new HighscoreView());
+        	}
+        	else {
+        		highscoreFrame.setVisible(true);
+        	}
+        }
     }
 }
