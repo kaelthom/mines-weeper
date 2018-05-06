@@ -67,7 +67,7 @@ public class ConnexionFactory
         } else
         if(ConnexionProperties.DBMS.equals("derby"))
         {
-            url = (new StringBuilder("jdbc:")).append(ConnexionProperties.DBMS).append(":").append(ConnexionProperties.DB_NAME).append(";").toString();
+            url = (new StringBuilder("jdbc:")).append(ConnexionProperties.DBMS).append(":").append(ConnexionProperties.DB_NAME).append(";create=true").toString();
             cpds.setDriverClass("org.apache.derby.jdbc.EmbeddedDriver");
         } else
         if(ConnexionProperties.DBMS.equals("postgresql"))
