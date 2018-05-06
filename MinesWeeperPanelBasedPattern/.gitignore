@@ -1,0 +1,6 @@
+/MinesWeeper.jar
+/bin/
+*.log
+/target/
+/.project
+/.classpath
