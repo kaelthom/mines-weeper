@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import datas.DataManager;
 import languages.LanguageFactory;
 import views.frame.MenuFrame;
 import views.panels.CellsPanel;
@@ -61,7 +62,8 @@ public class DeminorView extends JPanel
 
     public static void main(String args[])
     {
-        SwingUtilities.invokeLater(new Runnable() {
+    	DataManager.getHighscores(initialLevel);
+    	SwingUtilities.invokeLater(new Runnable() {
 
             public void run()
             {
