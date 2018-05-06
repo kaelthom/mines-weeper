@@ -61,7 +61,7 @@ public class HighscoreDAO
         catch(Exception e)
         {
 			try {
-				createTable(conn);
+				createTable(conn,level);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -137,8 +137,8 @@ public class HighscoreDAO
 		int rs = statement.executeUpdate(query);
 	}
 
-	private void createTable(Connection conn) throws SQLException {
-		String level = Integer.toString(DeminorView.getLevel());
+	private void createTable(Connection conn, int inputLevel) throws SQLException {
+		String level = Integer.toString(inputLevel);
 		String query = new StringBuilder("CREATE TABLE HIGHSCORE_")
 		                                .append(level)
 		                                .append(" (MAP_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
