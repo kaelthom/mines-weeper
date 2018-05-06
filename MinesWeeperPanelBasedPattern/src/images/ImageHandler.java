@@ -11,7 +11,7 @@ public class ImageHandler {
 	private static ImageIcon bombIcon;
 	private static ImageIcon flagIcon;
 	private static ImageIcon hiddenIcon;
-	private static String path = "g:/git/mines-weeper/MinesWeeperPanelBasedPattern/images/";
+	private static String path = "C:/Users/thomere/Dropbox/workspace/Games/MinesWeeperFrameBasedPattern/images/";
 
 	public static void createImages() {
 		setBombIcon(new ImageIcon(path + "demineur.png"));
