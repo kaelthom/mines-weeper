@@ -16,8 +16,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import views.DeminorView;
 import connections.ConnexionFactory;
+import views.DeminorView;
+import views.panels.DeminorPanel;
 
 
 // Referenced classes of package datas:
@@ -73,12 +74,11 @@ public class HighscoreDAO
         return highscores;
     }
 
-	public void addHighscore(Highscore highscore) {
-		int level = DeminorView.getLevel();
+	public void addHighscore(Highscore highscore, int level) {
 		List<Highscore> highscores = DataManager.getHighscores(level);
 		System.out.println("size table : " + highscores.size());
 		if (highscores.size()<10) {
-	    	addHighscore(highscore,null);
+	    	addHighscore(highscore, level, null);
 		} else {
 			Highscore maxHighscore = Collections.max(highscores);
 			System.out.println("maxscore : " + maxHighscore.getScore());
@@ -86,18 +86,18 @@ public class HighscoreDAO
 			System.out.println("score : " + highscore.getScore());
 			System.out.println("percent : " + highscore.getPercent());
 			if (maxHighscore.compareTo(highscore)==1) {
-		    	addHighscore(highscore,maxHighscore);
+		    	addHighscore(highscore, level, maxHighscore);
 			}
 		}
 	}
 
-	public boolean addHighscore(Highscore highscore, Highscore maxHighscore)
+	public boolean addHighscore(Highscore highscore, int level, Highscore maxHighscore)
     {
         Connection conn = null;
         try {
 			conn = ConnexionFactory.getConnectionInstance();
 			if (maxHighscore!=null) deleteHighscore(maxHighscore, conn);
-	        insertHighscore(highscore, conn);
+	        insertHighscore(highscore, level, conn);
 	        return true;
 		} catch (SQLException e) {
 //			try {
@@ -118,9 +118,8 @@ public class HighscoreDAO
         return false;
     }
 
-	private void insertHighscore(Highscore highscore, Connection conn)
+	private void insertHighscore(Highscore highscore, int level, Connection conn)
 			throws SQLException {
-		String level = Integer.toString(DeminorView.getLevel());
 		String query = new StringBuilder("INSERT INTO HIGHSCORE_")
 		        .append(level)
 		        .append("(NAME,DATE,SCORE,PERCENT) VALUES ('")

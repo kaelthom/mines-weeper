@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import actions.optionssubmit.OptionsSubmitAction;
+import actions.optionssubmit.OptionsSubmitActionInput;
 import languages.LanguageFactory;
 import views.frame.MenuFrame;
 import views.panels.CustomLevelPanel;
@@ -69,15 +71,7 @@ public class OptionsView extends JPanel
     {
         if(e.getActionCommand().equals("OK"))
         {
-            int level = optionsLevelPanel.getLevel();
-            frame.setVisible(false);
-            MenuFrame deminorFrame = DeminorView.getFrame();
-            deminorFrame.setVisible(true);
-            deminorFrame.getContentPane().removeAll();
-            DeminorView.createDeminorPanel(level);
-            DeminorView.resize();
-            deminorFrame.getContentPane().add(DeminorView.getDeminorPanel());
-            deminorFrame.repaint();
+			new OptionsSubmitAction().execute(new OptionsSubmitActionInput(null,optionsLevelPanel));
         }
     }
 

@@ -31,8 +31,8 @@ public class DataManager
 
     private static List<Highscore> highscores = new ArrayList<>();
 
-	public static void insertHighscore(Highscore highscore) {
-	   	new HighscoreDAO().addHighscore(highscore);
+	public static void insertHighscore(Highscore highscore , int level) {
+	   	new HighscoreDAO().addHighscore(highscore, level);
 	}
 
 }

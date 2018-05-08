@@ -3,76 +3,73 @@ package views.panels;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import languages.LanguageFactory;
+import actions.cellleftclick.CellLeftClickAction;
+import actions.cellleftclick.LeftClickActionInput;
+import actions.cellrightclick.CellRightClickAction;
+import actions.cellrightclick.RightClickActionInput;
+import dto.DeminorGameProperties;
+import dto.DeminorPanelProperties;
+import images.ImageHandler;
+import views.panels.DeminorPanel;
 import views.components.Cell;
-import datas.DataManager;
-import datas.Highscore;
 
 public class DeminorPanel extends JPanel {
 
-	private static final String GAMELOST = ResourceBundle.getBundle("labels",LanguageFactory.getInstance().getLocale()).getString("main.gamelost");
-	private static final String GAMEWON = ResourceBundle.getBundle("labels",LanguageFactory.getInstance().getLocale()).getString("main.gamewon");
-
 	private static final long serialVersionUID = 1L;
 
+	private static int level;
+
+	private static DeminorGameProperties gameProperties;
+	
 	private static int cellWidth = 23;
 	private static int cellHeight = 23;
 
-	private static int DeminorX = 0;
-	private static int DeminorY = 0;
-	private static Rectangle DeminorBounds;
-	
-	private static int minesPanelX = 10;
-	private static int minesPanelY = 10;
-	private static Rectangle minesPanelBounds;
+	private static Rectangle bounds;
 	
 	private static CellsPanel cellsPanel;
-	private static long time;
-	private static int percent;
 	
-	public DeminorPanel() {
+	public DeminorPanel(Rectangle bounds) {
+		this.setLayout(null);
+		this.setBounds(bounds);
 	}
 
-	public static DeminorPanel createPanel(int iLevel) {
-		int cellsPerWidth  = 0; 
-		int cellsPerHeight = 0;
+
+	public static DeminorPanel createPanel(DeminorGameProperties properties) {
+
+		int iLevel = properties.getLevel();
+
+		ImageHandler.createImages();
+		DeminorPanel.setLevel(iLevel);
+		DeminorPanel.setGameProperties(properties);
+
+		properties.setTime(System.currentTimeMillis());
+		properties.setPercent(0);
+
+		int cellsPerLine  = 0; 
+		int cellsPerColumn = 0;
 		int nBombs = 0;
-		time = System.currentTimeMillis();
-		percent = 0;
 		
-		if (iLevel >= 0 && iLevel <= 2) {
-			cellsPerWidth = OptionsLevelPanel.getDeminorCellsPerWidthByLevel()[iLevel];
-			cellsPerHeight = OptionsLevelPanel.getDeminorCellsPerHeightByLevel()[iLevel];
+		if (level >= 0 && level <= 2) {
+			cellsPerLine = OptionsLevelPanel.getDeminorCellsPerWidthByLevel()[iLevel];
+			cellsPerColumn = OptionsLevelPanel.getDeminorCellsPerHeightByLevel()[iLevel];
 			nBombs = OptionsLevelPanel.getBombsByLevel()[iLevel];
 		} else {
-			cellsPerWidth = CustomLevelPanel.getCellsPerWidth();
-			cellsPerHeight = CustomLevelPanel.getCellsPerColumn();
-			nBombs = CustomLevelPanel.getnBombs();
+			nBombs = properties.getnBombs();
+			cellsPerLine = properties.getCellsPerLine();
+			cellsPerColumn = properties.getCellsPerColumn();
 		}
 
-		int minesPanelWidth = cellsPerWidth*cellWidth;
-		int minesPanelHeight = cellsPerHeight*cellHeight;
-		minesPanelBounds = new Rectangle(minesPanelX,minesPanelY,minesPanelWidth, minesPanelHeight);
+		bounds = calculateDeminorBounds(cellsPerLine, cellsPerColumn);
 
-		int deminorWidth = minesPanelWidth+minesPanelX*2;
-		int deminorHeight = minesPanelHeight+minesPanelY*2;
-		DeminorBounds = new Rectangle(DeminorX,DeminorY,deminorWidth, deminorHeight);
+		DeminorPanel deminorPanel = new DeminorPanel(bounds);
 
-		DeminorPanel deminorPanel = new DeminorPanel();
-		deminorPanel.setLayout(null);
-		deminorPanel.setBounds(DeminorBounds);
+		cellsPanel = new CellsPanel(cellsPerLine,cellsPerColumn,nBombs);
 
-		cellsPanel = new CellsPanel(minesPanelBounds,cellsPerWidth,cellsPerHeight,cellWidth,cellHeight,nBombs);
-
-		for (int iOcc = 0 ; iOcc < cellsPerWidth * cellsPerHeight ; iOcc++){
+		for (int iOcc = 0 ; iOcc < cellsPerLine* cellsPerColumn ; iOcc++){
 			Cell button = cellsPanel.getCells().get(iOcc);
 			button.setActionCommand("button" + iOcc);
 			button.addMouseListener(new MouseListener() {
@@ -91,45 +88,10 @@ public class DeminorPanel extends JPanel {
 						Object source = arg0.getSource();
 						if (source instanceof Cell){
 							Cell cell = (Cell) source;
-							int index = cell.getIndex();
-							if (SwingUtilities.isLeftMouseButton(arg0) && !cell.isFlagged()) {
-								if (cell.isMined()) {
-									CellsPanel.setLost(true);
-									Iterator<Integer> it = cellsPanel.getMinedCells().iterator();
-									cell.showCell(cellsPanel);
-									while (it.hasNext()){
-										int minedCellsIndex = it.next();
-										if(index != minedCellsIndex) {
-											Cell minedCell = cellsPanel.getCells().get(minedCellsIndex);
-											minedCell.showCell(cellsPanel);
-										}
-									}
-									time=System.currentTimeMillis()-time;time=time/1000;
-									JOptionPane.showMessageDialog(cellsPanel, GAMELOST);
-									percent = (cellsPanel.getDiscoveredCells()-CellsPanel.getnBombs())*100/
-											  (CellsPanel.getCellsPerHeight()*CellsPanel.getCellsPerWidth()-CellsPanel.getnBombs());
-									DataManager.insertHighscore(new Highscore("", new Date().toLocaleString(), time, percent));
-								} else {
-									cellsPanel.showCurrentAndNeighbourCells(cell.getxOcc(), cell.getyOcc(),cell);
-									int nCellsToWin = CellsPanel.getCellsPerHeight()*CellsPanel.getCellsPerHeight()-CellsPanel.getnBombs();
-									if (cellsPanel.getDiscoveredCells() == nCellsToWin) {
-										CellsPanel.setWon(true);
-										JOptionPane.showMessageDialog(cellsPanel, GAMEWON);
-										time=System.currentTimeMillis()-time;time=time/1000;
-										percent = 100;
-										System.out.println("time : " + time);
-										System.out.println("percent : " + percent);
-										DataManager.insertHighscore(new Highscore("", new Date().toLocaleString(), time, percent));
-									}
-								}
-							} else if (SwingUtilities.isRightMouseButton(arg0)) {
-								if (cell.isHidden()) {
-									if (!cell.isFlagged()) {
-										cell.flagCell();
-									} else {
-										cell.unFlagCell();
-									}
-								}
+							if (SwingUtilities.isRightMouseButton(arg0)) {
+								new CellRightClickAction().execute(new RightClickActionInput(cell));
+							} else if (SwingUtilities.isLeftMouseButton(arg0) && !cell.isFlagged()) {
+								new CellLeftClickAction().execute(new LeftClickActionInput(cell,cellsPanel,DeminorPanel.getGameProperties()));
 							}
 						}
 					}
@@ -152,14 +114,24 @@ public class DeminorPanel extends JPanel {
 		return deminorPanel;
 	}
 	
-	public static Rectangle getMinesPanelBounds() {
-		return minesPanelBounds;
-	}
+	private static Rectangle calculateDeminorBounds(int cellsPerLine, int cellsPerHeight) {
+		int cellWidth = DeminorPanelProperties.getCellWidth();
+		int cellHeight = DeminorPanelProperties.getCellHeight();
+		int minesPanelX = DeminorPanelProperties.getMinesPanelX();
+		int minesPanelY = DeminorPanelProperties.getMinesPanelY();
+		int deminorPanelX = DeminorPanelProperties.getDeminorX();
+		int deminorPanelY = DeminorPanelProperties.getDeminorY();
+		
+		int minesPanelWidth = cellsPerLine*cellWidth;
+		int minesPanelHeight = cellsPerHeight*cellHeight;
 
-	public static void setMinesPanelBounds(Rectangle minesPanelBounds) {
-		DeminorPanel.minesPanelBounds = minesPanelBounds;
+		int deminorWidth = minesPanelWidth + minesPanelX*2;
+		int deminorHeight = minesPanelHeight + minesPanelY*2;
+		Rectangle bounds = new Rectangle(deminorPanelX,deminorPanelY,deminorWidth, deminorHeight);
+		
+		return bounds; 
 	}
-
+	
 	public static int getCellWidth() {
 		return cellWidth;
 	}
@@ -182,6 +154,22 @@ public class DeminorPanel extends JPanel {
 
 	public static void setCellsPanel(CellsPanel cellsPanel) {
 		DeminorPanel.cellsPanel = cellsPanel;
+	}
+
+	public static int getLevel() {
+		return level;
+	}
+
+	public static void setLevel(int level) {
+		DeminorPanel.level = level;
+	}
+
+	public static DeminorGameProperties getGameProperties() {
+		return gameProperties;
+	}
+
+	public static void setGameProperties(DeminorGameProperties gameProperties) {
+		DeminorPanel.gameProperties = gameProperties;
 	}
 
 }

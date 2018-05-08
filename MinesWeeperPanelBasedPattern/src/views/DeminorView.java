@@ -18,6 +18,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import datas.DataManager;
+import dto.DeminorGameProperties;
 import languages.LanguageFactory;
 import views.frame.MenuFrame;
 import views.panels.CellsPanel;
@@ -35,7 +36,7 @@ public class DeminorView extends JPanel
     {
         setLevel(iLevel);
         ImageHandler.createImages();
-        deminorPanel = DeminorPanel.createPanel(iLevel);
+        deminorPanel = DeminorPanel.createPanel(new DeminorGameProperties(iLevel, 0, 0, 0));
         LanguageFactory.initLanguage();
     }
 

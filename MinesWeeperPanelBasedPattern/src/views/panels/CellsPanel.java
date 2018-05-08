@@ -8,45 +8,55 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import dto.DeminorPanelProperties;
 import views.components.Cell;
 
 public class CellsPanel extends JPanel {
 
 	private static final long serialVersionUID = -5474923082252270189L;
-	private static int buttonsPanelXMargin = 0;
-	private static int buttonsPanelYMargin = 0;
-	private static int xSpaceBtwButtons = 0;
-	private static int ySpaceBtwButtons = 0;
-	private static int cellsPerWidth;
-	private static int cellsPerHeight;
+	private static int cellsPerLine;
+	private static int cellsPerColumn;
 	private static int nBombs;
 	private List<Cell> cells = new ArrayList<Cell>(); 
 	private List<Integer> minedCells = new ArrayList<Integer>(); 
 	private int discoveredCells; 
 
+	private Rectangle bounds;
+	
 	private static boolean lost; 
 	private static boolean won; 
 
-	public CellsPanel(Rectangle bounds, int cellsPerWidth, int cellsPerHeight, int cellWidth, int cellHeight, int nBombs) {
+	public CellsPanel(int cellsPerLine, int cellsPerColumn, int nBombs) {
 		super();
+
+		int cellWidth = DeminorPanelProperties.getCellWidth();
+		int cellHeight = DeminorPanelProperties.getCellHeight();
+
+		this.bounds = calculateMinesPanelBounds(cellsPerLine, cellsPerColumn);;
+
 		setLayout(null);
-		setBounds(bounds);
+		setBounds(this.bounds);
 		setOpaque(true);
 
-		setCellsPerHeight(cellsPerHeight);
-		setCellsPerWidth(cellsPerWidth);
+		setCellsPerColumn(cellsPerLine);
+		setCellsPerLine(cellsPerLine);
 		setLost(false);
 		setWon(false);
 		setDiscoveredCells(0);
 		setnBombs(nBombs);
 		
+		int buttonsPanelXMargin = DeminorPanelProperties.getButtonsPanelXMargin();
+		int buttonsPanelYMargin = DeminorPanelProperties.getButtonsPanelYMargin();
+		int xSpaceBtwButtons = DeminorPanelProperties.getxSpaceBtwButtons();
+		int ySpaceBtwButtons = DeminorPanelProperties.getySpaceBtwButtons();
+		
 		int nRemainingBombs=nBombs;
-		int nRemainingCells=cellsPerWidth*cellsPerHeight;
+		int nRemainingCells=cellsPerLine*cellsPerColumn;
 		double bombprobability = nRemainingBombs*1d/nRemainingCells;
 		Cell.setBombProbability(bombprobability);
 		
-		for (int jOcc = 0 ; jOcc < cellsPerHeight ; jOcc++){
-			for (int iOcc = 0 ; iOcc < cellsPerWidth ; iOcc++){
+		for (int jOcc = 0 ; jOcc < cellsPerColumn ; jOcc++){
+			for (int iOcc = 0 ; iOcc < cellsPerLine ; iOcc++){
 				int cellX = buttonsPanelXMargin + iOcc * (cellWidth + xSpaceBtwButtons);
 				int cellY = buttonsPanelYMargin + jOcc * (cellHeight + ySpaceBtwButtons);
 				Rectangle cellBounds = new Rectangle(cellX,cellY,cellWidth, cellHeight);
@@ -65,8 +75,8 @@ public class CellsPanel extends JPanel {
 				Cell.setBombProbability(bombprobability);
 			}
 		}
-		for (int jOcc = 0 ; jOcc < cellsPerHeight ; jOcc++){
-			for (int iOcc = 0 ; iOcc < cellsPerWidth ; iOcc++){
+		for (int jOcc = 0 ; jOcc < cellsPerColumn ; jOcc++){
+			for (int iOcc = 0 ; iOcc < cellsPerLine ; iOcc++){
 				Cell cell = getCells().get(getCellIndex(iOcc, jOcc));
 				if (!cell.isMined()) { 
 					countBombsAround(iOcc,jOcc,cell);
@@ -75,6 +85,16 @@ public class CellsPanel extends JPanel {
 		}
 	}
 
+	private static Rectangle calculateMinesPanelBounds(int cellsPerLine, int cellsPerHeight) {
+		int minesPanelX = DeminorPanelProperties.getMinesPanelX();
+		int minesPanelY = DeminorPanelProperties.getMinesPanelY();
+		int minesPanelWidth = cellsPerLine*DeminorPanelProperties.getCellWidth();
+		int minesPanelHeight = cellsPerHeight*DeminorPanelProperties.getCellHeight();
+		
+		Rectangle bounds = new Rectangle(minesPanelX,minesPanelY,minesPanelWidth, minesPanelHeight);
+		return bounds;
+	}
+	
 	public List<Cell> getCells() {
 		return cells;
 	}
@@ -84,31 +104,31 @@ public class CellsPanel extends JPanel {
 	}
 
 	public int getCellIndex(int x, int y) {
-		int index = (y) * cellsPerWidth + x;
+		int index = (y) * cellsPerLine + x;
 		return index;
 		
 	}
 
 	public Point getCellPosition(int index) {
-		Point cellPoint = new Point(index % cellsPerWidth,index/cellsPerWidth);
+		Point cellPoint = new Point(index % cellsPerLine,index/cellsPerLine);
 		return cellPoint;
 		
 	}
 
-	public static int getCellsPerWidth() {
-		return cellsPerWidth;
+	public static int getCellsPerLine() {
+		return cellsPerLine;
 	}
 
-	public static void setCellsPerWidth(int cellsPerWidth) {
-		CellsPanel.cellsPerWidth = cellsPerWidth;
+	public static void setCellsPerLine(int cellsPerWidth) {
+		CellsPanel.cellsPerLine = cellsPerWidth;
 	}
 
-	public static int getCellsPerHeight() {
-		return cellsPerHeight;
+	public static int getCellsPerColumn() {
+		return cellsPerColumn;
 	}
 
-	public static void setCellsPerHeight(int cellsPerHeight) {
-		CellsPanel.cellsPerHeight = cellsPerHeight;
+	public static void setCellsPerColumn(int cellsPerHeight) {
+		CellsPanel.cellsPerColumn = cellsPerHeight;
 	}
 
 	public static int getnBombs() {
@@ -120,8 +140,8 @@ public class CellsPanel extends JPanel {
 	}
 
 	public void countBombsAround(int iOcc, int jOcc, Cell cell) {
-		if (iOcc > 0 && iOcc < cellsPerWidth-1){
-			if (jOcc > 0 && jOcc < cellsPerHeight-1){
+		if (iOcc > 0 && iOcc < cellsPerLine-1){
+			if (jOcc > 0 && jOcc < cellsPerColumn-1){
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isMined()) cell.incrementNBombsaround();
@@ -136,7 +156,7 @@ public class CellsPanel extends JPanel {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isMined()) cell.incrementNBombsaround();
-			} else if (jOcc == cellsPerHeight-1) {
+			} else if (jOcc == cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isMined()) cell.incrementNBombsaround();
@@ -144,7 +164,7 @@ public class CellsPanel extends JPanel {
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isMined()) cell.incrementNBombsaround();
 			}
 		} else if (iOcc == 0) {
-			if (jOcc > 0 && jOcc < cellsPerHeight-1){
+			if (jOcc > 0 && jOcc < cellsPerColumn-1){
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isMined()) cell.incrementNBombsaround();
@@ -154,13 +174,13 @@ public class CellsPanel extends JPanel {
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isMined()) cell.incrementNBombsaround();
-			} else if (jOcc == cellsPerHeight-1) {
+			} else if (jOcc == cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isMined()) cell.incrementNBombsaround();
 			}
-		} else if (iOcc == cellsPerWidth-1) {
-			if (jOcc > 0 && jOcc < cellsPerHeight-1){
+		} else if (iOcc == cellsPerLine-1) {
+			if (jOcc > 0 && jOcc < cellsPerColumn-1){
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isMined()) cell.incrementNBombsaround();
@@ -170,7 +190,7 @@ public class CellsPanel extends JPanel {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isMined()) cell.incrementNBombsaround();
-			} else if (jOcc == cellsPerHeight-1) {
+			} else if (jOcc == cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isMined()) cell.incrementNBombsaround();
@@ -179,8 +199,8 @@ public class CellsPanel extends JPanel {
 	}
 
 	public void showNeighbourBlankCells(int iOcc, int jOcc) {
-		if (iOcc > 0 && iOcc < cellsPerWidth-1){
-			if (jOcc > 0 && jOcc < cellsPerHeight-1){
+		if (iOcc > 0 && iOcc < cellsPerLine-1){
+			if (jOcc > 0 && jOcc < cellsPerColumn-1){
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc-1,getCells().get(getCellIndex(iOcc-1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc-1,getCells().get(getCellIndex(iOcc+1, jOcc-1)));
@@ -195,7 +215,7 @@ public class CellsPanel extends JPanel {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc+1,getCells().get(getCellIndex(iOcc-1, jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc+1,getCells().get(getCellIndex(iOcc  , jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc+1,getCells().get(getCellIndex(iOcc+1, jOcc+1)));
-			} else if (jOcc == cellsPerHeight-1) {
+			} else if (jOcc == cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc-1,getCells().get(getCellIndex(iOcc-1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc-1,getCells().get(getCellIndex(iOcc+1, jOcc-1)));
@@ -203,7 +223,7 @@ public class CellsPanel extends JPanel {
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc  ,getCells().get(getCellIndex(iOcc+1, jOcc  )));
 			}
 		} else if (iOcc == 0) {
-			if (jOcc > 0 && jOcc < cellsPerHeight-1){
+			if (jOcc > 0 && jOcc < cellsPerColumn-1){
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc-1,getCells().get(getCellIndex(iOcc+1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc  ,getCells().get(getCellIndex(iOcc+1, jOcc  )));
@@ -213,13 +233,13 @@ public class CellsPanel extends JPanel {
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc  ,getCells().get(getCellIndex(iOcc+1, jOcc  )));
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc+1,getCells().get(getCellIndex(iOcc  , jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc+1,getCells().get(getCellIndex(iOcc+1, jOcc+1)));
-			} else if (jOcc == cellsPerHeight-1) {
+			} else if (jOcc == cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc-1,getCells().get(getCellIndex(iOcc+1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc  ,getCells().get(getCellIndex(iOcc+1, jOcc  )));
 			}
-		} else if (iOcc == cellsPerWidth-1) {
-			if (jOcc > 0 && jOcc < cellsPerHeight-1){
+		} else if (iOcc == cellsPerLine-1) {
+			if (jOcc > 0 && jOcc < cellsPerColumn-1){
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc-1,getCells().get(getCellIndex(iOcc-1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc  ,getCells().get(getCellIndex(iOcc-1, jOcc  )));
@@ -229,7 +249,7 @@ public class CellsPanel extends JPanel {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc  ,getCells().get(getCellIndex(iOcc-1, jOcc  )));
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc+1,getCells().get(getCellIndex(iOcc-1, jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc+1,getCells().get(getCellIndex(iOcc  , jOcc+1)));
-			} else if (jOcc == cellsPerHeight-1) {
+			} else if (jOcc == cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc-1,getCells().get(getCellIndex(iOcc-1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc  ,getCells().get(getCellIndex(iOcc-1, jOcc  )));

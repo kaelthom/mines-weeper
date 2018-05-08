@@ -20,7 +20,7 @@ import views.DeminorView;
 import views.HighscoreView;
 import views.OptionsView;
 import views.frame.MenuFrame;
-import datas.DataManager;
+import views.panels.DeminorPanel;
 
 public class MainMenu
     implements ActionListener
@@ -102,7 +102,7 @@ public class MainMenu
         } else
         if(e.getActionCommand().equals("FileNew"))
         {
-            int level = DeminorView.getLevel();
+            int level = DeminorPanel.getLevel();
             MenuFrame deminorFrame = DeminorView.getFrame();
             deminorFrame.getContentPane().removeAll();
             DeminorView.createDeminorPanel(level);
