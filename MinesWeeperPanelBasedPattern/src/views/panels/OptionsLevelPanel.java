@@ -14,6 +14,7 @@ import javax.swing.JRadioButton;
 
 import dto.DeminorGameProperties;
 import languages.LanguageFactory;
+import views.DeminorView;
 
 public class OptionsLevelPanel extends JPanel implements ActionListener{
 
@@ -47,8 +48,8 @@ public class OptionsLevelPanel extends JPanel implements ActionListener{
 			add(levelButton);
 			group.add(levelButton);
 		}
-		levelButtons.get(0).setSelected(true);
-		setLevel(0);
+		levelButtons.get(DeminorView.getLevel()).setSelected(true);
+		setLevel(DeminorView.getLevel());
 		
 	}
 
