@@ -105,6 +105,10 @@ public class OptionsLevelPanel extends JPanel implements ActionListener{
 				CustomLevelPanel.getCellsPerColumnTextField().setText(Integer.toString(gameProperties.getCellsPerColumn()));
 				CustomLevelPanel.getCellsPerWidthTextField().setText(Integer.toString(gameProperties.getCellsPerLine()));
 				CustomLevelPanel.getnBombsTextField().setText(Integer.toString(gameProperties.getnBombs()));
+				boolean editable = iLevel == 3? true:false;
+				CustomLevelPanel.getCellsPerColumnTextField().setEditable(editable);
+				CustomLevelPanel.getCellsPerWidthTextField().setEditable(editable);
+				CustomLevelPanel.getnBombsTextField().setEditable(editable);
 			}
 		}
 	}

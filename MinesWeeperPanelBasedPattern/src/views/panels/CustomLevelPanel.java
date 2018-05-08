@@ -42,6 +42,7 @@ public class CustomLevelPanel extends JPanel{
 
 		setCellsPerColumnTextField(new JTextField(Integer.toString(getCellsPerColumn())));
 		cellsPerColumnTextField.setActionCommand("cellsPerColumn");
+		cellsPerColumnTextField.setEditable(false);
 		cellsPerColumnTextField.addKeyListener(new KeyListener() {
 			
 			@Override
@@ -63,6 +64,7 @@ public class CustomLevelPanel extends JPanel{
 
 		setCellsPerWidthTextField(new JTextField(Integer.toString(getCellsPerWidth())));
 		cellsPerWidthTextField.setActionCommand("cellsPerWidth");
+		cellsPerWidthTextField.setEditable(false);
 		cellsPerWidthTextField.addKeyListener(new KeyListener() {
 			
 			@Override
@@ -83,6 +85,7 @@ public class CustomLevelPanel extends JPanel{
 
 		setnBombsTextField(new JTextField(Integer.toString(getnBombs())));
 		nBombsTextField.setActionCommand("nBombs");
+		nBombsTextField.setEditable(false);
 		nBombsTextField.addKeyListener(new KeyListener() {
 			
 			@Override
