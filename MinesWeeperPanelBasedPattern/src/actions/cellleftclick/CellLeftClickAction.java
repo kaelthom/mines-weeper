@@ -2,7 +2,6 @@ package actions.cellleftclick;
 
 import java.util.Date;
 import java.util.Iterator;
-import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
@@ -10,15 +9,13 @@ import actions.GenericAbstractInputObjectAction;
 import datas.DataManager;
 import datas.Highscore;
 import dto.DeminorGameProperties;
-import languages.LanguageFactory;
+import messages.Labels;
 import views.components.Cell;
 import views.panels.CellsPanel;
 import views.panels.DeminorPanel;
 
 public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftClickActionInput> {
 
-	private static final String GAMELOST = ResourceBundle.getBundle("labels",LanguageFactory.getInstance().getLocale()).getString("main.gamelost");
-	private static final String GAMEWON = ResourceBundle.getBundle("labels",LanguageFactory.getInstance().getLocale()).getString("main.gamewon");
 	@Override
 	public int execute(LeftClickActionInput input) {
 		Cell cell = input.getCell();
@@ -48,7 +45,7 @@ public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftCl
 				}
 			}
 			time = System.currentTimeMillis() - time;time=time/1000;
-			JOptionPane.showMessageDialog(cellsPanel, GAMELOST);
+			JOptionPane.showMessageDialog(cellsPanel, Labels.GAMELOST);
 			percent = (cellsPanel.getDiscoveredCells()-CellsPanel.getnBombs())*100/
 					  (cellsPerLine*cellsPerColumn-nBombs);
 			DataManager.insertHighscore(new Highscore("", new Date().toLocaleString(), time, percent), level);
@@ -57,7 +54,7 @@ public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftCl
 			int nCellsToWin = CellsPanel.getCellsPerColumn()*CellsPanel.getCellsPerColumn()-CellsPanel.getnBombs();
 			if (cellsPanel.getDiscoveredCells() == nCellsToWin) {
 				CellsPanel.setWon(true);
-				JOptionPane.showMessageDialog(cellsPanel, GAMEWON);
+				JOptionPane.showMessageDialog(cellsPanel, Labels.GAMEWON);
 				time=System.currentTimeMillis()-time;time=time/1000;
 				percent = 100;
 				System.out.println("time : " + time);

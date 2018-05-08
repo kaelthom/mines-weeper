@@ -16,6 +16,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import languages.LanguageFactory;
+import messages.Labels;
 import views.DeminorView;
 import views.HighscoreView;
 import views.OptionsView;
@@ -28,15 +29,16 @@ public class MainMenu
 
 
     private JMenu menus[] = {
-        new JMenu(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.game")), new JMenu(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.options"))
+        new JMenu(Labels.GAME),
+        new JMenu(Labels.OPTIONS)
     };
     private JMenuItem items[][] = {
         {
-            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gamenew")), 
-            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gameoptions")), 
-            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.gameclose"))
+            new JMenuItem(Labels.GAME_NEW), 
+            new JMenuItem(Labels.GAME_OPTIONS), 
+            new JMenuItem(Labels.GAME_CLOSE)
         }, {
-            new JMenuItem(ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("menu.optionshighscore"))
+            new JMenuItem(Labels.OPTIONS_HIGHSCORES)
         }
     };
     private String actionCommands[][] = {

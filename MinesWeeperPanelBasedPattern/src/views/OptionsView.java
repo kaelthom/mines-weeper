@@ -9,7 +9,6 @@ import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,8 +18,7 @@ import javax.swing.UIManager;
 
 import actions.optionssubmit.OptionsSubmitAction;
 import actions.optionssubmit.OptionsSubmitActionInput;
-import languages.LanguageFactory;
-import views.frame.MenuFrame;
+import messages.Labels;
 import views.panels.CustomLevelPanel;
 import views.panels.OptionsLevelPanel;
 
@@ -47,7 +45,7 @@ public class OptionsView extends JPanel
 
     private static void createAndShowGUI(JPanel panel)
     {
-        frame = new JFrame(OPTIONS_TITLE);
+        frame = new JFrame(Labels.OPTIONS_TITLE);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setBounds(frameBounds);
         frame.add(panel);
@@ -85,7 +83,6 @@ public class OptionsView extends JPanel
         OptionsView.frame = frame;
     }
 
-    private static final String OPTIONS_TITLE = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("options.title");
     private static final long serialVersionUID = 0xd9a497f118f4e396L;
     private static JFrame frame;
     private static int frameWidth;

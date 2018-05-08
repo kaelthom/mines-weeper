@@ -5,12 +5,9 @@
 
 package views;
 
-import images.ImageHandler;
-
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,7 +16,9 @@ import javax.swing.UIManager;
 
 import datas.DataManager;
 import dto.DeminorGameProperties;
+import images.ImageHandler;
 import languages.LanguageFactory;
+import messages.Labels;
 import views.frame.MenuFrame;
 import views.panels.CellsPanel;
 import views.panels.DeminorPanel;
@@ -53,7 +52,7 @@ public class DeminorView extends JPanel
 
     private static void createAndShowGUI()
     {
-        frame = new MenuFrame(DEMINOR_TITLE);
+        frame = new MenuFrame(Labels.DEMINOR_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         createDeminorPanel(initialLevel);
         resize();
@@ -122,7 +121,6 @@ public class DeminorView extends JPanel
     	DeminorView.level = level;
     }
 
-    private static final String DEMINOR_TITLE = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("main.title");
     private static final long serialVersionUID = 1L;
     private static MenuFrame frame;
     private static int initialLevel = 0;

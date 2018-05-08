@@ -2,23 +2,18 @@ package views.panels;
 
 import java.awt.Dimension;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import languages.LanguageFactory;
 import datas.DataManager;
 import datas.Highscore;
+import messages.Labels;
 
 public class HighscorePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-    public static final String NAME_COLUMN_NAME = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("highscores.columnname.name");
-    public static final String DATE_COLUMN_NAME = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("highscores.columnname.date");
-    public static final String SCORE_COLUMN_NAME = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("highscores.columnname.score");
-    public static final String PERCENT_COLUMN_NAME = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("highscores.columnname.percent");
 
 	private HighscorePanel(int level) {
         List<Highscore> highscores = DataManager.getHighscores(level);
@@ -50,10 +45,13 @@ public class HighscorePanel extends JPanel {
 			}
 		}
 		
-
 		String columnNames[] = {
-		    NAME_COLUMN_NAME, DATE_COLUMN_NAME, SCORE_COLUMN_NAME,PERCENT_COLUMN_NAME
+		    Labels.NAME_COLUMN_NAME, 
+		    Labels.DATE_COLUMN_NAME, 
+		    Labels.SCORE_COLUMN_NAME, 
+		    Labels.PERCENT_COLUMN_NAME
 		};
+
 		final JTable table = new JTable(data, columnNames);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 11*15));
 		table.setFillsViewportHeight(true);

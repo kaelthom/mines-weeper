@@ -6,14 +6,13 @@
 package views;
 
 import java.awt.GridLayout;
-import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import languages.LanguageFactory;
+import messages.Labels;
 import views.panels.HighscoreMainPanel;
 
 public class HighscoreView extends JPanel
@@ -28,7 +27,7 @@ public class HighscoreView extends JPanel
 
     private static void createAndShowGUI(JPanel panel)
     {
-        JFrame frame = new JFrame(HIGHSCORES_TITLE);
+        JFrame frame = new JFrame(Labels.HIGHSCORES_TITLE);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(panel);
         frame.pack();
@@ -49,7 +48,6 @@ public class HighscoreView extends JPanel
         	});
     }
 
-    private static final String HIGHSCORES_TITLE = ResourceBundle.getBundle("labels", LanguageFactory.getInstance().getLocale()).getString("highscores.title");
     private static final long serialVersionUID = 1L;
 
 
