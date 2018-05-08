@@ -11,6 +11,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import constants.Levels;
 import dto.DeminorGameProperties;
 import messages.Labels;
 import views.DeminorView;
@@ -26,9 +27,9 @@ public class OptionsLevelPanel extends JPanel implements ActionListener{
 			                                     Labels.OPTIONS_LEVEL_CUSTOM
 			                                    };
 	private static int MnemonicByLevel[] = {KeyEvent.VK_E,KeyEvent.VK_I,KeyEvent.VK_H,KeyEvent.VK_C};
-	private static int bombsByLevel[] = {10,40,300,0};
-	private static int deminorCellsPerWidthByLevel[] = {10,15,40,0};
-	private static int deminorCellsPerHeightByLevel[] = {10,15,40,0};
+	private static int bombsByLevel                [] = {10,40,300,0};
+	private static int deminorCellsPerWidthByLevel [] = {10,15, 40,0};
+	private static int deminorCellsPerHeightByLevel[] = {10,15, 40,0};
 	private List<JRadioButton> levelButtons = new ArrayList<JRadioButton>();
 	
 	private ButtonGroup group;
@@ -105,7 +106,7 @@ public class OptionsLevelPanel extends JPanel implements ActionListener{
 				CustomLevelPanel.getCellsPerColumnTextField().setText(Integer.toString(gameProperties.getCellsPerColumn()));
 				CustomLevelPanel.getCellsPerWidthTextField().setText(Integer.toString(gameProperties.getCellsPerLine()));
 				CustomLevelPanel.getnBombsTextField().setText(Integer.toString(gameProperties.getnBombs()));
-				boolean editable = iLevel == 3? true:false;
+				boolean editable = iLevel == Levels.CUSTOM? true:false;
 				CustomLevelPanel.getCellsPerColumnTextField().setEditable(editable);
 				CustomLevelPanel.getCellsPerWidthTextField().setEditable(editable);
 				CustomLevelPanel.getnBombsTextField().setEditable(editable);
