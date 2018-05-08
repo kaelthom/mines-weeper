@@ -9,7 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import dto.DeminorGameProperties;
 import languages.LanguageFactory;
+import views.DeminorView;
 
 public class CustomLevelPanel extends JPanel{
 
@@ -33,11 +35,12 @@ public class CustomLevelPanel extends JPanel{
 	public void createCustomPanel() {
 		setLayout(new GridLayout(3,2));
 		
-		setCellsPerColumn(0);
-		setCellsPerWidth(0);
-		setnBombs(0);
+		DeminorGameProperties gameProperties = new DeminorGameProperties(DeminorView.getLevel());
+		setCellsPerColumn(gameProperties.getCellsPerColumn());
+		setCellsPerWidth(gameProperties.getCellsPerLine());
+		setnBombs(gameProperties.getnBombs());
 
-		setCellsPerColumnTextField(new JTextField("0"));
+		setCellsPerColumnTextField(new JTextField(Integer.toString(getCellsPerColumn())));
 		cellsPerColumnTextField.setActionCommand("cellsPerColumn");
 		cellsPerColumnTextField.addKeyListener(new KeyListener() {
 			
@@ -58,7 +61,7 @@ public class CustomLevelPanel extends JPanel{
 		add(new JLabel(OPTIONS_CELLS_PER_HEIGHT),0);
 		add(cellsPerColumnTextField,1);
 
-		setCellsPerWidthTextField(new JTextField("0"));
+		setCellsPerWidthTextField(new JTextField(Integer.toString(getCellsPerWidth())));
 		cellsPerWidthTextField.setActionCommand("cellsPerWidth");
 		cellsPerWidthTextField.addKeyListener(new KeyListener() {
 			
@@ -78,7 +81,7 @@ public class CustomLevelPanel extends JPanel{
 		add(new JLabel(OPTIONS_CELLS_PER_WIDTH),2);
 		add(cellsPerWidthTextField,3);
 
-		setnBombsTextField(new JTextField("0"));
+		setnBombsTextField(new JTextField(Integer.toString(getnBombs())));
 		nBombsTextField.setActionCommand("nBombs");
 		nBombsTextField.addKeyListener(new KeyListener() {
 			

@@ -41,6 +41,9 @@ public class DeminorPanel extends JPanel {
 	public static DeminorPanel createPanel(DeminorGameProperties properties) {
 
 		int iLevel = properties.getLevel();
+		int cellsPerLine  = properties.getCellsPerLine(); 
+		int cellsPerColumn = properties.getCellsPerColumn();
+		int nBombs = properties.getnBombs();
 
 		ImageHandler.createImages();
 		DeminorPanel.setLevel(iLevel);
@@ -48,20 +51,6 @@ public class DeminorPanel extends JPanel {
 
 		properties.setTime(System.currentTimeMillis());
 		properties.setPercent(0);
-
-		int cellsPerLine  = 0; 
-		int cellsPerColumn = 0;
-		int nBombs = 0;
-		
-		if (level >= 0 && level <= 2) {
-			cellsPerLine = OptionsLevelPanel.getDeminorCellsPerWidthByLevel()[iLevel];
-			cellsPerColumn = OptionsLevelPanel.getDeminorCellsPerHeightByLevel()[iLevel];
-			nBombs = OptionsLevelPanel.getBombsByLevel()[iLevel];
-		} else {
-			nBombs = properties.getnBombs();
-			cellsPerLine = properties.getCellsPerLine();
-			cellsPerColumn = properties.getCellsPerColumn();
-		}
 
 		bounds = calculateDeminorBounds(cellsPerLine, cellsPerColumn);
 

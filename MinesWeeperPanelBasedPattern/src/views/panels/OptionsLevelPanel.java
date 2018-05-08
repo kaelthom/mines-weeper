@@ -12,6 +12,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import dto.DeminorGameProperties;
 import languages.LanguageFactory;
 
 public class OptionsLevelPanel extends JPanel implements ActionListener{
@@ -99,6 +100,10 @@ public class OptionsLevelPanel extends JPanel implements ActionListener{
 			if (e.getActionCommand().equals(levelLabel[iLevel])) {
 				System.out.println("iLevel : " + iLevel);
 				setLevel(iLevel);
+				DeminorGameProperties gameProperties = new DeminorGameProperties(iLevel);
+				CustomLevelPanel.getCellsPerColumnTextField().setText(Integer.toString(gameProperties.getCellsPerColumn()));
+				CustomLevelPanel.getCellsPerWidthTextField().setText(Integer.toString(gameProperties.getCellsPerLine()));
+				CustomLevelPanel.getnBombsTextField().setText(Integer.toString(gameProperties.getnBombs()));
 			}
 		}
 	}

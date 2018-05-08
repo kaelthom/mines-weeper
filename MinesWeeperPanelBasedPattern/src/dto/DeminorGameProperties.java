@@ -1,5 +1,8 @@
 package dto;
 
+import views.panels.CustomLevelPanel;
+import views.panels.OptionsLevelPanel;
+
 public class DeminorGameProperties {
 
 	private int nBombs;
@@ -13,6 +16,28 @@ public class DeminorGameProperties {
 	private long time;
 
 	private int percent;
+
+	public DeminorGameProperties(int level) {
+		this.level = level;
+		calculateGamePropertiesFromLevel(level);
+	}
+
+	private void calculateGamePropertiesFromLevel(int iLevel) {
+		this.cellsPerLine  = 0; 
+		this.cellsPerColumn = 0;
+		this.nBombs = 0;
+		
+		if (level >= 0 && level <= 2) {
+			this.cellsPerLine = OptionsLevelPanel.getDeminorCellsPerWidthByLevel()[iLevel];
+			this.cellsPerColumn = OptionsLevelPanel.getDeminorCellsPerHeightByLevel()[iLevel];
+			this.nBombs = OptionsLevelPanel.getBombsByLevel()[iLevel];
+		} else {
+			this.cellsPerLine = Integer.parseInt(CustomLevelPanel.getCellsPerWidthTextField().getText());
+			this.cellsPerColumn = Integer.parseInt(CustomLevelPanel.getCellsPerColumnTextField().getText());
+			this.nBombs = Integer.parseInt(CustomLevelPanel.getnBombsTextField().getText());
+		}
+
+	}
 
 	public DeminorGameProperties(int level, int nBombs, int cellsPerLine, int cellsPerColumn) {
 		this.nBombs = nBombs;

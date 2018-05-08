@@ -28,10 +28,10 @@ public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftCl
 		int percent = gameProperties.getPercent();
 //		int cellsPerColumn = gameProperties.getCellsPerColumn();
 //		int cellsPerLine = gameProperties.getCellsPerLine();
+//		int level = gameProperties.getCellsPerLine();
 		int cellsPerColumn = CellsPanel.getCellsPerColumn();
 		int cellsPerLine = CellsPanel.getCellsPerLine();
 		int nBombs = gameProperties.getnBombs();
-//		int level = gameProperties.getCellsPerLine();
 		int level = DeminorPanel.getLevel();
 		
 		int returnCode = 0;
