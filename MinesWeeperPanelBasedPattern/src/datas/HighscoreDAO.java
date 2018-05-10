@@ -96,7 +96,7 @@ public class HighscoreDAO
         Connection conn = null;
         try {
 			conn = ConnexionFactory.getConnectionInstance();
-			if (maxHighscore!=null) deleteHighscore(maxHighscore, conn);
+			if (maxHighscore!=null) deleteHighscore(maxHighscore, conn, level);
 	        insertHighscore(highscore, level, conn);
 	        return true;
 		} catch (SQLException e) {
@@ -150,14 +150,14 @@ public class HighscoreDAO
 		int rs = statement.executeUpdate(query);
 	}
 
-	public void deleteHighscore (Highscore highscore, Connection conn) throws SQLException {
-		String level = Integer.toString(DeminorView.getLevel());
+	public void deleteHighscore (Highscore highscore, Connection conn, int iLevel) throws SQLException {
+		String level = Integer.toString(iLevel);
 		String highscoreTable = "HIGHSCORE_" + level;
 		String query = new StringBuilder("DELETE FROM ")
 		                                .append(highscoreTable)
 		                                .append(" WHERE SCORE IN (SELECT SCORE FROM ")
 		                                .append(highscoreTable)
-		                                .append(" WHERE SCORE = ? ORDER BY DATE FETCH FIRST 1 ROWS ONLY)").toString();
+		                                .append(" WHERE SCORE = ? ORDER BY PERCENT,SCORE FETCH FIRST 1 ROWS ONLY)").toString();
 		System.out.println(query);
 	    PreparedStatement statement = conn.prepareStatement(query);
 	    statement.setLong(1, highscore.getScore());

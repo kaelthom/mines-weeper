@@ -12,7 +12,6 @@ import dto.DeminorGameProperties;
 import messages.Labels;
 import views.components.Cell;
 import views.panels.CellsPanel;
-import views.panels.DeminorPanel;
 
 public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftClickActionInput> {
 
@@ -23,13 +22,10 @@ public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftCl
 		DeminorGameProperties gameProperties = input.getGameProperties();
 		long time = gameProperties.getTime();
 		int percent = gameProperties.getPercent();
-//		int cellsPerColumn = gameProperties.getCellsPerColumn();
-//		int cellsPerLine = gameProperties.getCellsPerLine();
-//		int level = gameProperties.getCellsPerLine();
-		int cellsPerColumn = CellsPanel.getCellsPerColumn();
-		int cellsPerLine = CellsPanel.getCellsPerLine();
+		int cellsPerColumn = gameProperties.getCellsPerColumn();
+		int cellsPerLine = gameProperties.getCellsPerLine();
 		int nBombs = gameProperties.getnBombs();
-		int level = DeminorPanel.getLevel();
+		int level = gameProperties.getLevel();
 		
 		int returnCode = 0;
 		int index = cell.getIndex();
