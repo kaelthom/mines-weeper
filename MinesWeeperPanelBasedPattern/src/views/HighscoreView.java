@@ -18,7 +18,9 @@ import views.panels.HighscoreMainPanel;
 public class HighscoreView extends JPanel
 {
 
-    public HighscoreView(int level)
+    private static JFrame frame;
+
+	public HighscoreView(int level)
     {
     	setLayout(new GridLayout(1,1));
         add(HighscoreMainPanel.createPanel(level));
@@ -26,7 +28,7 @@ public class HighscoreView extends JPanel
 
     private static void createAndShowGUI(JPanel panel)
     {
-        JFrame frame = new JFrame(Labels.HIGHSCORES_TITLE);
+        frame = new JFrame(Labels.HIGHSCORES_TITLE);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(panel);
         frame.pack();
@@ -49,6 +51,8 @@ public class HighscoreView extends JPanel
 
     private static final long serialVersionUID = 1L;
 
-
+	public static JFrame getFrame() {
+		return frame;
+	}
 
 }
