@@ -5,7 +5,9 @@ import views.panels.OptionsLevelPanel;
 
 public class DeminorGameProperties {
 
-	private int nBombs;
+    private static int initialLevel = 0;
+
+    private int nBombs;
 	
 	private int level;
 	
@@ -19,18 +21,18 @@ public class DeminorGameProperties {
 
 	public DeminorGameProperties(int level) {
 		this.level = level;
-		calculateGamePropertiesFromLevel(level);
+		calculateGamePropertiesFromLevel();
 	}
 
-	private void calculateGamePropertiesFromLevel(int iLevel) {
+	public void calculateGamePropertiesFromLevel() {
 		this.cellsPerLine  = 0; 
 		this.cellsPerColumn = 0;
 		this.nBombs = 0;
 		
 		if (level >= 0 && level <= 2) {
-			this.cellsPerLine = OptionsLevelPanel.getDeminorCellsPerWidthByLevel()[iLevel];
-			this.cellsPerColumn = OptionsLevelPanel.getDeminorCellsPerHeightByLevel()[iLevel];
-			this.nBombs = OptionsLevelPanel.getBombsByLevel()[iLevel];
+			this.cellsPerLine = OptionsLevelPanel.getDeminorCellsPerWidthByLevel()[this.level];
+			this.cellsPerColumn = OptionsLevelPanel.getDeminorCellsPerHeightByLevel()[this.level];
+			this.nBombs = OptionsLevelPanel.getBombsByLevel()[this.level];
 		} else {
 			this.cellsPerLine = Integer.parseInt(CustomLevelPanel.getCellsPerWidthTextField().getText());
 			this.cellsPerColumn = Integer.parseInt(CustomLevelPanel.getCellsPerColumnTextField().getText());
@@ -92,6 +94,14 @@ public class DeminorGameProperties {
 
 	public void setPercent(int percent) {
 		this.percent = percent;
+	}
+
+	public static int getInitialLevel() {
+		return initialLevel;
+	}
+
+	public static void setInitialLevel(int initialLevel) {
+		DeminorGameProperties.initialLevel = initialLevel;
 	}
 
 }

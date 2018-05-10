@@ -2,6 +2,7 @@ package actions.newgame;
 
 import actions.GenericAbstractInputObjectAction;
 import dto.DeminorGameProperties;
+import dto.DeminorGamePropertiesFactory;
 import views.DeminorView;
 import views.frame.MenuFrame;
 import views.panels.DeminorPanel;
@@ -10,15 +11,13 @@ public class NewGameAction extends GenericAbstractInputObjectAction<NewGameActio
 
 	@Override
 	public int execute(NewGameActionInput input) {
-		DeminorGameProperties deminorProperties = input.getDeminorProperties();
+		DeminorGameProperties gameProperties = input.getDeminorProperties();
 
-		MenuFrame deminorFrame = DeminorView.getFrame();
-		deminorFrame.getContentPane().removeAll();;
-
-		DeminorPanel deminorPanel = DeminorPanel.createPanel(deminorProperties);
-		DeminorView.setDeminorPanel(deminorPanel);
-		deminorFrame.add(deminorPanel);
-		deminorFrame.repaint();
+        MenuFrame deminorFrame = DeminorView.getFrame();
+        deminorFrame.getContentPane().removeAll();
+        DeminorView.createDeminorPanel(gameProperties);
+        deminorFrame.add(DeminorView.getDeminorPanel());
+        deminorFrame.repaint();
 
 		return 0;
 	}

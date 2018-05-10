@@ -16,6 +16,7 @@ import javax.swing.UIManager;
 
 import datas.DataManager;
 import dto.DeminorGameProperties;
+import dto.DeminorGamePropertiesFactory;
 import images.ImageHandler;
 import languages.LanguageFactory;
 import messages.Labels;
@@ -31,11 +32,12 @@ public class DeminorView extends JPanel
     {
     }
 
-    public static void createDeminorPanel(int iLevel)
+    public static void createDeminorPanel(DeminorGameProperties gameProperties)
     {
+    	int iLevel = gameProperties.getLevel();
         setLevel(iLevel);
         ImageHandler.createImages();
-        deminorPanel = DeminorPanel.createPanel(new DeminorGameProperties(iLevel));
+        deminorPanel = DeminorPanel.createPanel(gameProperties);
         LanguageFactory.initLanguage();
     }
 
@@ -54,7 +56,8 @@ public class DeminorView extends JPanel
     {
         frame = new MenuFrame(Labels.DEMINOR_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        createDeminorPanel(initialLevel);
+        DeminorGameProperties gameProperties = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance();
+        createDeminorPanel(gameProperties);
         resize();
         frame.add(deminorPanel);
         frame.setVisible(true);
@@ -62,7 +65,7 @@ public class DeminorView extends JPanel
 
     public static void main(String args[])
     {
-    	DataManager.getHighscores(initialLevel);
+    	DataManager.getHighscores(DeminorGameProperties.getInitialLevel());
     	SwingUtilities.invokeLater(new Runnable() {
 
             public void run()
@@ -123,7 +126,6 @@ public class DeminorView extends JPanel
 
     private static final long serialVersionUID = 1L;
     private static MenuFrame frame;
-    private static int initialLevel = 0;
     private static int frameWidth;
     private static int frameHeight;
     private static int frameX = 0;

@@ -18,11 +18,10 @@ import views.panels.HighscoreMainPanel;
 public class HighscoreView extends JPanel
 {
 
-    public HighscoreView()
+    public HighscoreView(int level)
     {
     	setLayout(new GridLayout(1,1));
-    	int currentLevel = DeminorView.getLevel();
-        add(HighscoreMainPanel.createPanel(currentLevel));
+        add(HighscoreMainPanel.createPanel(level));
     }
 
     private static void createAndShowGUI(JPanel panel)

@@ -12,9 +12,9 @@ import actions.cellleftclick.LeftClickActionInput;
 import actions.cellrightclick.CellRightClickAction;
 import actions.cellrightclick.RightClickActionInput;
 import dto.DeminorGameProperties;
+import dto.DeminorGamePropertiesFactory;
 import dto.DeminorPanelProperties;
 import images.ImageHandler;
-import views.panels.DeminorPanel;
 import views.components.Cell;
 
 public class DeminorPanel extends JPanel {
@@ -80,7 +80,8 @@ public class DeminorPanel extends JPanel {
 							if (SwingUtilities.isRightMouseButton(arg0)) {
 								new CellRightClickAction().execute(new RightClickActionInput(cell));
 							} else if (SwingUtilities.isLeftMouseButton(arg0) && !cell.isFlagged()) {
-								new CellLeftClickAction().execute(new LeftClickActionInput(cell,cellsPanel,DeminorPanel.getGameProperties()));
+								LeftClickActionInput input = new LeftClickActionInput(cell,cellsPanel,DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance());
+								new CellLeftClickAction().execute(input);
 							}
 						}
 					}

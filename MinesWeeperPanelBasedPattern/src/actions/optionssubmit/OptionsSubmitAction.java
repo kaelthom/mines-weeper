@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import actions.GenericAbstractInputObjectAction;
 import dto.DeminorGameProperties;
+import dto.DeminorGamePropertiesFactory;
 import views.DeminorView;
 import views.OptionsView;
 import views.frame.MenuFrame;
@@ -23,7 +24,10 @@ public class OptionsSubmitAction extends GenericAbstractInputObjectAction<Option
 		deminorFrame.setVisible(true);
 		deminorFrame.getContentPane().removeAll();
 		
-		DeminorPanel deminorPanel = DeminorPanel.createPanel(new DeminorGameProperties(level));
+		DeminorGameProperties gameProperties = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance();
+		gameProperties.setLevel(level);
+		DeminorGamePropertiesFactory.updateDeminorGameProperties(gameProperties);
+		DeminorPanel deminorPanel = DeminorPanel.createPanel(DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance());
         DeminorView.setDeminorPanel(deminorPanel);
         DeminorView.resize();
         deminorFrame.getContentPane().add(deminorPanel);

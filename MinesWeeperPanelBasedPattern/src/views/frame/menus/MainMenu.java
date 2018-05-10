@@ -15,13 +15,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import languages.LanguageFactory;
+import actions.newgame.NewGameAction;
+import actions.newgame.NewGameActionInput;
+import dto.DeminorGamePropertiesFactory;
 import messages.Labels;
-import views.DeminorView;
 import views.HighscoreView;
 import views.OptionsView;
-import views.frame.MenuFrame;
-import views.panels.DeminorPanel;
 
 public class MainMenu
     implements ActionListener
@@ -101,17 +100,14 @@ public class MainMenu
                 OptionsView.launchFrame(new OptionsView());
             else
                 optionsFrame.setVisible(true);
-        } else
-        if(e.getActionCommand().equals("FileNew"))
+        } else if(e.getActionCommand().equals("FileNew"))
         {
-            int level = DeminorPanel.getLevel();
-            MenuFrame deminorFrame = DeminorView.getFrame();
-            deminorFrame.getContentPane().removeAll();
-            DeminorView.createDeminorPanel(level);
-            deminorFrame.add(DeminorView.getDeminorPanel());
-            deminorFrame.repaint();
-        } else
-        if(e.getActionCommand().equals("OptionsHighscores"))
-        	HighscoreView.launchFrame(new HighscoreView());
+        	NewGameActionInput input = new NewGameActionInput(DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance());
+        	new NewGameAction().execute(input);
+        } else if(e.getActionCommand().equals("OptionsHighscores")) 
+        {
+        	int level = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance().getLevel();
+        	HighscoreView.launchFrame(new HighscoreView(level));
+        }
     }
 }
