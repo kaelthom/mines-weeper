@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) 
 // Source File Name:   MainMenu.java
 
-package views.frame.menus;
+package views.main.menu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,8 +19,8 @@ import actions.newgame.NewGameAction;
 import actions.newgame.NewGameActionInput;
 import dto.DeminorGamePropertiesFactory;
 import messages.Labels;
-import views.HighscoreView;
-import views.OptionsView;
+import views.highscore.HighscoreView;
+import views.options.OptionsView;
 
 public class MainMenu
     implements ActionListener

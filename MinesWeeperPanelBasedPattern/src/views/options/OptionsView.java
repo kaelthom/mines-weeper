@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) 
 // Source File Name:   OptionsView.java
 
-package views;
+package views.options;
 
 import java.awt.GridLayout;
 import java.awt.Rectangle;
@@ -21,8 +21,8 @@ import actions.optionssubmit.OptionsSubmitActionInput;
 import dto.DeminorGameProperties;
 import dto.DeminorGamePropertiesFactory;
 import messages.Labels;
-import views.panels.CustomLevelPanel;
-import views.panels.OptionsLevelPanel;
+import views.options.panels.CustomLevelPanel;
+import views.options.panels.OptionsLevelPanel;
 
 // Referenced classes of package views:
 //            DeminorView

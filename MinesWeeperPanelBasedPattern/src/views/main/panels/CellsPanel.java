@@ -1,4 +1,4 @@
-package views.panels;
+package views.main.panels;
 
 import java.awt.Insets;
 import java.awt.Point;
@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import dto.DeminorPanelProperties;
-import views.components.Cell;
+import views.main.Cell;
 
 public class CellsPanel extends JPanel {
 

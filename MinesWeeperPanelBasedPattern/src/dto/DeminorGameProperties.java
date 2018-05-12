@@ -1,7 +1,7 @@
 package dto;
 
-import views.panels.CustomLevelPanel;
-import views.panels.OptionsLevelPanel;
+import views.options.panels.CustomLevelPanel;
+import views.options.panels.OptionsLevelPanel;
 
 public class DeminorGameProperties {
 

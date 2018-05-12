@@ -4,10 +4,10 @@ import javax.swing.JFrame;
 
 import actions.GenericAbstractInputObjectAction;
 import dto.DeminorGameProperties;
-import views.DeminorView;
-import views.OptionsView;
-import views.frame.MenuFrame;
-import views.panels.DeminorPanel;
+import views.main.DeminorView;
+import views.main.menu.MenuFrame;
+import views.main.panels.DeminorPanel;
+import views.options.OptionsView;
 
 public class OptionsSubmitAction extends GenericAbstractInputObjectAction<OptionsSubmitActionInput>{
 	

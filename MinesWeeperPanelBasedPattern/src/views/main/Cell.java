@@ -1,13 +1,12 @@
-package views.components;
+package views.main;
 
 import images.ImageHandler;
+import views.main.panels.CellsPanel;
 
 import java.awt.Color;
 import java.awt.Rectangle;
 
 import javax.swing.JButton;
-
-import views.panels.CellsPanel;
 
 public class Cell extends JButton {
 

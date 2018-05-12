@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import connections.ConnexionFactory;
-import views.DeminorView;
-import views.panels.DeminorPanel;
+import views.main.DeminorView;
+import views.main.panels.DeminorPanel;
 
 
 // Referenced classes of package datas:

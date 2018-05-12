@@ -1,4 +1,4 @@
-package views.panels;
+package views.options.panels;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

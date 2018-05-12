@@ -1,4 +1,4 @@
-package views.panels;
+package views.main.panels;
 
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
@@ -15,7 +15,7 @@ import dto.DeminorGameProperties;
 import dto.DeminorGamePropertiesFactory;
 import dto.DeminorPanelProperties;
 import images.ImageHandler;
-import views.components.Cell;
+import views.main.Cell;
 
 public class DeminorPanel extends JPanel {
 

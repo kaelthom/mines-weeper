@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) 
 // Source File Name:   DeminorView.java
 
-package views;
+package views.main;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -20,9 +20,9 @@ import dto.DeminorGamePropertiesFactory;
 import images.ImageHandler;
 import languages.LanguageFactory;
 import messages.Labels;
-import views.frame.MenuFrame;
-import views.panels.CellsPanel;
-import views.panels.DeminorPanel;
+import views.main.menu.MenuFrame;
+import views.main.panels.CellsPanel;
+import views.main.panels.DeminorPanel;
 
 public class DeminorView extends JPanel
     implements ActionListener

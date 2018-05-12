@@ -3,13 +3,11 @@
 // Decompiler options: packimports(3) 
 // Source File Name:   MenuFrame.java
 
-package views.frame;
+package views.main.menu;
 
 import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
-
-import views.frame.menus.MainMenu;
 
 public class MenuFrame extends JFrame
 {

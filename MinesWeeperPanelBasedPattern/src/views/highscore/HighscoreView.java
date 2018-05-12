@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) 
 // Source File Name:   HighscoreView.java
 
-package views;
+package views.highscore;
 
 import java.awt.GridLayout;
 
@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import messages.Labels;
-import views.panels.HighscoreMainPanel;
+import views.highscore.panels.HighscoreMainPanel;
 
 public class HighscoreView extends JPanel
 {

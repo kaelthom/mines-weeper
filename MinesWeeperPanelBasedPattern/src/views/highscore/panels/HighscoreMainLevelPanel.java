@@ -1,4 +1,4 @@
-package views.panels;
+package views.highscore.panels;
 
 import java.awt.GridLayout;
 

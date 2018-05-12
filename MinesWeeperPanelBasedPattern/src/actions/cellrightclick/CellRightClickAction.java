@@ -1,7 +1,7 @@
 package actions.cellrightclick;
 
 import actions.GenericAbstractInputObjectAction;
-import views.components.Cell;
+import views.main.Cell;
 
 public class CellRightClickAction extends GenericAbstractInputObjectAction<RightClickActionInput> {
 	

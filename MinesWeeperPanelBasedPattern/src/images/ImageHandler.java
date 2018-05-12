@@ -4,7 +4,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-import views.panels.DeminorPanel;
+import views.main.panels.DeminorPanel;
 
 public class ImageHandler {
 

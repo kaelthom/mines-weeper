@@ -2,8 +2,8 @@ package actions.newgame;
 
 import actions.GenericAbstractInputObjectAction;
 import dto.DeminorGameProperties;
-import views.DeminorView;
-import views.frame.MenuFrame;
+import views.main.DeminorView;
+import views.main.menu.MenuFrame;
 
 public class NewGameAction extends GenericAbstractInputObjectAction<NewGameActionInput>{
 
