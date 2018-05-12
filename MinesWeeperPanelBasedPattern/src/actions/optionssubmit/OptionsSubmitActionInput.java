@@ -1,33 +1,21 @@
 package actions.optionssubmit;
 
 import dto.DeminorGameProperties;
-import views.panels.OptionsLevelPanel;
 
 public class OptionsSubmitActionInput {
 	
-	public OptionsSubmitActionInput(DeminorGameProperties properties, OptionsLevelPanel optionsLevelPanel) {
-		this.properties = properties;
-		this.optionsLevelPanel = optionsLevelPanel;
+	public OptionsSubmitActionInput(DeminorGameProperties properties) {
+		this.gameProperties = properties;
 	}
 
-	private DeminorGameProperties properties;
+	private DeminorGameProperties gameProperties;
 	
-	private OptionsLevelPanel optionsLevelPanel;
-
-	public DeminorGameProperties getProperties() {
-		return properties;
+	public DeminorGameProperties getGameProperties() {
+		return gameProperties;
 	}
 
-	public void setProperties(DeminorGameProperties properties) {
-		this.properties = properties;
-	}
-
-	public OptionsLevelPanel getOptionsLevelPanel() {
-		return optionsLevelPanel;
-	}
-
-	public void setOptionsLevelPanel(OptionsLevelPanel optionsLevelPanel) {
-		this.optionsLevelPanel = optionsLevelPanel;
+	public void setGameProperties(DeminorGameProperties properties) {
+		this.gameProperties = properties;
 	}
 
 }

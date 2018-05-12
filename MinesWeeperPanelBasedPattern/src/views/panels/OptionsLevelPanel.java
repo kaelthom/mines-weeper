@@ -13,8 +13,8 @@ import javax.swing.JRadioButton;
 
 import constants.Levels;
 import dto.DeminorGameProperties;
+import dto.DeminorGamePropertiesFactory;
 import messages.Labels;
-import views.DeminorView;
 
 public class OptionsLevelPanel extends JPanel implements ActionListener{
 
@@ -49,8 +49,9 @@ public class OptionsLevelPanel extends JPanel implements ActionListener{
 			add(levelButton);
 			group.add(levelButton);
 		}
-		levelButtons.get(DeminorView.getLevel()).setSelected(true);
-		setLevel(DeminorView.getLevel());
+		int level = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance().getLevel();
+		levelButtons.get(level).setSelected(true);
+		setLevel(level);
 		
 	}
 
@@ -78,14 +79,6 @@ public class OptionsLevelPanel extends JPanel implements ActionListener{
 	public static void setDeminorCellsPerHeightByLevel(
 			int[] deminorCellsPerHeightByLevel) {
 		OptionsLevelPanel.deminorCellsPerHeightByLevel = deminorCellsPerHeightByLevel;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
 	}
 
 	public ButtonGroup getGroup() {
@@ -116,6 +109,14 @@ public class OptionsLevelPanel extends JPanel implements ActionListener{
 
 	public static String[] getLevelLabel() {
 		return LEVEL_LABEL;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 }

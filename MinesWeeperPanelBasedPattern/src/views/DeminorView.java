@@ -34,10 +34,8 @@ public class DeminorView extends JPanel
 
     public static void createDeminorPanel(DeminorGameProperties gameProperties)
     {
-    	int iLevel = gameProperties.getLevel();
-        setLevel(iLevel);
-        ImageHandler.createImages();
         deminorPanel = DeminorPanel.createPanel(gameProperties);
+        ImageHandler.createImages();
         LanguageFactory.initLanguage();
     }
 
@@ -114,16 +112,6 @@ public class DeminorView extends JPanel
     	DeminorView.deminorPanel = deminorPanel;
     }
 
-    public static int getLevel()
-    {
-        return level;
-    }
-
-    public static void setLevel(int level)
-    {
-    	DeminorView.level = level;
-    }
-
     private static final long serialVersionUID = 1L;
     private static MenuFrame frame;
     private static int frameWidth;
@@ -135,7 +123,6 @@ public class DeminorView extends JPanel
     private static int borderHeight;
     private static CellsPanel cellsPanel;
     private static DeminorPanel deminorPanel;
-    private static int level;
 
 
 }

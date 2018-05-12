@@ -18,6 +18,8 @@ import javax.swing.UIManager;
 
 import actions.optionssubmit.OptionsSubmitAction;
 import actions.optionssubmit.OptionsSubmitActionInput;
+import dto.DeminorGameProperties;
+import dto.DeminorGamePropertiesFactory;
 import messages.Labels;
 import views.panels.CustomLevelPanel;
 import views.panels.OptionsLevelPanel;
@@ -31,7 +33,7 @@ public class OptionsView extends JPanel
 
     public OptionsView()
     {
-        setLayout(new GridLayout(3, 1, 20, 20));
+    	setLayout(new GridLayout(3, 1, 20, 20));
         optionsLevelPanel = new OptionsLevelPanel();
         add(optionsLevelPanel);
         customPanel = new CustomLevelPanel();
@@ -69,7 +71,11 @@ public class OptionsView extends JPanel
     {
         if(e.getActionCommand().equals("OK"))
         {
-			new OptionsSubmitAction().execute(new OptionsSubmitActionInput(null,optionsLevelPanel));
+    		DeminorGameProperties gameProperties = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance();
+    		int level = optionsLevelPanel.getLevel();
+    		gameProperties.setLevel(level);
+    		DeminorGamePropertiesFactory.updateDeminorGameProperties(gameProperties);
+			new OptionsSubmitAction().execute(new OptionsSubmitActionInput(gameProperties));
         }
     }
 
