@@ -23,9 +23,7 @@ public class MenuFrame extends JFrame
     {
         javax.swing.JMenuBar menubar = (new MainMenu()).getMenuBar();
         setJMenuBar(menubar);
-        setSize(300, 200);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(3);
     }
 
     private static final long serialVersionUID = 1L;

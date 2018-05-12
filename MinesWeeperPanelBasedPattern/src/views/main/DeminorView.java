@@ -17,6 +17,7 @@ import javax.swing.UIManager;
 import datas.DataManager;
 import dto.DeminorGameProperties;
 import dto.DeminorGamePropertiesFactory;
+import dto.DeminorPanelProperties;
 import images.ImageHandler;
 import languages.LanguageFactory;
 import messages.Labels;
@@ -46,7 +47,7 @@ public class DeminorView extends JPanel
         borderWidth = (frame.getWidth() - frame.getContentPane().getWidth()) / 2;
         frameWidth = deminorPanel.getWidth() + borderWidth * 2;
         frameHeight = deminorPanel.getHeight() + borderHeight * 2;
-        frameBounds = new Rectangle(frameX, frameY, frameWidth, frameHeight);
+        frameBounds = new Rectangle(DeminorPanelProperties.getFrameX(), DeminorPanelProperties.getFrameY(), frameWidth, frameHeight);
         frame.setBounds(frameBounds);
     }
 
@@ -116,8 +117,6 @@ public class DeminorView extends JPanel
     private static MenuFrame frame;
     private static int frameWidth;
     private static int frameHeight;
-    private static int frameX = 0;
-    private static int frameY = 0;
     private static Rectangle frameBounds;
     private static int borderWidth;
     private static int borderHeight;

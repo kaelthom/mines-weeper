@@ -10,7 +10,11 @@ public class DeminorPanelProperties {
 	
 	private static int ySpaceBtwButtons = 0;
 
-	private static int deminorX = 0;
+    private static int frameX = 0;
+    
+    private static int frameY = 0;
+
+    private static int deminorX = 0;
 
 	private static int deminorY = 0;
 
@@ -100,6 +104,22 @@ public class DeminorPanelProperties {
 
 	public static void setCellHeight(int cellHeight) {
 		DeminorPanelProperties.cellHeight = cellHeight;
+	}
+
+	public static int getFrameY() {
+		return frameY;
+	}
+
+	public static void setFrameY(int frameY) {
+		DeminorPanelProperties.frameY = frameY;
+	}
+
+	public static int getFrameX() {
+		return frameX;
+	}
+
+	public static void setFrameX(int frameX) {
+		DeminorPanelProperties.frameX = frameX;
 	}
 	
 	

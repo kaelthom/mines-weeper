@@ -14,9 +14,11 @@ import views.main.Cell;
 public class CellsPanel extends JPanel {
 
 	private static final long serialVersionUID = -5474923082252270189L;
+	
 	private static int cellsPerLine;
 	private static int cellsPerColumn;
 	private static int nBombs;
+	
 	private List<Cell> cells = new ArrayList<Cell>(); 
 	private List<Integer> minedCells = new ArrayList<Integer>(); 
 	private int discoveredCells; 

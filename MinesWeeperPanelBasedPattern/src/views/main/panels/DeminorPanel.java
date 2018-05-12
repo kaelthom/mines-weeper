@@ -21,13 +21,6 @@ public class DeminorPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private static int level;
-
-	private static DeminorGameProperties gameProperties;
-	
-	private static int cellWidth = 23;
-	private static int cellHeight = 23;
-
 	private static Rectangle bounds;
 	
 	private static CellsPanel cellsPanel;
@@ -40,14 +33,11 @@ public class DeminorPanel extends JPanel {
 
 	public static DeminorPanel createPanel(DeminorGameProperties properties) {
 
-		int iLevel = properties.getLevel();
 		int cellsPerLine  = properties.getCellsPerLine(); 
 		int cellsPerColumn = properties.getCellsPerColumn();
 		int nBombs = properties.getnBombs();
 
 		ImageHandler.createImages();
-		DeminorPanel.setLevel(iLevel);
-		DeminorPanel.setGameProperties(properties);
 
 		properties.setTime(System.currentTimeMillis());
 		properties.setPercent(0);
@@ -122,44 +112,12 @@ public class DeminorPanel extends JPanel {
 		return bounds; 
 	}
 	
-	public static int getCellWidth() {
-		return cellWidth;
-	}
-
-	public static void setCellWidth(int cellWidth) {
-		DeminorPanel.cellWidth = cellWidth;
-	}
-
-	public static int getCellHeight() {
-		return cellHeight;
-	}
-
-	public static void setCellHeight(int cellHeight) {
-		DeminorPanel.cellHeight = cellHeight;
-	}
-
 	public static CellsPanel getCellsPanel() {
 		return cellsPanel;
 	}
 
 	public static void setCellsPanel(CellsPanel cellsPanel) {
 		DeminorPanel.cellsPanel = cellsPanel;
-	}
-
-	public static int getLevel() {
-		return level;
-	}
-
-	public static void setLevel(int level) {
-		DeminorPanel.level = level;
-	}
-
-	public static DeminorGameProperties getGameProperties() {
-		return gameProperties;
-	}
-
-	public static void setGameProperties(DeminorGameProperties gameProperties) {
-		DeminorPanel.gameProperties = gameProperties;
 	}
 
 }

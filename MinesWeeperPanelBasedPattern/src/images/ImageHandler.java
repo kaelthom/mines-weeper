@@ -4,7 +4,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-import views.main.panels.DeminorPanel;
+import dto.DeminorPanelProperties;
 
 public class ImageHandler {
 
@@ -25,7 +25,7 @@ public class ImageHandler {
 	}
 
 	public static void setBombIcon(ImageIcon bombIcon) {
-		Image img = bombIcon.getImage().getScaledInstance(DeminorPanel.getCellWidth(), DeminorPanel.getCellHeight(), Image.SCALE_FAST);
+		Image img = bombIcon.getImage().getScaledInstance(DeminorPanelProperties.getCellWidth(), DeminorPanelProperties.getCellHeight(), Image.SCALE_FAST);
 		ImageHandler.bombIcon = new ImageIcon(img);
 	}
 
@@ -34,7 +34,7 @@ public class ImageHandler {
 	}
 
 	public static void setFlagIcon(ImageIcon flagIcon) {
-		Image img = flagIcon.getImage().getScaledInstance(DeminorPanel.getCellWidth(), DeminorPanel.getCellHeight(), Image.SCALE_FAST);
+		Image img = flagIcon.getImage().getScaledInstance(DeminorPanelProperties.getCellWidth(), DeminorPanelProperties.getCellHeight(), Image.SCALE_FAST);
 		ImageHandler.flagIcon = new ImageIcon(img);
 	}
 
@@ -43,7 +43,7 @@ public class ImageHandler {
 	}
 
 	public static void setHiddenIcon(ImageIcon hiddenIcon) {
-		Image img = hiddenIcon.getImage().getScaledInstance(DeminorPanel.getCellWidth(), DeminorPanel.getCellHeight(), Image.SCALE_FAST);
+		Image img = hiddenIcon.getImage().getScaledInstance(DeminorPanelProperties.getCellWidth(), DeminorPanelProperties.getCellHeight(), Image.SCALE_FAST);
 		ImageHandler.hiddenIcon = new ImageIcon(img);
 	}
 
