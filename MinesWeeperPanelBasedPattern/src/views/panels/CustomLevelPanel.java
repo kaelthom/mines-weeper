@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import dto.DeminorGameProperties;
+import dto.DeminorGamePropertiesFactory;
 import messages.Labels;
-import views.DeminorView;
 
 public class CustomLevelPanel extends JPanel{
 
@@ -30,7 +30,7 @@ public class CustomLevelPanel extends JPanel{
 	public void createCustomPanel() {
 		setLayout(new GridLayout(3,2));
 		
-		DeminorGameProperties gameProperties = new DeminorGameProperties(DeminorView.getLevel());
+		DeminorGameProperties gameProperties = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance();
 		setCellsPerColumn(gameProperties.getCellsPerColumn());
 		setCellsPerWidth(gameProperties.getCellsPerLine());
 		setnBombs(gameProperties.getnBombs());
