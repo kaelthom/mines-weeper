@@ -1,6 +1,6 @@
 package actions.cellrightclick;
 
-import views.main.Cell;
+import views.main.panels.Cell;
 
 public class RightClickActionInput {
 

@@ -1,9 +1,10 @@
 package actions.newgame;
 
+import javax.swing.JFrame;
+
 import actions.GenericAbstractInputObjectAction;
 import dto.DeminorGameProperties;
 import views.main.DeminorView;
-import views.main.menu.MenuFrame;
 
 public class NewGameAction extends GenericAbstractInputObjectAction<NewGameActionInput>{
 
@@ -11,7 +12,7 @@ public class NewGameAction extends GenericAbstractInputObjectAction<NewGameActio
 	public int execute(NewGameActionInput input) {
 		DeminorGameProperties gameProperties = input.getDeminorProperties();
 
-        MenuFrame deminorFrame = DeminorView.getFrame();
+        JFrame deminorFrame = DeminorView.getFrame();
         deminorFrame.getContentPane().removeAll();
         DeminorView.createDeminorPanel(gameProperties);
         deminorFrame.add(DeminorView.getDeminorPanel());

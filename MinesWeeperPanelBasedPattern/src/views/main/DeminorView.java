@@ -21,7 +21,7 @@ import dto.DeminorPanelProperties;
 import images.ImageHandler;
 import languages.LanguageFactory;
 import messages.Labels;
-import views.main.menu.MenuFrame;
+import views.main.menu.MainMenu;
 import views.main.panels.CellsPanel;
 import views.main.panels.DeminorPanel;
 
@@ -53,7 +53,12 @@ public class DeminorView extends JPanel
 
     private static void createAndShowGUI()
     {
-        frame = new MenuFrame(Labels.DEMINOR_TITLE);
+        frame = new JFrame(Labels.DEMINOR_TITLE);
+
+        javax.swing.JMenuBar menubar = (new MainMenu()).getMenuBar();
+        frame.setJMenuBar(menubar);
+        frame.setLocationRelativeTo(null);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         DeminorGameProperties gameProperties = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance();
         createDeminorPanel(gameProperties);
@@ -93,12 +98,12 @@ public class DeminorView extends JPanel
             System.out.println("Hello!!!!!");
     }
 
-    public static MenuFrame getFrame()
+    public static JFrame getFrame()
     {
         return frame;
     }
 
-    public static void setFrame(MenuFrame frame)
+    public static void setFrame(JFrame frame)
     {
     	DeminorView.frame = frame;
     }
@@ -114,7 +119,7 @@ public class DeminorView extends JPanel
     }
 
     private static final long serialVersionUID = 1L;
-    private static MenuFrame frame;
+    private static JFrame frame;
     private static int frameWidth;
     private static int frameHeight;
     private static Rectangle frameBounds;

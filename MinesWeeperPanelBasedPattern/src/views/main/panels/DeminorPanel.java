@@ -15,7 +15,6 @@ import dto.DeminorGameProperties;
 import dto.DeminorGamePropertiesFactory;
 import dto.DeminorPanelProperties;
 import images.ImageHandler;
-import views.main.Cell;
 
 public class DeminorPanel extends JPanel {
 

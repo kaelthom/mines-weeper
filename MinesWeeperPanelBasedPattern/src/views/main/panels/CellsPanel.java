@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import dto.DeminorPanelProperties;
-import views.main.Cell;
 
 public class CellsPanel extends JPanel {
 

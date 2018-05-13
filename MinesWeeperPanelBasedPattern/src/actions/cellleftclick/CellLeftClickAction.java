@@ -10,7 +10,7 @@ import datas.DataManager;
 import datas.Highscore;
 import dto.DeminorGameProperties;
 import messages.Labels;
-import views.main.Cell;
+import views.main.panels.Cell;
 import views.main.panels.CellsPanel;
 
 public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftClickActionInput> {

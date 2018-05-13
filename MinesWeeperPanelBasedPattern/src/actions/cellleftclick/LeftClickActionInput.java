@@ -1,7 +1,7 @@
 package actions.cellleftclick;
 
 import dto.DeminorGameProperties;
-import views.main.Cell;
+import views.main.panels.Cell;
 import views.main.panels.CellsPanel;
 
 public class LeftClickActionInput {

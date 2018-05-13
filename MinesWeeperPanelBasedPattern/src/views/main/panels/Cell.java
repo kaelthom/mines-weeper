@@ -1,7 +1,6 @@
-package views.main;
+package views.main.panels;
 
 import images.ImageHandler;
-import views.main.panels.CellsPanel;
 
 import java.awt.Color;
 import java.awt.Rectangle;
