@@ -44,7 +44,7 @@ public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftCl
 			JOptionPane.showMessageDialog(cellsPanel, Labels.GAMELOST);
 			percent = (cellsPanel.getDiscoveredCells()-CellsPanel.getnBombs())*100/
 					  (cellsPerLine*cellsPerColumn-nBombs);
-			DataManager.insertHighscore(new Highscore("", new Date().toLocaleString(), time, percent), level);
+			DataManager.insertHighscore(new Highscore(0,"", new Date().toLocaleString(), time, percent), level);
 		} else {
 			cellsPanel.showCurrentAndNeighbourCells(cell.getxOcc(), cell.getyOcc(),cell);
 			int nCellsToWin = CellsPanel.getCellsPerColumn()*CellsPanel.getCellsPerColumn()-CellsPanel.getnBombs();
@@ -55,7 +55,7 @@ public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftCl
 				percent = 100;
 				System.out.println("time : " + time);
 				System.out.println("percent : " + percent);
-				DataManager.insertHighscore(new Highscore("", new Date().toLocaleString(), time, percent), level);
+				DataManager.insertHighscore(new Highscore(0,"", new Date().toLocaleString(), time, percent), level);
 			}
 		}
 		return returnCode;

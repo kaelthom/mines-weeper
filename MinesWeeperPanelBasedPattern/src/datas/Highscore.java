@@ -15,8 +15,9 @@ public class Highscore implements Comparable<Highscore>
     private long score;
 	private int percent;
 
-	public Highscore(String name, String date, long score, int percent)
+	public Highscore(long id, String name, String date, long score, int percent)
     {
+        this.id = id;
         this.date = date;
         this.name = name;
         this.score = score;

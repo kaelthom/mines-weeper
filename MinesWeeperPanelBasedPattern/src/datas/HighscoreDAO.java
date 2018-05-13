@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import connections.ConnexionFactory;
-import views.main.DeminorView;
-import views.main.panels.DeminorPanel;
 
 
 // Referenced classes of package datas:
@@ -26,6 +24,7 @@ import views.main.panels.DeminorPanel;
 
 public class HighscoreDAO
 {
+	private static final String ID_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.id");
 	private static final String NAME_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.name");
 	private static final String DATE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.date");
 	private static final String SCORE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.score");
@@ -47,6 +46,7 @@ public class HighscoreDAO
             String name;
             String date;
             long score;
+            long id;
             int percent;
             for(ResultSet rs = statement.executeQuery(query); rs.next();)
             {
@@ -54,8 +54,9 @@ public class HighscoreDAO
                 date = rs.getString(DATE_COLUMN_NAME);
                 score = rs.getLong(SCORE_COLUMN_NAME);
                 percent = rs.getInt(PERCENT_COLUMN_NAME);
+                id = rs.getInt(ID_COLUMN_NAME);
                 
-                highscores.add(new Highscore(name, date, score, percent));
+                highscores.add(new Highscore(id, name, date, score, percent));
             }
             Collections.sort(highscores);
         }
@@ -150,17 +151,35 @@ public class HighscoreDAO
 		int rs = statement.executeUpdate(query);
 	}
 
+//	/**
+//	 * To find the score to delete we sort the table by increasing percent and decreasing score and remove the first result 
+//	 * @param highscore
+//	 * @param conn
+//	 * @param iLevel
+//	 * @throws SQLException
+//	 */
+//	public void deleteLowestHighscore (Connection conn, int iLevel) throws SQLException {
+//		String level = Integer.toString(iLevel);
+//		String highscoreTable = "HIGHSCORE_" + level;
+//		String query = new StringBuilder("DELETE FROM ")
+//		                                .append(highscoreTable)
+//		                                .append(" WHERE MAP_ID IN (SELECT MAP_ID FROM ")
+//		                                .append(highscoreTable)
+//		                                .append(" ORDER BY PERCENT,-SCORE FETCH FIRST 1 ROWS ONLY)").toString();
+//		System.out.println(query);
+//	    PreparedStatement statement = conn.prepareStatement(query);
+//	    int rs = statement.executeUpdate();
+//	}
+
 	public void deleteHighscore (Highscore highscore, Connection conn, int iLevel) throws SQLException {
 		String level = Integer.toString(iLevel);
 		String highscoreTable = "HIGHSCORE_" + level;
 		String query = new StringBuilder("DELETE FROM ")
 		                                .append(highscoreTable)
-		                                .append(" WHERE SCORE IN (SELECT SCORE FROM ")
-		                                .append(highscoreTable)
-		                                .append(" WHERE SCORE = ? ORDER BY PERCENT,SCORE FETCH FIRST 1 ROWS ONLY)").toString();
+		                                .append(" WHERE MAP_ID = ? ").toString();
 		System.out.println(query);
 	    PreparedStatement statement = conn.prepareStatement(query);
-	    statement.setLong(1, highscore.getScore());
+	    statement.setLong(1, highscore.getId());
 	    int rs = statement.executeUpdate();
 	}
 }
