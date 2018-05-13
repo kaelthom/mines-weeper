@@ -40,7 +40,7 @@ public class CellsPanel extends JPanel {
 		setBounds(this.bounds);
 		setOpaque(true);
 
-		setCellsPerColumn(cellsPerLine);
+		setCellsPerColumn(cellsPerColumn);
 		setCellsPerLine(cellsPerLine);
 		setLost(false);
 		setWon(false);
@@ -106,6 +106,7 @@ public class CellsPanel extends JPanel {
 	}
 
 	public int getCellIndex(int x, int y) {
+		System.out.println("x: " + x + " - y: " + y);
 		int index = (y) * cellsPerLine + x;
 		return index;
 		
@@ -152,50 +153,66 @@ public class CellsPanel extends JPanel {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isMined()) cell.incrementNBombsaround();
-			} else if (jOcc == 0) {
+			} else if (jOcc == 0 && jOcc != cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isMined()) cell.incrementNBombsaround();
-			} else if (jOcc == cellsPerColumn-1) {
+			} else if (jOcc == cellsPerColumn-1 && jOcc != 0) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isMined()) cell.incrementNBombsaround();
+			} else if (jOcc == cellsPerColumn-1 && jOcc == 0) {
+				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isMined()) cell.incrementNBombsaround();
+				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isMined()) cell.incrementNBombsaround();
 			}
-		} else if (iOcc == 0) {
+		} else if (iOcc == 0 && iOcc != cellsPerLine-1) {
 			if (jOcc > 0 && jOcc < cellsPerColumn-1){
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isMined()) cell.incrementNBombsaround();
-			} else if (jOcc == 0) {
+			} else if (jOcc == 0 && jOcc != cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isMined()) cell.incrementNBombsaround();
-			} else if (jOcc == cellsPerColumn-1) {
+			} else if (jOcc == cellsPerColumn-1 && jOcc != 0) {
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isMined()) cell.incrementNBombsaround();
+			} else if (jOcc == cellsPerColumn-1 && jOcc == 0) {
+				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isMined()) cell.incrementNBombsaround();
 			}
-		} else if (iOcc == cellsPerLine-1) {
+		} else if (iOcc == cellsPerLine-1 && iOcc != 0) {
 			if (jOcc > 0 && jOcc < cellsPerColumn-1){
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isMined()) cell.incrementNBombsaround();
-			} else if (jOcc == 0) {
+			} else if (jOcc == 0 && jOcc != cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isMined()) cell.incrementNBombsaround();
-			} else if (jOcc == cellsPerColumn-1) {
+			} else if (jOcc == cellsPerColumn-1 && jOcc != 0) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isMined()) cell.incrementNBombsaround();
+			} else if (jOcc == cellsPerColumn-1 && jOcc == 0) {
+				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isMined()) cell.incrementNBombsaround();
+			}
+		} else if (iOcc == cellsPerLine-1 && iOcc == 0) {
+			if (jOcc > 0 && jOcc < cellsPerColumn-1){
+				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
+				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isMined()) cell.incrementNBombsaround();
+			} else if (jOcc == 0) {
+				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isMined()) cell.incrementNBombsaround();
+			} else if (jOcc == cellsPerColumn-1) {
+				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isMined()) cell.incrementNBombsaround();
 			}
 		}
 	}
@@ -211,50 +228,66 @@ public class CellsPanel extends JPanel {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc+1,getCells().get(getCellIndex(iOcc-1, jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc+1,getCells().get(getCellIndex(iOcc  , jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc+1,getCells().get(getCellIndex(iOcc+1, jOcc+1)));
-			} else if (jOcc == 0) {
+			} else if (jOcc == 0 && jOcc != cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc  ,getCells().get(getCellIndex(iOcc-1, jOcc  )));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc  ,getCells().get(getCellIndex(iOcc+1, jOcc  )));
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc+1,getCells().get(getCellIndex(iOcc-1, jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc+1,getCells().get(getCellIndex(iOcc  , jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc+1,getCells().get(getCellIndex(iOcc+1, jOcc+1)));
-			} else if (jOcc == cellsPerColumn-1) {
+			} else if (jOcc == cellsPerColumn-1 && jOcc != 0) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc-1,getCells().get(getCellIndex(iOcc-1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc-1,getCells().get(getCellIndex(iOcc+1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc  ,getCells().get(getCellIndex(iOcc-1, jOcc  )));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc  ,getCells().get(getCellIndex(iOcc+1, jOcc  )));
+			} else if (jOcc == cellsPerColumn-1 && jOcc == 0) {
+				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc  ,getCells().get(getCellIndex(iOcc-1, jOcc  )));
+				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc  ,getCells().get(getCellIndex(iOcc+1, jOcc  )));
 			}
-		} else if (iOcc == 0) {
+		} else if (iOcc == 0 && iOcc != cellsPerLine-1) {
 			if (jOcc > 0 && jOcc < cellsPerColumn-1){
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc-1,getCells().get(getCellIndex(iOcc+1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc  ,getCells().get(getCellIndex(iOcc+1, jOcc  )));
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc+1,getCells().get(getCellIndex(iOcc  , jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc+1,getCells().get(getCellIndex(iOcc+1, jOcc+1)));
-			} else if (jOcc == 0) {
+			} else if (jOcc == 0 && jOcc != cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc  ,getCells().get(getCellIndex(iOcc+1, jOcc  )));
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc+1,getCells().get(getCellIndex(iOcc  , jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc+1,getCells().get(getCellIndex(iOcc+1, jOcc+1)));
-			} else if (jOcc == cellsPerColumn-1) {
+			} else if (jOcc == cellsPerColumn-1 && jOcc != 0) {
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc-1,getCells().get(getCellIndex(iOcc+1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc  ,getCells().get(getCellIndex(iOcc+1, jOcc  )));
+			} else if (jOcc == cellsPerColumn-1 && jOcc == 0) {
+				if (getCells().get(getCellIndex(iOcc+1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc+1, jOcc  ,getCells().get(getCellIndex(iOcc+1, jOcc  )));
 			}
-		} else if (iOcc == cellsPerLine-1) {
+		} else if (iOcc == cellsPerLine-1 && iOcc != 0) {
 			if (jOcc > 0 && jOcc < cellsPerColumn-1){
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc-1,getCells().get(getCellIndex(iOcc-1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc  ,getCells().get(getCellIndex(iOcc-1, jOcc  )));
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc+1,getCells().get(getCellIndex(iOcc-1, jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc+1,getCells().get(getCellIndex(iOcc  , jOcc+1)));
-			} else if (jOcc == 0) {
+			} else if (jOcc == 0 && jOcc != cellsPerColumn-1) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc  ,getCells().get(getCellIndex(iOcc-1, jOcc  )));
 				if (getCells().get(getCellIndex(iOcc-1, jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc+1,getCells().get(getCellIndex(iOcc-1, jOcc+1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc+1,getCells().get(getCellIndex(iOcc  , jOcc+1)));
-			} else if (jOcc == cellsPerColumn-1) {
+			} else if (jOcc == cellsPerColumn-1 && jOcc != 0) {
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc-1,getCells().get(getCellIndex(iOcc-1, jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc  ,getCells().get(getCellIndex(iOcc-1, jOcc  )));
+			} else if (jOcc == cellsPerColumn-1 && jOcc == 0) {
+				if (getCells().get(getCellIndex(iOcc-1, jOcc  )).isHidden()) showCurrentAndNeighbourCells(iOcc-1, jOcc  ,getCells().get(getCellIndex(iOcc-1, jOcc  )));
+			}
+		} else if (iOcc == cellsPerLine-1 && iOcc == 0) {
+			if (jOcc > 0 && jOcc < cellsPerColumn-1){
+				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
+				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc+1,getCells().get(getCellIndex(iOcc  , jOcc+1)));
+			} else if (jOcc == 0) {
+				if (getCells().get(getCellIndex(iOcc  , jOcc+1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc+1,getCells().get(getCellIndex(iOcc  , jOcc+1)));
+			} else if (jOcc == cellsPerColumn-1) {
+				if (getCells().get(getCellIndex(iOcc  , jOcc-1)).isHidden()) showCurrentAndNeighbourCells(iOcc  , jOcc-1,getCells().get(getCellIndex(iOcc  , jOcc-1)));
 			}
 		}
 	}

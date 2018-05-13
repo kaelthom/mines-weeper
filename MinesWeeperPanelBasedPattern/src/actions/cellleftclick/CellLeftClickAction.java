@@ -47,7 +47,7 @@ public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftCl
 			DataManager.insertHighscore(new Highscore(0,"", new Date().toLocaleString(), time, percent), level);
 		} else {
 			cellsPanel.showCurrentAndNeighbourCells(cell.getxOcc(), cell.getyOcc(),cell);
-			int nCellsToWin = CellsPanel.getCellsPerColumn()*CellsPanel.getCellsPerColumn()-CellsPanel.getnBombs();
+			int nCellsToWin = cellsPerLine*cellsPerColumn-nBombs;
 			if (cellsPanel.getDiscoveredCells() == nCellsToWin) {
 				CellsPanel.setWon(true);
 				JOptionPane.showMessageDialog(cellsPanel, Labels.GAMEWON);

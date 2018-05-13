@@ -75,6 +75,9 @@ public class OptionsView extends JPanel
     		int level = optionsLevelPanel.getLevel();
     		gameProperties.setLevel(level);
     		DeminorGamePropertiesFactory.updateDeminorGameProperties(gameProperties);
+    		gameProperties = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance();
+    		System.out.println("cellsPerLine : " + gameProperties.getCellsPerLine());
+    		System.out.println("cellsPerColumn : " + gameProperties.getCellsPerColumn());
 			new OptionsSubmitAction().execute(new OptionsSubmitActionInput(gameProperties));
         }
     }
