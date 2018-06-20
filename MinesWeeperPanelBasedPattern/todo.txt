@@ -1,0 +1,20 @@
+- implements csv parser
+- implement exception for parsing
+- implements csv extraction from db and csv parsing to db
+- Extract panel properties
+- Are there any variables duplications other than panel properties.
+- What for custom level saving in db? cancel saving?
+- create imagesFactory and move the image creation (in CellsPanel constructor?)
+- create a Player entity
+- handle int return from update query
+- toLocaleString deprecated. change it
+- use double in percent highscore and seconds
+- implement JUnit
+- migrate to Java 8. Calendar iso Date and Lambdas and try with resources close
+- migrate to Spring
+- migrate to Hibernate
+- implements an AI to play the game 60
+- implements an Admin Screen to modify DeminorPanelProperties
+- Admin screen : choose DB mode (simple file, DB) 10
+- test gluon
+- migration to Android
