@@ -1,10 +1,14 @@
-- implements csv parser
-- implement exception for parsing
+- implements Admin menu : extract data from DB to csv/csv to DB, choose DB/csv saving
+- implement User model
 - implements csv extraction from db and csv parsing to db
+- use csv parser to retrieve score and store them in csv file
+- see mnemonics doublons issue
+- implement exception for parsing
 - Extract panel properties
 - Are there any variables duplications other than panel properties.
 - What for custom level saving in db? cancel saving?
 - create imagesFactory and move the image creation (in CellsPanel constructor?)
+- create DAOFactory
 - create a Player entity
 - handle int return from update query
 - toLocaleString deprecated. change it
@@ -15,6 +19,6 @@
 - migrate to Hibernate
 - implements an AI to play the game 60
 - implements an Admin Screen to modify DeminorPanelProperties
-- Admin screen : choose DB mode (simple file, DB) 10
+- Admin screen : choose DB mode (simple file/DB, name of the file/DB, path, etc..) 10
 - test gluon
 - migration to Android

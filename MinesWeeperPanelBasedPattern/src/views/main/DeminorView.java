@@ -8,12 +8,15 @@ package views.main;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import constants.Profiles;
 import datas.DataManager;
 import dto.DeminorGameProperties;
 import dto.DeminorGamePropertiesFactory;
@@ -21,6 +24,7 @@ import dto.DeminorPanelProperties;
 import images.ImageHandler;
 import languages.LanguageFactory;
 import messages.Labels;
+import tools.parsers.Parsers;
 import views.main.menu.MainMenu;
 import views.main.panels.CellsPanel;
 import views.main.panels.DeminorPanel;
@@ -51,11 +55,11 @@ public class DeminorView extends JPanel
         frame.setBounds(frameBounds);
     }
 
-    private static void createAndShowGUI()
+    private static void createAndShowGUI(List<String> userRights)
     {
         frame = new JFrame(Labels.DEMINOR_TITLE);
 
-        javax.swing.JMenuBar menubar = (new MainMenu()).getMenuBar();
+        javax.swing.JMenuBar menubar = (new MainMenu(userRights)).getMenuBar();
         frame.setJMenuBar(menubar);
         frame.setLocationRelativeTo(null);
 
@@ -70,12 +74,18 @@ public class DeminorView extends JPanel
     public static void main(String args[])
     {
     	DataManager.getHighscores(DeminorGameProperties.getInitialLevel());
+    	
+    	String userProfile = Profiles.ADMIN_USER;
+    	String userRights[] = Profiles.rightsPerProfile.get(userProfile);
+    	
+    	Parsers.init();
+    	
     	SwingUtilities.invokeLater(new Runnable() {
 
             public void run()
             {
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
-                DeminorView.createAndShowGUI();
+                DeminorView.createAndShowGUI(Arrays.asList(userRights));
             }
 
         }
