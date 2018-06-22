@@ -8,7 +8,7 @@ package datas;
 import java.util.ArrayList;
 import java.util.List;
 
-import daos.HighscoreDBDAO;
+import daos.HighscoreCSVFileDAO;
 
 // Referenced classes of package datas:
 //            HighscoreDAO
@@ -22,7 +22,7 @@ public class DataManager
 
     public static List<Highscore> getHighscores(int level)
     {
-    	highscores = (new HighscoreDBDAO()).getHighscoreList(level);
+    	highscores = (new HighscoreCSVFileDAO()).getHighscoreList(level);
         return highscores;
     }
 
@@ -34,7 +34,7 @@ public class DataManager
     private static List<Highscore> highscores = new ArrayList<>();
 
 	public static void insertHighscore(Highscore highscore , int level) {
-	   	new HighscoreDBDAO().addHighscore(highscore, level);
+	   	new HighscoreCSVFileDAO().addHighscore(highscore, level);
 	}
 
 }

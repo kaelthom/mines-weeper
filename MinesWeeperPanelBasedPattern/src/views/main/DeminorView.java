@@ -73,12 +73,12 @@ public class DeminorView extends JPanel
 
     public static void main(String args[])
     {
-    	DataManager.getHighscores(DeminorGameProperties.getInitialLevel());
-    	
     	String userProfile = Profiles.ADMIN_USER;
     	String userRights[] = Profiles.rightsPerProfile.get(userProfile);
     	
     	Parsers.init();
+    	
+    	DataManager.getHighscores(DeminorGameProperties.getInitialLevel());
     	
     	SwingUtilities.invokeLater(new Runnable() {
 

@@ -1,8 +1,8 @@
-- implements Admin menu : extract data from DB to csv/csv to DB, choose DB/csv saving
-- implement User model
+- implements User model
 - implements csv extraction from db and csv parsing to db
-- use csv parser to retrieve score and store them in csv file
 - see mnemonics doublons issue
+- test extract from CSV to DB
+- implements Admin menu : choose DB/csv saving
 - implement exception for parsing
 - Extract panel properties
 - Are there any variables duplications other than panel properties.
