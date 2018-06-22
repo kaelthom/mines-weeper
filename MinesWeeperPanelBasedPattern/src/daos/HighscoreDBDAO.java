@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) 
 // Source File Name:   HighscoreDAO.java
 
-package datas;
+package daos;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
@@ -17,19 +17,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import connections.ConnexionFactory;
+import datas.DataManager;
+import datas.Highscore;
 
 
 // Referenced classes of package datas:
 //            Highscore
 
-public class HighscoreDAO
+public class HighscoreDBDAO
 {
 	private static final String ID_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.id");
 	private static final String NAME_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.name");
 	private static final String DATE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.date");
 	private static final String SCORE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.score");
 	private static final String PERCENT_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.percent");
-    public HighscoreDAO()
+    public HighscoreDBDAO()
     {
     }
 

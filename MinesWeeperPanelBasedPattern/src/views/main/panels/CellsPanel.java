@@ -105,7 +105,7 @@ public class CellsPanel extends JPanel {
 	}
 
 	public int getCellIndex(int x, int y) {
-		System.out.println("x: " + x + " - y: " + y);
+//		System.out.println("x: " + x + " - y: " + y);
 		int index = (y) * cellsPerLine + x;
 		return index;
 		
