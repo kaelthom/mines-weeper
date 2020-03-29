@@ -3,6 +3,9 @@ package actions.extractcsvtodb;
 import java.io.File;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import actions.GenericAbstractInputObjectAction;
 import datas.Highscore;
 import tools.parsers.Parsers;
@@ -10,27 +13,40 @@ import tools.parsers.csv.CsvParser;
 
 public class ExtractCSVtoDBAction extends GenericAbstractInputObjectAction<ExtractCSVtoDBActionInput> {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExtractCSVtoDBAction.class); 
+	private static final String HIGHSCORE_MESSAGE = "highscore({}).{} : {}";
+	private static final String CSV_FILE_PATH_MESSAGE = "CSV file path : {}";
+	private static final String NAME = "NAME";
+	private static final String ID = "ID";
+	private static final String DATE = "DATE";
+	private static final String SCORE = "SCORE";
+	private static final String PERCENT = "PERCENT";
+	
 	@Override
 	public int execute(ExtractCSVtoDBActionInput input) {
 		File csvFile = input.getCsvFile();
 		
-		System.out.println(csvFile.getAbsolutePath());
+		LOGGER.debug("%n");
+		LOGGER.debug("%n");
+		LOGGER.debug(CSV_FILE_PATH_MESSAGE, csvFile.getAbsolutePath());
 		try {
 			CsvParser<Highscore> csvHighscoreParser = Parsers.getCsvHighscoreParser();
 			List<Highscore> highscores = csvHighscoreParser.parse(csvFile);
 			for (int iHighscore = 0; iHighscore<highscores.size(); iHighscore++) {
 				Highscore highscore = highscores.get(iHighscore);
-				System.out.println("highscore(" + iHighscore + ").name : " + highscore.getName());
-				System.out.println("highscore(" + iHighscore + ").id : " + highscore.getId());
-				System.out.println("highscore(" + iHighscore + ").date : " + highscore.getDate());
-				System.out.println("highscore(" + iHighscore + ").score : " + highscore.getScore());
-				System.out.println("highscore(" + iHighscore + ").percent : " + highscore.getPercent());
+				LOGGER.debug(HIGHSCORE_MESSAGE, iHighscore, NAME, highscore.getName());
+				LOGGER.debug(HIGHSCORE_MESSAGE, iHighscore, ID, highscore.getId());
+				LOGGER.debug(HIGHSCORE_MESSAGE, iHighscore, DATE, highscore.getName());
+				LOGGER.debug(HIGHSCORE_MESSAGE, iHighscore, SCORE, highscore.getScore());
+				LOGGER.debug(HIGHSCORE_MESSAGE, iHighscore, PERCENT, highscore.getName());
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// TODO create CSV parsing Exception
+			LOGGER.error("Error while parsing CSV", e);
 		}
+		LOGGER.debug("%n");
+		LOGGER.debug("%n");
 		return 0;
 	}
 	

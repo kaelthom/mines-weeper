@@ -2,13 +2,26 @@ package actions.extractdbtocsv;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import actions.GenericAbstractInputObjectAction;
+import actions.extractcsvtodb.ExtractCSVtoDBAction;
 import datas.DataManager;
 import datas.Highscore;
 import tools.parsers.Parsers;
 import tools.parsers.csv.CsvParser;
 
 public class ExtractDBtoCSVAction extends GenericAbstractInputObjectAction<ExtractDBtoCSVActionInput> {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExtractCSVtoDBAction.class); 
+	private static final String HIGHSCORE_MESSAGE = "highscore({}).{} : {}";
+	private static final String UNPARSE_MESSAGE = "unparsing to CSV file path : {}";
+	private static final String NAME = "NAME   ";
+	private static final String ID = "ID     ";
+	private static final String DATE = "DATE   ";
+	private static final String SCORE = "SCORE  ";
+	private static final String PERCENT = "PERCENT";
 
 	@Override
 	public int execute(ExtractDBtoCSVActionInput input) {
@@ -19,14 +32,16 @@ public class ExtractDBtoCSVAction extends GenericAbstractInputObjectAction<Extra
 				List<Highscore> highscores = DataManager.getHighscores(iLevel);
 				for (int iHighscore = 0; iHighscore<highscores.size(); iHighscore++) {
 					Highscore highscore = highscores.get(iHighscore);
-					System.out.println("highscore(" + iHighscore + ").name : " + highscore.getName());
-					System.out.println("highscore(" + iHighscore + ").id : " + highscore.getId());
-					System.out.println("highscore(" + iHighscore + ").date : " + highscore.getDate());
-					System.out.println("highscore(" + iHighscore + ").score : " + highscore.getScore());
-					System.out.println("highscore(" + iHighscore + ").percent : " + highscore.getPercent());
+					LOGGER.info(HIGHSCORE_MESSAGE, iHighscore, NAME, highscore.getName());
+					LOGGER.info(HIGHSCORE_MESSAGE, iHighscore, ID, highscore.getId());
+					LOGGER.info(HIGHSCORE_MESSAGE, iHighscore, DATE, highscore.getDate());
+					LOGGER.info(HIGHSCORE_MESSAGE, iHighscore, SCORE, highscore.getScore());
+					LOGGER.info(HIGHSCORE_MESSAGE, iHighscore, PERCENT, highscore.getName());
 				}
-				String highscoresFilePath = "highscores/highscore_" + iLevel + ".csv";
-				csvHighscoreParser.unParse(highscores, highscoresFilePath);
+				String highscoresFilePath = "highscores/highscore_{}.csv";
+
+				LOGGER.debug(UNPARSE_MESSAGE, iLevel);
+				csvHighscoreParser.unParse(highscores, String.format(highscoresFilePath, iLevel));
 			}
 
 		} catch (Exception e) {

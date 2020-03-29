@@ -16,9 +16,7 @@
 - implement JUnit
 - migrate to Java 8. Calendar iso Date and Lambdas and try with resources close
 - migrate to Spring
-- migrate to Hibernate
 - implements an AI to play the game 60
 - implements an Admin Screen to modify DeminorPanelProperties
 - Admin screen : choose DB mode (simple file/DB, name of the file/DB, path, etc..) 10
 - test gluon
-- migration to Android
