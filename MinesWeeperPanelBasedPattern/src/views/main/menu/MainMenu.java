@@ -33,12 +33,12 @@ public class MainMenu implements ActionListener {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MainMenu.class);
 	
-    private JMenu menus[] = {
+    private JMenu[] menus = {
         new JMenu(Labels.GAME),
         new JMenu(Labels.OPTIONS),
         new JMenu(Labels.ADMIN)
     };
-    private JMenuItem items[][] = {
+    private JMenuItem[][] items = {
             {
                 new JMenuItem(Labels.GAME_NEW), 
                 new JMenuItem(Labels.GAME_OPTIONS), 
@@ -51,27 +51,29 @@ public class MainMenu implements ActionListener {
                 new JMenuItem(Labels.ADMIN_CONFIG)
             }
         };
-    private String actionCommands[][] = {
+    private ResourceBundle labelsBundle = ResourceBundle.getBundle("labels", new Locale("en", "EN"));
+    
+    private String[][] actionCommands = {
         {
-            (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.game"))))
-                                      .append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.gamenew")).toString(),
-            (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.game"))))
-                                      .append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.gameoptions")).toString(), 
-            (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.game"))))
-                                      .append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.gameclose")).toString()
+            (new StringBuilder(String.valueOf(labelsBundle.getString("menu.game"))))
+                                      .append(labelsBundle.getString("menu.gamenew")).toString(),
+            (new StringBuilder(String.valueOf(labelsBundle.getString("menu.game"))))
+                                      .append(labelsBundle.getString("menu.gameoptions")).toString(), 
+            (new StringBuilder(String.valueOf(labelsBundle.getString("menu.game"))))
+                                      .append(labelsBundle.getString("menu.gameclose")).toString()
         }, {
-            (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.options"))))
-                                     .append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.optionshighscore")).toString()
+            (new StringBuilder(String.valueOf(labelsBundle.getString("menu.options"))))
+                                     .append(labelsBundle.getString("menu.optionshighscore")).toString()
         }, {
-        	(new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.admin"))))
-        	                         .append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.admincsvtodb")).toString(),
-        	(new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.admin"))))
-                                     .append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.admindbtocsv")).toString(),
-            (new StringBuilder(String.valueOf(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.admin"))))
-                                    .append(ResourceBundle.getBundle("labels", new Locale("en", "EN")).getString("menu.adminconfig")).toString()
+        	(new StringBuilder(String.valueOf(labelsBundle.getString("menu.admin"))))
+        	                         .append(labelsBundle.getString("menu.admincsvtodb")).toString(),
+        	(new StringBuilder(String.valueOf(labelsBundle.getString("menu.admin"))))
+                                     .append(labelsBundle.getString("menu.admindbtocsv")).toString(),
+            (new StringBuilder(String.valueOf(labelsBundle.getString("menu.admin"))))
+                                    .append(labelsBundle.getString("menu.adminconfig")).toString()
         }
     };
-    private String rights[] = {
+    private String[] rights = {
             Rights.GET_GAME_MENU,
             Rights.GET_OPTIONS_MENU,
             Rights.GET_ADMIN_MENU,
@@ -120,7 +122,8 @@ public class MainMenu implements ActionListener {
     public void actionPerformed(ActionEvent e)
     {
         LOGGER.info("actionPerformed from MainMenu called!");
-        LOGGER.info((new StringBuilder("actionCommand : ")).append(e.getActionCommand()).toString());
+        LOGGER.info("actionCommand : {}",e.getActionCommand());
+        
         if(e.getActionCommand().equals("FileClose"))
             System.exit(0);
         else

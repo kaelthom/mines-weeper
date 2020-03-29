@@ -81,16 +81,10 @@ public class DeminorView extends JPanel implements ActionListener {
     	
     	DataManager.getHighscores(DeminorGameProperties.getInitialLevel());
     	
-    	SwingUtilities.invokeLater(new Runnable() {
-
-            public void run()
-            {
-                UIManager.put("swing.boldMetal", Boolean.FALSE);
-                DeminorView.createAndShowGUI(Arrays.asList(userRights));
-            }
-
-        }
-);
+    	SwingUtilities.invokeLater(() -> {
+		    UIManager.put("swing.boldMetal", Boolean.FALSE);
+		    DeminorView.createAndShowGUI(Arrays.asList(userRights));
+		});
     }
 
     public static CellsPanel getCellsPanel()

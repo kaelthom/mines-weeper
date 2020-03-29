@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,21 +31,16 @@ public class CsvParser<T> extends AbstractGenericParser<List<T>, List<String>> {
 		this.objClass = objClass;
 		this.separator = separator;
 		this.fields = Arrays.asList(objClass.getFields());
-		this.fields.sort(new Comparator<Field>() {
-
-			@Override
-			public int compare(Field f1, Field f2) {
-				int f1Column = f1.getAnnotation(CsvColumn.class).column();
-				int f2Column = f2.getAnnotation(CsvColumn.class).column();
-				if (f1Column<f2Column) {
-					return -1;
-				} else if (f1Column>f2Column){
-					return 1;
-				} else {
-					return 0;
-				}
+		this.fields.sort((field1, field2) -> {
+			int f1Column = field1.getAnnotation(CsvColumn.class).column();
+			int f2Column = field2.getAnnotation(CsvColumn.class).column();
+			if (f1Column<f2Column) {
+				return -1;
+			} else if (f1Column>f2Column){
+				return 1;
+			} else {
+				return 0;
 			}
-			
 		});
 		LOGGER.info("fields size of class {} : {}",objClass.getName(),fields.size());
 		if (!isClassCompatible())
