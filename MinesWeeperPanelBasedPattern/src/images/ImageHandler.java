@@ -11,7 +11,7 @@ public class ImageHandler {
 	private static ImageIcon bombIcon;
 	private static ImageIcon flagIcon;
 	private static ImageIcon hiddenIcon;
-	private static String path = "bin/";
+	private static String path = "images/";
 
 	public static void createImages() {
 		setBombIcon(new ImageIcon(path + "demineur.png"));
