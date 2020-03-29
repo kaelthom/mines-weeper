@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import constants.Profiles;
 import datas.DataManager;
 import dto.DeminorGameProperties;
@@ -29,14 +32,10 @@ import views.main.menu.MainMenu;
 import views.main.panels.CellsPanel;
 import views.main.panels.DeminorPanel;
 
-public class DeminorView extends JPanel
-    implements ActionListener
-{
+public class DeminorView extends JPanel implements ActionListener {
 
-    public DeminorView()
-    {
-    }
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(DeminorView.class);
+	
     public static void createDeminorPanel(DeminorGameProperties gameProperties)
     {
         deminorPanel = DeminorPanel.createPanel(gameProperties);
@@ -47,11 +46,13 @@ public class DeminorView extends JPanel
     public static void resize()
     {
         frame.pack();
-        borderHeight = (frame.getHeight() - frame.getContentPane().getHeight()) / 2;
-        borderWidth = (frame.getWidth() - frame.getContentPane().getWidth()) / 2;
-        frameWidth = deminorPanel.getWidth() + borderWidth * 2;
-        frameHeight = deminorPanel.getHeight() + borderHeight * 2;
-        frameBounds = new Rectangle(DeminorPanelProperties.getFrameX(), DeminorPanelProperties.getFrameY(), frameWidth, frameHeight);
+        
+        final int borderHeight = (frame.getHeight() - frame.getContentPane().getHeight()) / 2;
+        final int borderWidth = (frame.getWidth() - frame.getContentPane().getWidth()) / 2;
+        final int frameWidth = deminorPanel.getWidth() + borderWidth * 2;
+        final int frameHeight = deminorPanel.getHeight() + borderHeight * 2;
+        final Rectangle frameBounds = new Rectangle(DeminorPanelProperties.getFrameX(), DeminorPanelProperties.getFrameY(), frameWidth, frameHeight);
+        
         frame.setBounds(frameBounds);
     }
 
@@ -71,10 +72,10 @@ public class DeminorView extends JPanel
         frame.setVisible(true);
     }
 
-    public static void main(String args[])
+    public static void main(String[] args)
     {
     	String userProfile = Profiles.ADMIN_USER;
-    	String userRights[] = Profiles.rightsPerProfile.get(userProfile);
+    	String[] userRights = Profiles.rightsPerProfile.get(userProfile);
     	
     	Parsers.init();
     	
@@ -104,8 +105,9 @@ public class DeminorView extends JPanel
 
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getActionCommand().equals("OK"))
-            System.out.println("Hello!!!!!");
+        if(e.getActionCommand().equals("OK")) {
+            LOGGER.info("Hello!!!!!");
+        }
     }
 
     public static JFrame getFrame()
@@ -130,11 +132,6 @@ public class DeminorView extends JPanel
 
     private static final long serialVersionUID = 1L;
     private static JFrame frame;
-    private static int frameWidth;
-    private static int frameHeight;
-    private static Rectangle frameBounds;
-    private static int borderWidth;
-    private static int borderHeight;
     private static CellsPanel cellsPanel;
     private static DeminorPanel deminorPanel;
 

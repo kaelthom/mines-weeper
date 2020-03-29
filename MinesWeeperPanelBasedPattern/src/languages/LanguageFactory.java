@@ -3,27 +3,34 @@ package languages;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public final class LanguageFactory {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(LanguageFactory.class);
 	private static LanguageFactory instance= null;
 	private String language;
 	private String country;
 	private Locale locale;
 
 	private LanguageFactory(){
-		setLanguage(ResourceBundle.getBundle("language").getString("language"));
-		System.out.println(language);
 		
-		setCountry(ResourceBundle.getBundle("language").getString("country"));
-		System.out.println(country);
+		ResourceBundle languageResourceBundle = ResourceBundle.getBundle("language");
+		setLanguage(languageResourceBundle.getString("language"));
+		LOGGER.info(language);
+		
+		setCountry(languageResourceBundle.getString("country"));
+		LOGGER.info(country);
 		locale = new Locale(language, country);
 	}
 
-	public final static void initLanguage(){
+	public static final void initLanguage(){
 		if (LanguageFactory.instance==null) {
 			instance = new LanguageFactory();
 		}
 	}
-	public final static LanguageFactory getInstance() {
+	public static final LanguageFactory getInstance() {
 		initLanguage();
 		return instance;
 	}

@@ -5,6 +5,9 @@ import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import actions.GenericAbstractInputObjectAction;
 import datas.DataManager;
 import datas.Highscore;
@@ -15,13 +18,15 @@ import views.main.panels.CellsPanel;
 
 public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftClickActionInput> {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(CellLeftClickAction.class);
+	
 	@Override
 	public int execute(LeftClickActionInput input) {
 		Cell cell = input.getCell();
 		CellsPanel cellsPanel = input.getCellsPanel();
 		DeminorGameProperties gameProperties = input.getGameProperties();
 		long time = gameProperties.getTime();
-		int percent = gameProperties.getPercent();
+		int percent;
 		int cellsPerColumn = gameProperties.getCellsPerColumn();
 		int cellsPerLine = gameProperties.getCellsPerLine();
 		int nBombs = gameProperties.getnBombs();
@@ -53,8 +58,8 @@ public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftCl
 				JOptionPane.showMessageDialog(cellsPanel, Labels.GAMEWON);
 				time=System.currentTimeMillis()-time;time=time/1000;
 				percent = 100;
-				System.out.println("time : " + time);
-				System.out.println("percent : " + percent);
+				LOGGER.info("time : {}",time);
+				LOGGER.info("percent : {}",percent);
 				DataManager.insertHighscore(new Highscore(0,"", new Date().toLocaleString(), time, percent), level);
 			}
 		}

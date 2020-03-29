@@ -15,8 +15,8 @@ import tools.parsers.csv.CsvParser;
 public class ExtractDBtoCSVAction extends GenericAbstractInputObjectAction<ExtractDBtoCSVActionInput> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExtractCSVtoDBAction.class); 
-	private static final String HIGHSCORE_MESSAGE = "highscore({}).{} : {}";
-	private static final String UNPARSE_MESSAGE = "unparsing to CSV file path : {}";
+	private static final String HIGHSCORE_MESSAGE = "Highscore({}).{} : {}";
+	private static final String UNPARSE_MESSAGE = "Unparsing to CSV file path : {}";
 	private static final String NAME = "NAME   ";
 	private static final String ID = "ID     ";
 	private static final String DATE = "DATE   ";
@@ -38,15 +38,14 @@ public class ExtractDBtoCSVAction extends GenericAbstractInputObjectAction<Extra
 					LOGGER.info(HIGHSCORE_MESSAGE, iHighscore, SCORE, highscore.getScore());
 					LOGGER.info(HIGHSCORE_MESSAGE, iHighscore, PERCENT, highscore.getName());
 				}
-				String highscoresFilePath = "highscores/highscore_{}.csv";
+				String highscoresFilePath = String.format("highscores/highscore_%d.csv", iLevel);
 
-				LOGGER.debug(UNPARSE_MESSAGE, iLevel);
+				LOGGER.info(UNPARSE_MESSAGE, highscoresFilePath);
 				csvHighscoreParser.unParse(highscores, String.format(highscoresFilePath, iLevel));
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error("Error while parsing csv file", e);
 		}
 		return 0;
 	}

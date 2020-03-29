@@ -8,12 +8,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dto.DeminorGameProperties;
 import dto.DeminorGamePropertiesFactory;
 import messages.Labels;
 
 public class CustomLevelPanel extends JPanel{
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(CustomLevelPanel.class);
+	
     private static final long serialVersionUID = -622076559152117047L;
 	private static JTextField cellsPerColumnTextField;
 	private static JTextField cellsPerWidthTextField;
@@ -42,16 +47,18 @@ public class CustomLevelPanel extends JPanel{
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
+				//Nothing to do
 			}
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				System.out.println("Custom cellsPerColumn : " + Integer.valueOf(cellsPerColumnTextField.getText()));
+				LOGGER.info("Custom cellsPerColumn : {}",Integer.valueOf(cellsPerColumnTextField.getText()));
 				setCellsPerColumn(Integer.valueOf(cellsPerColumnTextField.getText()));
 			}
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
+				//Nothing to do
 			}
 		});
 		add(new JLabel(Labels.OPTIONS_CELLS_PER_HEIGHT),0);
@@ -64,6 +71,7 @@ public class CustomLevelPanel extends JPanel{
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
+				//Nothing to do
 			}
 			
 			@Override
@@ -73,6 +81,7 @@ public class CustomLevelPanel extends JPanel{
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
+				//Nothing to do
 			}
 		});
 		add(new JLabel(Labels.OPTIONS_CELLS_PER_WIDTH),2);
@@ -85,16 +94,18 @@ public class CustomLevelPanel extends JPanel{
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
+				//Nothing to do
 			}
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				System.out.println("Custom nBombs : " + Integer.valueOf(nBombsTextField.getText()));
+				LOGGER.info("Custom nBombs : {}",Integer.valueOf(nBombsTextField.getText()));
 				setnBombs(Integer.valueOf(nBombsTextField.getText()));
 			}
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
+				//Nothing to do
 			}
 		});
 		add(new JLabel(Labels.OPTIONS_NUMBER_OF_BOMBS),4);
@@ -105,7 +116,7 @@ public class CustomLevelPanel extends JPanel{
 		return cellsPerColumnTextField;
 	}
 
-	public void setCellsPerColumnTextField(JTextField cellsPerColumnTextField) {
+	public static void setCellsPerColumnTextField(JTextField cellsPerColumnTextField) {
 		CustomLevelPanel.cellsPerColumnTextField = cellsPerColumnTextField;
 	}
 
@@ -113,7 +124,7 @@ public class CustomLevelPanel extends JPanel{
 		return cellsPerWidthTextField;
 	}
 
-	public void setCellsPerWidthTextField(JTextField cellsPerWidthTextField) {
+	public static void setCellsPerWidthTextField(JTextField cellsPerWidthTextField) {
 		CustomLevelPanel.cellsPerWidthTextField = cellsPerWidthTextField;
 	}
 
@@ -121,7 +132,7 @@ public class CustomLevelPanel extends JPanel{
 		return nBombsTextField;
 	}
 
-	public void setnBombsTextField(JTextField nBombsTextField) {
+	public static void setnBombsTextField(JTextField nBombsTextField) {
 		CustomLevelPanel.nBombsTextField = nBombsTextField;
 	}
 
@@ -129,7 +140,7 @@ public class CustomLevelPanel extends JPanel{
 		return cellsPerColumn;
 	}
 
-	public void setCellsPerColumn(int cellsPerColumn) {
+	public static void setCellsPerColumn(int cellsPerColumn) {
 		CustomLevelPanel.cellsPerColumn = cellsPerColumn;
 	}
 
@@ -137,7 +148,7 @@ public class CustomLevelPanel extends JPanel{
 		return cellsPerWidth;
 	}
 
-	public void setCellsPerWidth(int cellsPerWidth) {
+	public static void setCellsPerWidth(int cellsPerWidth) {
 		CustomLevelPanel.cellsPerWidth = cellsPerWidth;
 	}
 
@@ -145,7 +156,7 @@ public class CustomLevelPanel extends JPanel{
 		return nBombs;
 	}
 
-	public void setnBombs(int nBombs) {
+	public static void setnBombs(int nBombs) {
 		CustomLevelPanel.nBombs = nBombs;
 	}
 

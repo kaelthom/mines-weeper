@@ -9,6 +9,9 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import datas.DataManager;
 import datas.Highscore;
 import tools.parsers.Parsers;
@@ -20,9 +23,8 @@ import tools.parsers.csv.CsvParser;
 
 public class HighscoreCSVFileDAO
 {
-    public HighscoreCSVFileDAO()
-    {
-    }
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(HighscoreCSVFileDAO.class); 
 
     public List<Highscore> getHighscoreList(int level)
     {
@@ -35,17 +37,17 @@ public class HighscoreCSVFileDAO
 
 	public void addHighscore(Highscore highscore, int level) {
 		List<Highscore> highscores = DataManager.getHighscores(level);
-		System.out.println("size table : " + highscores.size());
+		LOGGER.info("size table : {}",highscores.size());
 		if (highscores.size()<10) {
-	    	addHighscore(highscores, highscore, level, null);
+	    	addHighscore(highscores, highscore, null);
 		} else {
 			Highscore maxHighscore = Collections.max(highscores);
-			System.out.println("maxscore : " + maxHighscore.getScore());
-			System.out.println("maxpercent : " + maxHighscore.getPercent());
-			System.out.println("score : " + highscore.getScore());
-			System.out.println("percent : " + highscore.getPercent());
-			if (maxHighscore.compareTo(highscore)==1) {
-		    	addHighscore(highscores, highscore, level, maxHighscore);
+			LOGGER.info("maxscore : {}",maxHighscore.getScore());
+			LOGGER.info("maxpercent : {}",maxHighscore.getPercent());
+			LOGGER.info("score : {}",highscore.getScore());
+			LOGGER.info("percent : {}",highscore.getPercent());
+			if (maxHighscore.compareTo(highscore)>0) {
+		    	addHighscore(highscores, highscore, maxHighscore);
 			}
 		}
 		CsvParser<Highscore> csvHighscoreParser = Parsers.getCsvHighscoreParser();
@@ -53,9 +55,11 @@ public class HighscoreCSVFileDAO
 		csvHighscoreParser.unParse(highscores, highscoresFilePath);
 	}
 
-	public boolean addHighscore(List<Highscore> highscores, Highscore highscore, int level, Highscore maxHighscore)
+	public boolean addHighscore(List<Highscore> highscores, Highscore highscore, Highscore maxHighscore)
     {
-		if (maxHighscore!=null) highscores.remove(maxHighscore);
+		if (maxHighscore!=null) {
+			highscores.remove(maxHighscore);	
+		}
 	    highscores.add(highscore);
 	    return true;
     }

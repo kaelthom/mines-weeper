@@ -16,6 +16,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import actions.extractcsvtodb.ExtractCSVtoDBAction;
 import actions.extractdbtocsv.ExtractDBtoCSVAction;
 import actions.newgame.NewGameAction;
@@ -26,11 +29,10 @@ import messages.Labels;
 import views.highscore.HighscoreView;
 import views.options.OptionsView;
 
-public class MainMenu
-    implements ActionListener
-{
+public class MainMenu implements ActionListener {
 
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(MainMenu.class);
+	
     private JMenu menus[] = {
         new JMenu(Labels.GAME),
         new JMenu(Labels.OPTIONS),
@@ -117,8 +119,8 @@ public class MainMenu
 
     public void actionPerformed(ActionEvent e)
     {
-        System.out.println("actionPerformed from MainMenu called!");
-        System.out.println((new StringBuilder("actionCommand : ")).append(e.getActionCommand()).toString());
+        LOGGER.info("actionPerformed from MainMenu called!");
+        LOGGER.info((new StringBuilder("actionCommand : ")).append(e.getActionCommand()).toString());
         if(e.getActionCommand().equals("FileClose"))
             System.exit(0);
         else

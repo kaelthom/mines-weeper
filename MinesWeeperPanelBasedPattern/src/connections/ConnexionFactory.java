@@ -9,13 +9,20 @@ import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import actions.cellleftclick.CellLeftClickAction;
 
 // Referenced classes of package connexions:
 //            ConnexionProperties
 
 public class ConnexionFactory
 {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(CellLeftClickAction.class);
 
     public ConnexionFactory()
     {
@@ -38,7 +45,7 @@ public class ConnexionFactory
     {
         dataSource = getDataSource();
         conn = dataSource.getConnection();
-        System.out.println((new StringBuilder("Connected to ")).append(ConnexionProperties.DBMS).append(" database").toString());
+        LOGGER.info((new StringBuilder("Connected to ")).append(ConnexionProperties.DBMS).append(" database").toString());
         return conn;
     }
 
@@ -89,11 +96,11 @@ public class ConnexionFactory
         try
         {
             conn.close();
-            System.out.println("connection closed.");
+            LOGGER.info("connection closed.");
         }
         catch(SQLException e)
         {
-            e.printStackTrace();
+            LOGGER.error("Error while closing connection",e);
             return false;
         }
         return true;

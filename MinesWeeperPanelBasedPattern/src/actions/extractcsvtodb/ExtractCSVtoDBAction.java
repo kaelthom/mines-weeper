@@ -42,7 +42,6 @@ public class ExtractCSVtoDBAction extends GenericAbstractInputObjectAction<Extra
 			}
 
 		} catch (Exception e) {
-			// TODO create CSV parsing Exception
 			LOGGER.error("Error while parsing CSV", e);
 		}
 		LOGGER.debug("%n");

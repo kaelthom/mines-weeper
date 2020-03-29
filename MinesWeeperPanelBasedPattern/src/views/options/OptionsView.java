@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import actions.optionssubmit.OptionsSubmitAction;
 import actions.optionssubmit.OptionsSubmitActionInput;
 import dto.DeminorGameProperties;
@@ -27,10 +30,10 @@ import views.options.panels.OptionsLevelPanel;
 // Referenced classes of package views:
 //            DeminorView
 
-public class OptionsView extends JPanel
-    implements ActionListener
-{
+public class OptionsView extends JPanel implements ActionListener {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(OptionsView.class);
+	
     public OptionsView()
     {
     	setLayout(new GridLayout(3, 1, 20, 20));
@@ -76,8 +79,8 @@ public class OptionsView extends JPanel
     		gameProperties.setLevel(level);
     		DeminorGamePropertiesFactory.updateDeminorGameProperties(gameProperties);
     		gameProperties = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance();
-    		System.out.println("cellsPerLine : " + gameProperties.getCellsPerLine());
-    		System.out.println("cellsPerColumn : " + gameProperties.getCellsPerColumn());
+    		LOGGER.info("cellsPerLine : {}",gameProperties.getCellsPerLine());
+    		LOGGER.info("cellsPerColumn : {}",gameProperties.getCellsPerColumn());
 			new OptionsSubmitAction().execute(new OptionsSubmitActionInput(gameProperties));
         }
     }

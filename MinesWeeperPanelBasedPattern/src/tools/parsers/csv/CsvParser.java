@@ -13,10 +13,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import tools.parsers.AbstractGenericParser;
 
 public class CsvParser<T> extends AbstractGenericParser<List<T>, List<String>> {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(CsvParser.class);
 	private String separator;
 
 	List<Field> fields;
@@ -44,7 +48,7 @@ public class CsvParser<T> extends AbstractGenericParser<List<T>, List<String>> {
 			}
 			
 		});
-		System.out.println("fields size of class " + objClass.getName() + ": " + fields.size());
+		LOGGER.info("fields size of class {} : {}",objClass.getName(),fields.size());
 		if (!isClassCompatible())
 			throw new Exception();
 	}
@@ -61,26 +65,14 @@ public class CsvParser<T> extends AbstractGenericParser<List<T>, List<String>> {
 		if (isFileCompatible()) {
 
 			String fileName = csvFile.getPath();
-			// System.out.println("filename : " + fileName);
-			List<String> lines = new ArrayList<String>();
+			List<String> lines = new ArrayList<>();
 
 			// read file into stream, try-with-resources
 			try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
 				lines = stream.collect(Collectors.toList());
 				listObj = parse(lines);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (
-
-			SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (IOException | SecurityException | InstantiationException | IllegalAccessException e) {
+				LOGGER.error("Error while parsing CSV file",e);
 			}
 		}
 		return listObj;
@@ -88,24 +80,21 @@ public class CsvParser<T> extends AbstractGenericParser<List<T>, List<String>> {
 
 	@Override
 	public List<T> parse(List<String> lines) throws InstantiationException, IllegalAccessException {
-		System.out.println("lines : " + lines.toString());
-		List<T> listObj = new ArrayList<T>();
+		LOGGER.info("lines : {}",lines);
+		List<T> listObj = new ArrayList<>();
 		for (int iLine = 0; iLine < lines.size(); iLine++) {
 			String line = lines.get(iLine);
-			// System.out.println("line " + iLine +"; " + line);
 			T obj = objClass.newInstance();
 			String[] propertiesString = line.split(this.separator);
-			// System.out.println("propertiesString : " + propertiesString);
 			for (int iField = 0; iField < fields.size(); iField++) {
 				Field field = fields.get(iField);
 				CsvColumn csvColumnAnnotation = field.getAnnotation(CsvColumn.class);
-				// System.out.println("annotation : " + csvColumnAnnotation);
 				if (csvColumnAnnotation != null) {
 					int column = field.getAnnotation(CsvColumn.class).column();
-					System.out.println("column for " + field.toString() + " : " + column);
-					System.out.println("value : " + propertiesString[column]);
+					LOGGER.info("column for {} : {}", field, column);
+					LOGGER.info("value : {}",propertiesString[column]);
 					Class<?> type = field.getType();
-					System.out.println("type : " + type);
+					LOGGER.info("type : {}",type);
 					if (column >= 0 && column < fields.size() && column < propertiesString.length) {
 						if (type.toString().equals("int")) {
 							field.setInt(obj, Integer.parseInt(propertiesString[column]));
@@ -118,7 +107,7 @@ public class CsvParser<T> extends AbstractGenericParser<List<T>, List<String>> {
 						} else if (type.equals(String.class)) {
 							field.set(obj, propertiesString[column]);
 						} else {
-							System.out.println("type not supported");
+							LOGGER.info("type not supported");
 						}
 					}
 				}
@@ -158,13 +147,13 @@ public class CsvParser<T> extends AbstractGenericParser<List<T>, List<String>> {
 					} else if (type.equals(String.class)) {
 						stringValue = (String) field.get(obj);
 					} else {
-						System.out.println("type not supported");
+						LOGGER.info("type not supported");
 					}
 					sb.append(stringValue);
 					sb.append(this.separator);
 			}
 			String line = sb.toString();
-			System.out.println("line: " + line);
+			LOGGER.info("line: {}",line);
 			lines.add(line);
 		}
 		return lines;
@@ -176,18 +165,11 @@ public class CsvParser<T> extends AbstractGenericParser<List<T>, List<String>> {
 		try {
 			List<String> lines = unParse(objs);
 			outputPath = Files.write(file.toPath(), lines);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IllegalArgumentException | IllegalAccessException | IOException e) {
+			LOGGER.error("Error while unparsing file", e);
 		}
 		
-		return outputPath.toFile();
+		return outputPath == null ? null : outputPath.toFile();
 	}
 
 	public Class<?> getObjClass() {

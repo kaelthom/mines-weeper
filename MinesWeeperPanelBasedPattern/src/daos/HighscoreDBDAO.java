@@ -16,6 +16,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import connections.ConnexionFactory;
 import datas.DataManager;
 import datas.Highscore;
@@ -26,17 +29,14 @@ import datas.Highscore;
 
 public class HighscoreDBDAO
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(HighscoreDBDAO.class); 
 	private static final String ID_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.id");
 	private static final String NAME_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.name");
 	private static final String DATE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.date");
 	private static final String SCORE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.score");
 	private static final String PERCENT_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.percent");
-    public HighscoreDBDAO()
-    {
-    }
 
-    public List<Highscore> getHighscoreList(int level)
-    {
+	public List<Highscore> getHighscoreList(int level) {
         String levelS = Integer.toString(level);
     	List<Highscore> highscores = new ArrayList<>();
         Connection conn = null;
@@ -67,10 +67,10 @@ public class HighscoreDBDAO
 			try {
 				createTable(conn,level);
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				LOGGER.error("Error while creating highscore table : ", e1);;
 			}
-			e.printStackTrace();
-			return null;
+			LOGGER.error("Error while getting highscore list", e);
+			return new ArrayList<>();
         } finally {
             if (conn != null) ConnexionFactory.close();
         }
@@ -79,16 +79,16 @@ public class HighscoreDBDAO
 
 	public void addHighscore(Highscore highscore, int level) {
 		List<Highscore> highscores = DataManager.getHighscores(level);
-		System.out.println("size table : " + highscores.size());
+		LOGGER.info("size table : {}", highscores.size());
 		if (highscores.size()<10) {
 	    	addHighscore(highscore, level, null);
 		} else {
 			Highscore maxHighscore = Collections.max(highscores);
-			System.out.println("maxscore : " + maxHighscore.getScore());
-			System.out.println("maxpercent : " + maxHighscore.getPercent());
-			System.out.println("score : " + highscore.getScore());
-			System.out.println("percent : " + highscore.getPercent());
-			if (maxHighscore.compareTo(highscore)==1) {
+			LOGGER.info("maxscore : {}",maxHighscore.getScore());
+			LOGGER.info("maxpercent : {}",maxHighscore.getPercent());
+			LOGGER.info("score : {}",highscore.getScore());
+			LOGGER.info("percent : {}",highscore.getPercent());
+			if (maxHighscore.compareTo(highscore)>0) {
 		    	addHighscore(highscore, level, maxHighscore);
 			}
 		}
@@ -96,10 +96,10 @@ public class HighscoreDBDAO
 
 	public boolean addHighscore(Highscore highscore, int level, Highscore maxHighscore)
     {
-        Connection conn = null;
-        try {
-			conn = ConnexionFactory.getConnectionInstance();
-			if (maxHighscore!=null) deleteHighscore(maxHighscore, conn, level);
+        try (Connection conn = ConnexionFactory.getConnectionInstance()){
+			if (maxHighscore!=null) {
+				deleteHighscore(maxHighscore, conn, level);
+			}
 	        insertHighscore(highscore, level, conn);
 	        return true;
 		} catch (SQLException e) {
@@ -109,14 +109,9 @@ public class HighscoreDBDAO
 //				e1.printStackTrace();
 //			}
 //			addHighscore(highscore, null);
-			System.out.println(e.getErrorCode());
-			System.out.println(e.getMessage());
-			System.out.println(e.getLocalizedMessage());
-			e.printStackTrace();
+			LOGGER.error("Error while inserting highscore.", e);
 		} catch (PropertyVetoException e) {
-			e.printStackTrace();
-		} finally {
-	        if (conn != null) ConnexionFactory.close();
+			LOGGER.error("Error while inserting highscore.", e);
 		}
         return false;
     }
@@ -134,9 +129,10 @@ public class HighscoreDBDAO
                 .append(",")
                 .append(highscore.getPercent())
                 .append(")").toString();
-        		System.out.println(query);
-		Statement statement = conn.createStatement();
-		int rs = statement.executeUpdate(query);
+		LOGGER.info(query);
+		try (Statement statement = conn.createStatement()) {
+			statement.executeUpdate(query);
+		}
 	}
 
 	private void createTable(Connection conn, int inputLevel) throws SQLException {
@@ -148,9 +144,10 @@ public class HighscoreDBDAO
 		                                		+ "DATE varchar(255),"
 		                                		+ "SCORE int,"
 				                                + "PERCENT int )").toString();
-		System.out.println(query);
-		Statement statement = conn.createStatement();
-		int rs = statement.executeUpdate(query);
+		LOGGER.info(query);
+		try (Statement statement = conn.createStatement()) {
+			statement.executeUpdate(query);
+		}
 	}
 
 //	/**
@@ -168,7 +165,7 @@ public class HighscoreDBDAO
 //		                                .append(" WHERE MAP_ID IN (SELECT MAP_ID FROM ")
 //		                                .append(highscoreTable)
 //		                                .append(" ORDER BY PERCENT,-SCORE FETCH FIRST 1 ROWS ONLY)").toString();
-//		System.out.println(query);
+//		LOGGER.info(query);
 //	    PreparedStatement statement = conn.prepareStatement(query);
 //	    int rs = statement.executeUpdate();
 //	}
@@ -179,9 +176,10 @@ public class HighscoreDBDAO
 		String query = new StringBuilder("DELETE FROM ")
 		                                .append(highscoreTable)
 		                                .append(" WHERE MAP_ID = ? ").toString();
-		System.out.println(query);
-	    PreparedStatement statement = conn.prepareStatement(query);
-	    statement.setLong(1, highscore.getId());
-	    int rs = statement.executeUpdate();
+		LOGGER.info(query);
+	    try(PreparedStatement statement = conn.prepareStatement(query)) {
+		    statement.setLong(1, highscore.getId());
+		    statement.executeUpdate();
+	    }
 	}
 }
