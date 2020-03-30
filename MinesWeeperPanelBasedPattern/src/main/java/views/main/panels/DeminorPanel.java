@@ -1,8 +1,6 @@
 package views.main.panels;
 
 import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -15,6 +13,7 @@ import dto.DeminorGameProperties;
 import dto.DeminorGamePropertiesFactory;
 import dto.DeminorPanelProperties;
 import images.ImageHandler;
+import views.listeners.MouseReleasedOnlyListener;
 
 public class DeminorPanel extends JPanel {
 
@@ -48,44 +47,16 @@ public class DeminorPanel extends JPanel {
 		for (int iOcc = 0 ; iOcc < cellsPerLine* cellsPerColumn ; iOcc++){
 			Cell button = cellsPanel.getCells().get(iOcc);
 			button.setActionCommand("button" + iOcc);
-			button.addMouseListener(new MouseListener() {
-				
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					//Nothing to do
-				}
-
-				@Override
-				public void mousePressed(MouseEvent e) {
-					//Nothing to do
-				}
-
-				@Override
-				public void mouseReleased(MouseEvent arg0) {
-					if (!CellsPanel.isLost() && !CellsPanel.isWon()){
-						Object source = arg0.getSource();
-						if (source instanceof Cell){
-							Cell cell = (Cell) source;
-							if (SwingUtilities.isRightMouseButton(arg0)) {
-								new CellRightClickAction().execute(new RightClickActionInput(cell));
-							} else if (SwingUtilities.isLeftMouseButton(arg0) && !cell.isFlagged()) {
-								LeftClickActionInput input = new LeftClickActionInput(cell,cellsPanel,DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance());
-								new CellLeftClickAction().execute(input);
-							}
-						}
+			button.addMouseListener((MouseReleasedOnlyListener) mouseEvent -> {
+				if (!CellsPanel.isLost() && !CellsPanel.isWon() && mouseEvent.getSource() instanceof Cell){
+					Cell cell = (Cell) mouseEvent.getSource();
+					if (SwingUtilities.isRightMouseButton(mouseEvent)) {
+						new CellRightClickAction().execute(new RightClickActionInput(cell));
+					} else if (SwingUtilities.isLeftMouseButton(mouseEvent) && !cell.isFlagged()) {
+						LeftClickActionInput input = new LeftClickActionInput(cell, cellsPanel,	DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance());
+						new CellLeftClickAction().execute(input);
 					}
 				}
-
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					//Nothing to do
-				}
-
-				@Override
-				public void mouseExited(MouseEvent e) {
-					//Nothing to do
-				}
-
 			});
 			cellsPanel.add(button);
 		}
