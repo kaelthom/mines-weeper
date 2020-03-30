@@ -45,7 +45,7 @@ public class ConnexionFactory
     {
         dataSource = getDataSource();
         conn = dataSource.getConnection();
-        LOGGER.info((new StringBuilder("Connected to ")).append(ConnexionProperties.DBMS).append(" database").toString());
+        LOGGER.info("Connected to {}",ConnexionProperties.DBMS);
         return conn;
     }
 
@@ -85,9 +85,9 @@ public class ConnexionFactory
             cpds.setPassword(ConnexionProperties.PASSWORD);
         }
         cpds.setJdbcUrl(url);
-//        cpds.setMinPoolSize(ConnexionProperties.MIN_POOL_SIZE);
-//        cpds.setAcquireIncrement(ConnexionProperties.ACQUIRE_INCREMENT);
-//        cpds.setMaxPoolSize(ConnexionProperties.MAX_POOL_SIZE);
+// TODO       cpds.setMinPoolSize(ConnexionProperties.MIN_POOL_SIZE);
+// TODO       cpds.setAcquireIncrement(ConnexionProperties.ACQUIRE_INCREMENT);
+// TODO       cpds.setMaxPoolSize(ConnexionProperties.MAX_POOL_SIZE);
         return cpds;
     }
 

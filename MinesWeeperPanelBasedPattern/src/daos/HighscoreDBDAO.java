@@ -29,12 +29,13 @@ import datas.Highscore;
 
 public class HighscoreDBDAO
 {
-	private static final Logger LOGGER = LoggerFactory.getLogger(HighscoreDBDAO.class); 
-	private static final String ID_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.id");
-	private static final String NAME_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.name");
-	private static final String DATE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.date");
-	private static final String SCORE_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.score");
-	private static final String PERCENT_COLUMN_NAME = ResourceBundle.getBundle("datas").getString("highscore.percent");
+	private static final Logger LOGGER = LoggerFactory.getLogger(HighscoreDBDAO.class);
+	private static final ResourceBundle datasBundle = ResourceBundle.getBundle("datas");
+	private static final String ID_COLUMN_NAME = datasBundle.getString("highscore.id");
+	private static final String NAME_COLUMN_NAME = datasBundle.getString("highscore.name");
+	private static final String DATE_COLUMN_NAME = datasBundle.getString("highscore.date");
+	private static final String SCORE_COLUMN_NAME = datasBundle.getString("highscore.score");
+	private static final String PERCENT_COLUMN_NAME = datasBundle.getString("highscore.percent");
 
 	public List<Highscore> getHighscoreList(int level) {
         String levelS = Integer.toString(level);
@@ -67,7 +68,7 @@ public class HighscoreDBDAO
 			try {
 				createTable(conn,level);
 			} catch (SQLException e1) {
-				LOGGER.error("Error while creating highscore table : ", e1);;
+				LOGGER.error("Error while creating highscore table : ", e1);
 			}
 			LOGGER.error("Error while getting highscore list", e);
 			return new ArrayList<>();
@@ -102,15 +103,7 @@ public class HighscoreDBDAO
 			}
 	        insertHighscore(highscore, level, conn);
 	        return true;
-		} catch (SQLException e) {
-//			try {
-//				createTable(conn);
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//			addHighscore(highscore, null);
-			LOGGER.error("Error while inserting highscore.", e);
-		} catch (PropertyVetoException e) {
+		} catch (SQLException | PropertyVetoException e) {
 			LOGGER.error("Error while inserting highscore.", e);
 		}
         return false;
@@ -149,26 +142,6 @@ public class HighscoreDBDAO
 			statement.executeUpdate(query);
 		}
 	}
-
-//	/**
-//	 * To find the score to delete we sort the table by increasing percent and decreasing score and remove the first result 
-//	 * @param highscore
-//	 * @param conn
-//	 * @param iLevel
-//	 * @throws SQLException
-//	 */
-//	public void deleteLowestHighscore (Connection conn, int iLevel) throws SQLException {
-//		String level = Integer.toString(iLevel);
-//		String highscoreTable = "HIGHSCORE_" + level;
-//		String query = new StringBuilder("DELETE FROM ")
-//		                                .append(highscoreTable)
-//		                                .append(" WHERE MAP_ID IN (SELECT MAP_ID FROM ")
-//		                                .append(highscoreTable)
-//		                                .append(" ORDER BY PERCENT,-SCORE FETCH FIRST 1 ROWS ONLY)").toString();
-//		LOGGER.info(query);
-//	    PreparedStatement statement = conn.prepareStatement(query);
-//	    int rs = statement.executeUpdate();
-//	}
 
 	public void deleteHighscore (Highscore highscore, Connection conn, int iLevel) throws SQLException {
 		String level = Integer.toString(iLevel);

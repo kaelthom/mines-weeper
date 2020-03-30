@@ -20,8 +20,6 @@ public class DeminorPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private static Rectangle bounds;
-	
 	private static CellsPanel cellsPanel;
 	
 	public DeminorPanel(Rectangle bounds) {
@@ -41,7 +39,7 @@ public class DeminorPanel extends JPanel {
 		properties.setTime(System.currentTimeMillis());
 		properties.setPercent(0);
 
-		bounds = calculateDeminorBounds(cellsPerLine, cellsPerColumn);
+		final Rectangle bounds = calculateDeminorBounds(cellsPerLine, cellsPerColumn);
 
 		DeminorPanel deminorPanel = new DeminorPanel(bounds);
 
@@ -54,10 +52,12 @@ public class DeminorPanel extends JPanel {
 				
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					//Nothing to do
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
+					//Nothing to do
 				}
 
 				@Override
@@ -78,17 +78,19 @@ public class DeminorPanel extends JPanel {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
+					//Nothing to do
 				}
 
 				@Override
 				public void mouseExited(MouseEvent e) {
+					//Nothing to do
 				}
 
 			});
 			cellsPanel.add(button);
 		}
-//		JScrollPane cellScrollPane = new JScrollPane(cellsPanel);
-//		deminorPanel.add(cellScrollPane);
+		//TODO		JScrollPane cellScrollPane = new JScrollPane(cellsPanel);
+		//TODO		deminorPanel.add(cellScrollPane);
 		deminorPanel.add(cellsPanel);
 		return deminorPanel;
 	}
@@ -106,9 +108,8 @@ public class DeminorPanel extends JPanel {
 
 		int deminorWidth = minesPanelWidth + minesPanelX*2;
 		int deminorHeight = minesPanelHeight + minesPanelY*2;
-		Rectangle bounds = new Rectangle(deminorPanelX,deminorPanelY,deminorWidth, deminorHeight);
 		
-		return bounds; 
+		return new Rectangle(deminorPanelX,deminorPanelY,deminorWidth, deminorHeight); 
 	}
 	
 	public static CellsPanel getCellsPanel() {
