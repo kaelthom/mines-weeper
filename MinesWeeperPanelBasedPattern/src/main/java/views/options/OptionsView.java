@@ -42,10 +42,10 @@ public class OptionsView extends JPanel implements ActionListener {
         customPanel = new CustomLevelPanel();
         customPanel.createCustomPanel();
         add(customPanel);
-        JButton OKButton = new JButton("OK");
-        OKButton.addActionListener(this);
-        OKButton.setActionCommand("OK");
-        add(OKButton);
+        JButton buttonOK = new JButton("OK");
+        buttonOK.addActionListener(this);
+        buttonOK.setActionCommand("OK");
+        add(buttonOK);
     }
 
     private static void createAndShowGUI(JPanel panel)
@@ -59,15 +59,10 @@ public class OptionsView extends JPanel implements ActionListener {
 
     public static void launchFrame(final JPanel panel)
     {
-        SwingUtilities.invokeLater(new Runnable() {
-
-            public void run()
-            {
-                UIManager.put("swing.boldMetal", Boolean.FALSE);
-                OptionsView.createAndShowGUI(panel);
-            }
-
-        });
+        SwingUtilities.invokeLater(() -> {
+		    UIManager.put("swing.boldMetal", Boolean.FALSE);
+		    OptionsView.createAndShowGUI(panel);
+		});
     }
 
     public void actionPerformed(ActionEvent e)

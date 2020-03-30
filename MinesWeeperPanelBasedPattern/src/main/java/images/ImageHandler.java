@@ -13,6 +13,10 @@ public class ImageHandler {
 	private static ImageIcon hiddenIcon;
 	private static String path = "images/";
 
+	private ImageHandler() {
+		//prevent from being called from other classes
+	}
+	
 	public static void createImages() {
 		setBombIcon(new ImageIcon(path + "demineur.png"));
 		setFlagIcon(new ImageIcon(path + "redflag.jpg"));

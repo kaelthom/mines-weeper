@@ -18,8 +18,8 @@ public class CellsPanel extends JPanel {
 	private static int cellsPerColumn;
 	private static int nBombs;
 	
-	private List<Cell> cells = new ArrayList<Cell>(); 
-	private List<Integer> minedCells = new ArrayList<Integer>(); 
+	private List<Cell> cells = new ArrayList<>(); 
+	private List<Integer> minedCells = new ArrayList<>(); 
 	private int discoveredCells; 
 
 	private Rectangle bounds;
@@ -33,7 +33,7 @@ public class CellsPanel extends JPanel {
 		int cellWidth = DeminorPanelProperties.getCellWidth();
 		int cellHeight = DeminorPanelProperties.getCellHeight();
 
-		this.bounds = calculateMinesPanelBounds(cellsPerLine, cellsPerColumn);;
+		this.bounds = calculateMinesPanelBounds(cellsPerLine, cellsPerColumn);
 
 		setLayout(null);
 		setBounds(this.bounds);
@@ -92,8 +92,7 @@ public class CellsPanel extends JPanel {
 		int minesPanelWidth = cellsPerLine*DeminorPanelProperties.getCellWidth();
 		int minesPanelHeight = cellsPerHeight*DeminorPanelProperties.getCellHeight();
 		
-		Rectangle bounds = new Rectangle(minesPanelX,minesPanelY,minesPanelWidth, minesPanelHeight);
-		return bounds;
+		return new Rectangle(minesPanelX,minesPanelY,minesPanelWidth, minesPanelHeight);
 	}
 	
 	public List<Cell> getCells() {
@@ -139,6 +138,7 @@ public class CellsPanel extends JPanel {
 	}
 
 	public void countBombsAround(int iOcc, int jOcc, Cell cell) {
+		
 		if (iOcc > 0 && iOcc < cellsPerLine-1){
 			if (jOcc > 0 && jOcc < cellsPerColumn-1){
 				if (getCells().get(getCellIndex(iOcc-1, jOcc-1)).isMined()) cell.incrementNBombsaround();

@@ -31,6 +31,26 @@ import views.options.OptionsView;
 
 public class MainMenu implements ActionListener {
 
+	private static final String MENU_OPTIONSHIGHSCORE = "menu.optionshighscore";
+
+	private static final String MENU_OPTIONS = "menu.options";
+
+	private static final String MENU_ADMINCONFIG = "menu.adminconfig";
+
+	private static final String MENU_ADMINDBTOCSV = "menu.admindbtocsv";
+
+	private static final String MENU_ADMINCSVTODB = "menu.admincsvtodb";
+
+	private static final String MENU_ADMIN = "menu.admin";
+
+	private static final String MENU_GAMECLOSE = "menu.gameclose";
+
+	private static final String MENU_GAMEOPTIONS = "menu.gameoptions";
+
+	private static final String MENU_GAMENEW = "menu.gamenew";
+
+	private static final String MENU_GAME = "menu.game";
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(MainMenu.class);
 	
     private JMenu[] menus = {
@@ -55,22 +75,22 @@ public class MainMenu implements ActionListener {
     
     private String[][] actionCommands = {
         {
-            (new StringBuilder(String.valueOf(labelsBundle.getString("menu.game"))))
-                                      .append(labelsBundle.getString("menu.gamenew")).toString(),
-            (new StringBuilder(String.valueOf(labelsBundle.getString("menu.game"))))
-                                      .append(labelsBundle.getString("menu.gameoptions")).toString(), 
-            (new StringBuilder(String.valueOf(labelsBundle.getString("menu.game"))))
-                                      .append(labelsBundle.getString("menu.gameclose")).toString()
+            (new StringBuilder(String.valueOf(labelsBundle.getString(MENU_GAME))))
+                                      .append(labelsBundle.getString(MENU_GAMENEW)).toString(),
+            (new StringBuilder(String.valueOf(labelsBundle.getString(MENU_GAME))))
+                                      .append(labelsBundle.getString(MENU_GAMEOPTIONS)).toString(), 
+            (new StringBuilder(String.valueOf(labelsBundle.getString(MENU_GAME))))
+                                      .append(labelsBundle.getString(MENU_GAMECLOSE)).toString()
         }, {
-            (new StringBuilder(String.valueOf(labelsBundle.getString("menu.options"))))
-                                     .append(labelsBundle.getString("menu.optionshighscore")).toString()
+            (new StringBuilder(String.valueOf(labelsBundle.getString(MENU_OPTIONS))))
+                                     .append(labelsBundle.getString(MENU_OPTIONSHIGHSCORE)).toString()
         }, {
-        	(new StringBuilder(String.valueOf(labelsBundle.getString("menu.admin"))))
-        	                         .append(labelsBundle.getString("menu.admincsvtodb")).toString(),
-        	(new StringBuilder(String.valueOf(labelsBundle.getString("menu.admin"))))
-                                     .append(labelsBundle.getString("menu.admindbtocsv")).toString(),
-            (new StringBuilder(String.valueOf(labelsBundle.getString("menu.admin"))))
-                                    .append(labelsBundle.getString("menu.adminconfig")).toString()
+        	(new StringBuilder(String.valueOf(labelsBundle.getString(MENU_ADMIN))))
+        	                         .append(labelsBundle.getString(MENU_ADMINCSVTODB)).toString(),
+        	(new StringBuilder(String.valueOf(labelsBundle.getString(MENU_ADMIN))))
+                                     .append(labelsBundle.getString(MENU_ADMINDBTOCSV)).toString(),
+            (new StringBuilder(String.valueOf(labelsBundle.getString(MENU_ADMIN))))
+                                    .append(labelsBundle.getString(MENU_ADMINCONFIG)).toString()
         }
     };
     private String[] rights = {
@@ -124,17 +144,17 @@ public class MainMenu implements ActionListener {
         LOGGER.info("actionPerformed from MainMenu called!");
         LOGGER.info("actionCommand : {}",e.getActionCommand());
         
-        if(e.getActionCommand().equals("FileClose"))
+        if(e.getActionCommand().equals("GameClose"))
             System.exit(0);
         else
-        if(e.getActionCommand().equals("FileOptions"))
+        if(e.getActionCommand().equals("GameOptions"))
         {
             JFrame optionsFrame = OptionsView.getFrame();
             if(optionsFrame == null)
                 OptionsView.launchFrame(new OptionsView());
             else
                 optionsFrame.setVisible(true);
-        } else if(e.getActionCommand().equals("FileNew"))
+        } else if(e.getActionCommand().equals("GameNew"))
         {
         	NewGameActionInput input = new NewGameActionInput(DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance());
         	new NewGameAction().execute(input);

@@ -26,6 +26,10 @@ public class DeminorPanelProperties {
 	
 	private static int cellHeight = 20;
 
+	private DeminorPanelProperties() {
+		//prevent calling constuctor from outside
+	}
+	
 	public static int getButtonsPanelXMargin() {
 		return buttonsPanelXMargin;
 	}
