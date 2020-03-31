@@ -15,7 +15,7 @@ public class Parsers {
 		//prevent from call from outside
 	}
 	public static CsvParser<Highscore> getCsvHighscoreParser() {
-		return csvHighscoreParser;
+		return csvHighscoreParser == null? createCsvParser():csvHighscoreParser;
 	}
 
 	public static void setCsvHighscoreParser(CsvParser<Highscore> csvHighscoreParser) {
@@ -23,11 +23,18 @@ public class Parsers {
 	}
 
 	public static int init() {
+		createCsvParser();
+		return 0;
+	}
+
+	private static CsvParser<Highscore> createCsvParser() {
+		CsvParser<Highscore> csvParser = null;
 		try {
-			csvHighscoreParser = new CsvParser<>(Highscore.class,";");
+			csvParser = new CsvParser<>(Highscore.class,";");
 		} catch (Exception e) {
 			LOGGER.error("Error while creating CSV parser",e);
 		}
-		return 0;
+
+		return csvParser;
 	}
 }

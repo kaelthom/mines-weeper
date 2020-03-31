@@ -11,7 +11,7 @@ public class ImageHandler {
 	private static ImageIcon bombIcon;
 	private static ImageIcon flagIcon;
 	private static ImageIcon hiddenIcon;
-	private static String path = "images/";
+	private static String path = "src/main/resources/images/";
 
 	private ImageHandler() {
 		//prevent from being called from other classes
