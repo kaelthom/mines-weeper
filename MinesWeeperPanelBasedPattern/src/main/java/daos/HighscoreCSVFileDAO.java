@@ -22,8 +22,9 @@ import java.util.List;
 
 public class HighscoreCSVFileDAO {
 
-    public static final String HIGHSCORES_FILE_PATH = "highscores/highscore_";
-    public static final String CSV_EXTENSION = ".csv";
+    public static final int HIGHSCORES_MAX_SIZE = 10;
+    private static final String HIGHSCORES_FILE_PATH = "highscores/highscore_";
+    private static final String CSV_EXTENSION = ".csv";
     private static final Logger LOGGER = LoggerFactory.getLogger(HighscoreCSVFileDAO.class);
 
     public List<Highscore> getHighscoreList(int level) {
@@ -38,7 +39,7 @@ public class HighscoreCSVFileDAO {
     public void addHighscore(Highscore highscore, int level) {
         List<Highscore> highscores = DataManager.getHighscores(level);
         LOGGER.info("size table : {}", highscores.size());
-        if (highscores.size() < 10) {
+        if (highscores.size() < HIGHSCORES_MAX_SIZE) {
             addHighscore(highscores, highscore, null);
         } else {
             Highscore maxHighscore = Collections.max(highscores);

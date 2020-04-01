@@ -5,29 +5,23 @@
 
 package views.highscore;
 
-import java.awt.GridLayout;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-
 import messages.Labels;
 import views.highscore.panels.HighscoreMainPanel;
 
-public class HighscoreView extends JPanel
-{
+import javax.swing.*;
+import java.awt.*;
 
+public class HighscoreView extends JPanel {
+
+    private static final long serialVersionUID = 1L;
     private static JFrame frame;
 
-	public HighscoreView(int level)
-    {
-    	setLayout(new GridLayout(1,1));
+    public HighscoreView(int level) {
+        setLayout(new GridLayout(1, 1));
         add(HighscoreMainPanel.createPanel(level));
     }
 
-    private static void createAndShowGUI(JPanel panel)
-    {
+    private static void createAndShowGUI(JPanel panel) {
         frame = new JFrame(Labels.HIGHSCORES_TITLE);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(panel);
@@ -35,24 +29,16 @@ public class HighscoreView extends JPanel
         frame.setVisible(true);
     }
 
-    public static void launchFrame(final JPanel panel)
-    {
+    public static void launchFrame(final JPanel panel) {
         SwingUtilities.invokeLater(
-        	new Runnable() {
-
-        		public void run()
-        		{
-        			UIManager.put("swing.boldMetal", Boolean.FALSE);
-        			HighscoreView.createAndShowGUI(panel);
-        		}
-
-        	});
+                () -> {
+                    UIManager.put("swing.boldMetal", Boolean.FALSE);
+                    HighscoreView.createAndShowGUI(panel);
+                });
     }
 
-    private static final long serialVersionUID = 1L;
-
-	public static JFrame getFrame() {
-		return frame;
-	}
+    public static JFrame getFrame() {
+        return frame;
+    }
 
 }

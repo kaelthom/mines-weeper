@@ -50,7 +50,7 @@ public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftCl
                     (cellsPerLine * cellsPerColumn - nBombs);
             DataManager.insertHighscore(new Highscore(0, "", new Date().toLocaleString(), time, percent), level);
         } else {
-            cellsPanel.showCurrentAndNeighbourCells(cell.getxOcc(), cell.getyOcc(), cell);
+            cellsPanel.showCurrentAndNeighbourCellsIfHidden(cell.getxOcc(), cell.getyOcc(), cell);
             int nCellsToWin = cellsPerLine * cellsPerColumn - nBombs;
             if (cellsPanel.getDiscoveredCells() == nCellsToWin) {
                 CellsPanel.setWon(true);

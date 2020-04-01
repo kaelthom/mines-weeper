@@ -2,129 +2,129 @@ package dto;
 
 public class DeminorPanelProperties {
 
-	private static int buttonsPanelXMargin = 0;
+    private static int buttonsPanelXMargin = 0;
 
-	private static int buttonsPanelYMargin = 0;
-	
-	private static int xSpaceBtwButtons = 0;
-	
-	private static int ySpaceBtwButtons = 0;
+    private static int buttonsPanelYMargin = 0;
+
+    private static int xSpaceBtwButtons = 0;
+
+    private static int ySpaceBtwButtons = 0;
 
     private static int frameX = 0;
-    
+
     private static int frameY = 0;
 
     private static int deminorX = 0;
 
-	private static int deminorY = 0;
+    private static int deminorY = 0;
 
-	private static int minesPanelX = 10;
+    private static int minesPanelX = 10;
 
-	private static int minesPanelY = 10;
-	
-	private static int cellWidth = 20;
-	
-	private static int cellHeight = 20;
+    private static int minesPanelY = 10;
 
-	private DeminorPanelProperties() {
-		//prevent calling constuctor from outside
-	}
-	
-	public static int getButtonsPanelXMargin() {
-		return buttonsPanelXMargin;
-	}
+    private static int cellWidth = 20;
 
-	public static void setButtonsPanelXMargin(int buttonsPanelXMargin) {
-		DeminorPanelProperties.buttonsPanelXMargin = buttonsPanelXMargin;
-	}
+    private static int cellHeight = 20;
 
-	public static int getButtonsPanelYMargin() {
-		return buttonsPanelYMargin;
-	}
+    private DeminorPanelProperties() {
+        //prevent calling constuctor from outside
+    }
 
-	public static void setButtonsPanelYMargin(int buttonsPanelYMargin) {
-		DeminorPanelProperties.buttonsPanelYMargin = buttonsPanelYMargin;
-	}
+    public static int getButtonsPanelXMargin() {
+        return buttonsPanelXMargin;
+    }
 
-	public static int getxSpaceBtwButtons() {
-		return xSpaceBtwButtons;
-	}
+    public static void setButtonsPanelXMargin(int buttonsPanelXMargin) {
+        DeminorPanelProperties.buttonsPanelXMargin = buttonsPanelXMargin;
+    }
 
-	public static void setxSpaceBtwButtons(int xSpaceBtwButtons) {
-		DeminorPanelProperties.xSpaceBtwButtons = xSpaceBtwButtons;
-	}
+    public static int getButtonsPanelYMargin() {
+        return buttonsPanelYMargin;
+    }
 
-	public static int getySpaceBtwButtons() {
-		return ySpaceBtwButtons;
-	}
+    public static void setButtonsPanelYMargin(int buttonsPanelYMargin) {
+        DeminorPanelProperties.buttonsPanelYMargin = buttonsPanelYMargin;
+    }
 
-	public static void setySpaceBtwButtons(int ySpaceBtwButtons) {
-		DeminorPanelProperties.ySpaceBtwButtons = ySpaceBtwButtons;
-	}
+    public static int getxSpaceBtwButtons() {
+        return xSpaceBtwButtons;
+    }
 
-	public static int getDeminorX() {
-		return deminorX;
-	}
+    public static void setxSpaceBtwButtons(int xSpaceBtwButtons) {
+        DeminorPanelProperties.xSpaceBtwButtons = xSpaceBtwButtons;
+    }
 
-	public static void setDeminorX(int deminorX) {
-		DeminorPanelProperties.deminorX = deminorX;
-	}
+    public static int getySpaceBtwButtons() {
+        return ySpaceBtwButtons;
+    }
 
-	public static int getDeminorY() {
-		return deminorY;
-	}
+    public static void setySpaceBtwButtons(int ySpaceBtwButtons) {
+        DeminorPanelProperties.ySpaceBtwButtons = ySpaceBtwButtons;
+    }
 
-	public static void setDeminorY(int deminorY) {
-		DeminorPanelProperties.deminorY = deminorY;
-	}
+    public static int getDeminorX() {
+        return deminorX;
+    }
 
-	public static int getMinesPanelX() {
-		return minesPanelX;
-	}
+    public static void setDeminorX(int deminorX) {
+        DeminorPanelProperties.deminorX = deminorX;
+    }
 
-	public static void setMinesPanelX(int minesPanelX) {
-		DeminorPanelProperties.minesPanelX = minesPanelX;
-	}
+    public static int getDeminorY() {
+        return deminorY;
+    }
 
-	public static int getMinesPanelY() {
-		return minesPanelY;
-	}
+    public static void setDeminorY(int deminorY) {
+        DeminorPanelProperties.deminorY = deminorY;
+    }
 
-	public static void setMinesPanelY(int minesPanelY) {
-		DeminorPanelProperties.minesPanelY = minesPanelY;
-	}
+    public static int getMinesPanelX() {
+        return minesPanelX;
+    }
 
-	public static int getCellWidth() {
-		return cellWidth;
-	}
+    public static void setMinesPanelX(int minesPanelX) {
+        DeminorPanelProperties.minesPanelX = minesPanelX;
+    }
 
-	public static void setCellWidth(int cellWidth) {
-		DeminorPanelProperties.cellWidth = cellWidth;
-	}
+    public static int getMinesPanelY() {
+        return minesPanelY;
+    }
 
-	public static int getCellHeight() {
-		return cellHeight;
-	}
+    public static void setMinesPanelY(int minesPanelY) {
+        DeminorPanelProperties.minesPanelY = minesPanelY;
+    }
 
-	public static void setCellHeight(int cellHeight) {
-		DeminorPanelProperties.cellHeight = cellHeight;
-	}
+    public static int getCellWidth() {
+        return cellWidth;
+    }
 
-	public static int getFrameY() {
-		return frameY;
-	}
+    public static void setCellWidth(int cellWidth) {
+        DeminorPanelProperties.cellWidth = cellWidth;
+    }
 
-	public static void setFrameY(int frameY) {
-		DeminorPanelProperties.frameY = frameY;
-	}
+    public static int getCellHeight() {
+        return cellHeight;
+    }
 
-	public static int getFrameX() {
-		return frameX;
-	}
+    public static void setCellHeight(int cellHeight) {
+        DeminorPanelProperties.cellHeight = cellHeight;
+    }
 
-	public static void setFrameX(int frameX) {
-		DeminorPanelProperties.frameX = frameX;
-	}
-	
-	
+    public static int getFrameY() {
+        return frameY;
+    }
+
+    public static void setFrameY(int frameY) {
+        DeminorPanelProperties.frameY = frameY;
+    }
+
+    public static int getFrameX() {
+        return frameX;
+    }
+
+    public static void setFrameX(int frameX) {
+        DeminorPanelProperties.frameX = frameX;
+    }
+
+
 }

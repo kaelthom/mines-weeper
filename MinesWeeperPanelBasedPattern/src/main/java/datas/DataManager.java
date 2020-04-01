@@ -5,36 +5,32 @@
 
 package datas;
 
+import daos.HighscoreCSVFileDAO;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import daos.HighscoreCSVFileDAO;
 
 // Referenced classes of package datas:
 //            HighscoreDAO
 
-public class DataManager
-{
-
-    public DataManager()
-    {
-    }
-
-    public static List<Highscore> getHighscores(int level)
-    {
-    	highscores = (new HighscoreCSVFileDAO()).getHighscoreList(level);
-        return highscores;
-    }
-
-    public static void setHighscores(List<Highscore> highscores)
-    {
-        DataManager.highscores = highscores;
-    }
+public class DataManager {
 
     private static List<Highscore> highscores = new ArrayList<>();
 
-	public static void insertHighscore(Highscore highscore , int level) {
-	   	new HighscoreCSVFileDAO().addHighscore(highscore, level);
-	}
+    public DataManager() {
+    }
+
+    public static List<Highscore> getHighscores(int level) {
+        highscores = (new HighscoreCSVFileDAO()).getHighscoreList(level);
+        return highscores;
+    }
+
+    public static void setHighscores(List<Highscore> highscores) {
+        DataManager.highscores = highscores;
+    }
+
+    public static void insertHighscore(Highscore highscore, int level) {
+        new HighscoreCSVFileDAO().addHighscore(highscore, level);
+    }
 
 }
