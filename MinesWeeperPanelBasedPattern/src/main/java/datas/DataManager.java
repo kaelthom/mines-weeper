@@ -17,7 +17,8 @@ public class DataManager {
 
     private static List<Highscore> highscores = new ArrayList<>();
 
-    public DataManager() {
+    private DataManager() {
+        //nothing to do
     }
 
     public static List<Highscore> getHighscores(int level) {

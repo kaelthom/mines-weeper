@@ -5,10 +5,10 @@ import java.util.Map;
 
 public class Profiles {
 
-    public final static String ADMIN_USER = "ADMIN_USER";
-    private final static String DEFAULT_USER = "DEFAULT_USER";
+    public static final String ADMIN_USER = "ADMIN_USER";
+    private static final String DEFAULT_USER = "DEFAULT_USER";
 
-    public final static Map<String, String[]> rightsPerProfile = createRightsMap();
+    public static final Map<String, String[]> rightsPerProfile = createRightsMap();
 
     private static Map<String, String[]> createRightsMap() {
         Map<String, String[]> rightsMap = new HashMap<>();

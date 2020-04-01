@@ -14,7 +14,7 @@ import javax.swing.*;
 import java.util.Date;
 import java.util.Iterator;
 
-public class CellLeftClickAction extends GenericAbstractInputObjectAction<LeftClickActionInput> {
+public class CellLeftClickAction implements GenericAbstractInputObjectAction<LeftClickActionInput> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CellLeftClickAction.class);
 

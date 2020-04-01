@@ -7,17 +7,20 @@ package connections;
 
 import java.util.ResourceBundle;
 
-public class ConnexionProperties
-{
+public class ConnexionProperties {
 
-    public final static String DBMS = ResourceBundle.getBundle("connections").getString("dbms");
-    public final static String SERVER_NAME = ResourceBundle.getBundle("connections").getString("servername");
-    public final static String PORT_NUMBER = ResourceBundle.getBundle("connections").getString("portnumber");
-    public final static String DB_NAME = ResourceBundle.getBundle("connections").getString("dbname");
-    public final static String USER_NAME = ResourceBundle.getBundle("connections").getString("username");
-    public final static String PASSWORD = ResourceBundle.getBundle("connections").getString("password");
-    public final static int MIN_POOL_SIZE = Integer.parseInt(ResourceBundle.getBundle("connections").getString("minpoolsize"));
-    public final static int MAX_POOL_SIZE = Integer.parseInt(ResourceBundle.getBundle("connections").getString("maxpoolsize"));
-    public final static int ACQUIRE_INCREMENT = Integer.parseInt(ResourceBundle.getBundle("connections").getString("acquireincrement"));
+    static final String SERVER_NAME = ResourceBundle.getBundle("connections").getString("servername");
+    static final String PORT_NUMBER = ResourceBundle.getBundle("connections").getString("portnumber");
+    static final String DB_NAME = ResourceBundle.getBundle("connections").getString("dbname");
+    static final String USER_NAME = ResourceBundle.getBundle("connections").getString("username");
+    static final String PASSWORD = ResourceBundle.getBundle("connections").getString("password");
+    static final int MIN_POOL_SIZE = Integer.parseInt(ResourceBundle.getBundle("connections").getString("minpoolsize"));
+    static final int MAX_POOL_SIZE = Integer.parseInt(ResourceBundle.getBundle("connections").getString("maxpoolsize"));
+    static final int ACQUIRE_INCREMENT = Integer.parseInt(ResourceBundle.getBundle("connections").getString("acquireincrement"));
+    private static final ResourceBundle CONNECTIONS_RESOURCE_BUNDLE = ResourceBundle.getBundle("connections");
+    static final String DBMS = CONNECTIONS_RESOURCE_BUNDLE.getString("dbms");
+
+    private ConnexionProperties() {
+    }
 
 }

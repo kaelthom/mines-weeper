@@ -5,38 +5,50 @@
 
 package views.options;
 
-import java.awt.GridLayout;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import actions.optionssubmit.OptionsSubmitAction;
 import actions.optionssubmit.OptionsSubmitActionInput;
 import dto.DeminorGameProperties;
 import dto.DeminorGamePropertiesFactory;
 import messages.Labels;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import views.options.panels.CustomLevelPanel;
 import views.options.panels.OptionsLevelPanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 // Referenced classes of package views:
 //            DeminorView
 
 public class OptionsView extends JPanel implements ActionListener {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(OptionsView.class);
-	
-    public OptionsView()
-    {
-    	setLayout(new GridLayout(3, 1, 20, 20));
+    private static final Logger LOGGER = LoggerFactory.getLogger(OptionsView.class);
+    private static final long serialVersionUID = 0xd9a497f118f4e396L;
+    private static JFrame frame;
+    private static int frameWidth;
+    private static int frameHeight;
+    private static int frameX;
+    private static int frameY;
+    private static Rectangle frameBounds;
+
+    static {
+        frameWidth = 500;
+        frameHeight = 500;
+        frameX = 0;
+        frameY = 0;
+        frameBounds = new Rectangle(frameX, frameY, frameWidth, frameHeight);
+    }
+
+    private OptionsLevelPanel optionsLevelPanel;
+    private CustomLevelPanel customPanel;
+
+    public OptionsView() {
+        setLayout(new GridLayout(3, 1, 20, 20));
         optionsLevelPanel = new OptionsLevelPanel();
         add(optionsLevelPanel);
         customPanel = new CustomLevelPanel();
@@ -48,65 +60,40 @@ public class OptionsView extends JPanel implements ActionListener {
         add(buttonOK);
     }
 
-    private static void createAndShowGUI(JPanel panel)
-    {
+    private static void createAndShowGUI(JPanel panel) {
         frame = new JFrame(Labels.OPTIONS_TITLE);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         frame.setBounds(frameBounds);
         frame.add(panel);
         frame.setVisible(true);
     }
 
-    public static void launchFrame(final JPanel panel)
-    {
+    public static void launchFrame(final JPanel panel) {
         SwingUtilities.invokeLater(() -> {
-		    UIManager.put("swing.boldMetal", Boolean.FALSE);
-		    OptionsView.createAndShowGUI(panel);
-		});
+            UIManager.put("swing.boldMetal", Boolean.FALSE);
+            OptionsView.createAndShowGUI(panel);
+        });
     }
 
-    public void actionPerformed(ActionEvent e)
-    {
-        if(e.getActionCommand().equals("OK"))
-        {
-    		DeminorGameProperties gameProperties = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance();
-    		int level = optionsLevelPanel.getLevel();
-    		gameProperties.setLevel(level);
-    		DeminorGamePropertiesFactory.updateDeminorGameProperties(gameProperties);
-    		gameProperties = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance();
-    		LOGGER.info("cellsPerLine : {}",gameProperties.getCellsPerLine());
-    		LOGGER.info("cellsPerColumn : {}",gameProperties.getCellsPerColumn());
-			new OptionsSubmitAction().execute(new OptionsSubmitActionInput(gameProperties));
-        }
-    }
-
-    public static JFrame getFrame()
-    {
+    public static JFrame getFrame() {
         return frame;
     }
 
-    public static void setFrame(JFrame frame)
-    {
+    public static void setFrame(JFrame frame) {
         OptionsView.frame = frame;
     }
 
-    private static final long serialVersionUID = 0xd9a497f118f4e396L;
-    private static JFrame frame;
-    private static int frameWidth;
-    private static int frameHeight;
-    private static int frameX;
-    private static int frameY;
-    private static Rectangle frameBounds;
-    private OptionsLevelPanel optionsLevelPanel;
-    private CustomLevelPanel customPanel;
-
-    static 
-    {
-        frameWidth = 500;
-        frameHeight = 500;
-        frameX = 0;
-        frameY = 0;
-        frameBounds = new Rectangle(frameX, frameY, frameWidth, frameHeight);
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("OK")) {
+            DeminorGameProperties gameProperties = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance();
+            int level = optionsLevelPanel.getLevel();
+            gameProperties.setLevel(level);
+            DeminorGamePropertiesFactory.updateDeminorGameProperties(gameProperties);
+            gameProperties = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance();
+            LOGGER.info("cellsPerLine : {}", gameProperties.getCellsPerLine());
+            LOGGER.info("cellsPerColumn : {}", gameProperties.getCellsPerColumn());
+            new OptionsSubmitAction().execute(new OptionsSubmitActionInput(gameProperties));
+        }
     }
 
 }

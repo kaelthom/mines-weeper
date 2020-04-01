@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CsvParser<T> extends AbstractGenericParser<List<T>, List<String>> {
+public class CsvParser<T> implements AbstractGenericParser<List<T>, List<String>> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CsvParser.class);
     private String separator;
@@ -109,7 +109,7 @@ public class CsvParser<T> extends AbstractGenericParser<List<T>, List<String>> {
     }
 
     @Override
-    public List<String> unParse(List<T> objs) throws IllegalArgumentException, IllegalAccessException {
+    public List<String> unParse(List<T> objs) throws IllegalAccessException {
         List<String> lines = new ArrayList<>();
         for (T obj : objs) {
             StringBuilder sb = new StringBuilder();

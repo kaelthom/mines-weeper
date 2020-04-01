@@ -7,6 +7,8 @@ package datas;
 
 import tools.parsers.csv.CsvColumn;
 
+import java.util.Objects;
+
 public class Highscore implements Comparable<Highscore> {
 
     @CsvColumn(column = 1)
@@ -74,6 +76,23 @@ public class Highscore implements Comparable<Highscore> {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Highscore highscore = (Highscore) o;
+        return score == highscore.score &&
+                percent == highscore.percent &&
+                Objects.equals(id, highscore.id) &&
+                Objects.equals(name, highscore.name) &&
+                Objects.equals(date, highscore.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, date, score, percent);
     }
 
     @Override

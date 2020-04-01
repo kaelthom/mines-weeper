@@ -6,4 +6,6 @@ public class Rights {
     public static final String GET_OPTIONS_MENU = "GET_OPTIONS_MENU";
     public static final String GET_ADMIN_MENU = "GET_ADMIN_MENU";
 
+    private Rights() {
+    }
 }

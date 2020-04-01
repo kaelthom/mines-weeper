@@ -11,6 +11,8 @@ import views.highscore.panels.HighscoreMainPanel;
 import javax.swing.*;
 import java.awt.*;
 
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
 public class HighscoreView extends JPanel {
 
     private static final long serialVersionUID = 1L;
@@ -23,7 +25,7 @@ public class HighscoreView extends JPanel {
 
     private static void createAndShowGUI(JPanel panel) {
         frame = new JFrame(Labels.HIGHSCORES_TITLE);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         frame.add(panel);
         frame.pack();
         frame.setVisible(true);

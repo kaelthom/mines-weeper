@@ -1,16 +1,16 @@
 package actions.newgame;
 
-import javax.swing.JFrame;
-
 import actions.GenericAbstractInputObjectAction;
 import dto.DeminorGameProperties;
 import views.main.DeminorView;
 
-public class NewGameAction extends GenericAbstractInputObjectAction<NewGameActionInput>{
+import javax.swing.*;
 
-	@Override
-	public int execute(NewGameActionInput input) {
-		DeminorGameProperties gameProperties = input.getDeminorProperties();
+public class NewGameAction implements GenericAbstractInputObjectAction<NewGameActionInput> {
+
+    @Override
+    public int execute(NewGameActionInput input) {
+        DeminorGameProperties gameProperties = input.getDeminorProperties();
 
         JFrame deminorFrame = DeminorView.getFrame();
         deminorFrame.getContentPane().removeAll();
@@ -18,7 +18,7 @@ public class NewGameAction extends GenericAbstractInputObjectAction<NewGameActio
         deminorFrame.add(DeminorView.getDeminorPanel());
         deminorFrame.repaint();
 
-		return 0;
-	}
+        return 0;
+    }
 
 }

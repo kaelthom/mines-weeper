@@ -1,9 +1,9 @@
 package tools.parsers;
 
-public abstract class AbstractGenericParser<T, V> {
+public interface AbstractGenericParser<T, V> {
 
-    public abstract V unParse(T obj) throws IllegalArgumentException, IllegalAccessException;
+    V unParse(T obj) throws IllegalAccessException;
 
-    public abstract T parse(V obj) throws InstantiationException, IllegalAccessException;
+    T parse(V obj) throws InstantiationException, IllegalAccessException;
 
 }
