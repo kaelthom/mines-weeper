@@ -7,6 +7,7 @@ import tools.parsers.AbstractGenericParser;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,7 +26,7 @@ public class CsvParser<T> implements AbstractGenericParser<List<T>, List<String>
 
     private Class<T> objClass;
 
-    public CsvParser(Class<T> objClass, String separator) throws Exception {
+    public CsvParser(Class<T> objClass, String separator) {
         super();
         this.objClass = objClass;
         this.separator = separator;
@@ -37,7 +38,7 @@ public class CsvParser<T> implements AbstractGenericParser<List<T>, List<String>
         });
         LOGGER.info("fields size of class {} : {}", objClass.getName(), fields.size());
         if (!isClassCompatible())
-            throw new Exception();
+            throw new UnsupportedOperationException();
     }
 
     public List<T> parse(File csvFile) {
@@ -52,7 +53,7 @@ public class CsvParser<T> implements AbstractGenericParser<List<T>, List<String>
             try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
                 lines = stream.collect(Collectors.toList());
                 listObj = parse(lines);
-            } catch (IOException | SecurityException | InstantiationException | IllegalAccessException e) {
+            } catch (IOException | SecurityException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                 LOGGER.error("Error while parsing CSV file", e);
             }
         }
@@ -60,11 +61,11 @@ public class CsvParser<T> implements AbstractGenericParser<List<T>, List<String>
     }
 
     @Override
-    public List<T> parse(List<String> lines) throws InstantiationException, IllegalAccessException {
+    public List<T> parse(List<String> lines) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         LOGGER.info("lines : {}", lines);
         List<T> listObj = new ArrayList<>();
         for (String line : lines) {
-            T obj = objClass.newInstance();
+            T obj = objClass.getDeclaredConstructor().newInstance();
             String[] propertiesString = line.split(this.separator);
             for (int iField = 0; iField < fields.size(); iField++) {
                 Field field = fields.get(iField);

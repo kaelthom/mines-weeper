@@ -19,7 +19,7 @@ public class DeminorPanel extends JPanel {
 
     private static CellsPanel cellsPanel;
 
-    public DeminorPanel(Rectangle bounds) {
+    private DeminorPanel(Rectangle bounds) {
         this.setLayout(null);
         this.setBounds(bounds);
     }
@@ -40,7 +40,7 @@ public class DeminorPanel extends JPanel {
 
         DeminorPanel deminorPanel = new DeminorPanel(bounds);
 
-        cellsPanel = new CellsPanel(cellsPerLine, cellsPerColumn, nBombs);
+        setCellsPanel(new CellsPanel(cellsPerLine, cellsPerColumn, nBombs));
 
         for (int iOcc = 0; iOcc < cellsPerLine * cellsPerColumn; iOcc++) {
             Cell button = cellsPanel.getCells().get(iOcc);
@@ -81,11 +81,7 @@ public class DeminorPanel extends JPanel {
         return new Rectangle(deminorPanelX, deminorPanelY, deminorWidth, deminorHeight);
     }
 
-    public static CellsPanel getCellsPanel() {
-        return cellsPanel;
-    }
-
-    public static void setCellsPanel(CellsPanel cellsPanel) {
+    private static void setCellsPanel(CellsPanel cellsPanel) {
         DeminorPanel.cellsPanel = cellsPanel;
     }
 

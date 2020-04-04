@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class HighscorePanel extends JPanel {
+class HighscorePanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class HighscorePanel extends JPanel {
 
     }
 
-    public static HighscorePanel createPanel(int level) {
+    static HighscorePanel createPanel(int level) {
         return new HighscorePanel(level);
     }
 

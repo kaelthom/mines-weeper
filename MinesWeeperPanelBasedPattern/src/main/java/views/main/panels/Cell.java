@@ -9,13 +9,12 @@ public class Cell extends JButton {
 
     private static final long serialVersionUID = 8266984880552648355L;
     private static double bombProbability;
-    private int nBombsaround;
+    private int nBombsAround;
     private int xOcc;
     private int yOcc;
     private int index;
     private boolean mined;
     private boolean hidden;
-    private boolean blank;
     private boolean flagged;
 
     public Cell(Rectangle bounds, int xOcc, int yOcc, int index) {
@@ -24,18 +23,13 @@ public class Cell extends JButton {
         setMined();
         setHidden(true);
         setFlagged(false);
-        setBlank(false);
         setIndex(index);
         setxOcc(xOcc);
         setyOcc(yOcc);
-        setnBombsaround(0);
+        setnBombsAround(0);
     }
 
-    public static double getBombProbability() {
-        return bombProbability;
-    }
-
-    public static void setBombProbability(double bombProbability) {
+    static void setBombProbability(double bombProbability) {
         Cell.bombProbability = bombProbability;
     }
 
@@ -43,28 +37,28 @@ public class Cell extends JButton {
         return mined;
     }
 
-    public void setMined() {
+    private void setMined() {
         double rand = Math.random();
         mined = rand < bombProbability;
     }
 
-    public int getnBombsaround() {
-        return nBombsaround;
+    int getnBombsAround() {
+        return nBombsAround;
     }
 
-    public void setnBombsaround(int nBombsaround) {
-        this.nBombsaround = nBombsaround;
+    private void setnBombsAround(int nBombsAround) {
+        this.nBombsAround = nBombsAround;
     }
 
-    public void incrementNBombsaround() {
-        nBombsaround++;
+    void incrementNBombsaround() {
+        nBombsAround++;
     }
 
     public int getxOcc() {
         return xOcc;
     }
 
-    public void setxOcc(int xOcc) {
+    private void setxOcc(int xOcc) {
         this.xOcc = xOcc;
     }
 
@@ -72,7 +66,7 @@ public class Cell extends JButton {
         return yOcc;
     }
 
-    public void setyOcc(int yOcc) {
+    private void setyOcc(int yOcc) {
         this.yOcc = yOcc;
     }
 
@@ -80,7 +74,7 @@ public class Cell extends JButton {
         return index;
     }
 
-    public void setIndex(int index) {
+    private void setIndex(int index) {
         this.index = index;
     }
 
@@ -88,7 +82,7 @@ public class Cell extends JButton {
         return hidden;
     }
 
-    public void setHidden(boolean hidden) {
+    private void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
 
@@ -100,16 +94,8 @@ public class Cell extends JButton {
             setIcon(ImageHandler.getBombIcon());
         } else {
             setBackground(Color.gray);
-            if (getnBombsaround() != 0) setText(String.valueOf(getnBombsaround()));
+            if (getnBombsAround() != 0) setText(String.valueOf(getnBombsAround()));
         }
-    }
-
-    public boolean isBlank() {
-        return blank;
-    }
-
-    public void setBlank(boolean blank) {
-        this.blank = blank;
     }
 
     public void flagCell() {
@@ -126,7 +112,7 @@ public class Cell extends JButton {
         return flagged;
     }
 
-    public void setFlagged(boolean flagged) {
+    private void setFlagged(boolean flagged) {
         this.flagged = flagged;
     }
 }

@@ -46,13 +46,13 @@ public class CellLeftClickAction implements GenericAbstractInputObjectAction<Lef
             time = System.currentTimeMillis() - time;
             time = time / 1000;
             JOptionPane.showMessageDialog(cellsPanel, Labels.GAMELOST);
-            percent = (cellsPanel.getDiscoveredCells() - CellsPanel.getnBombs()) * 100 /
+            percent = (cellsPanel.getnDiscoveredCells() - CellsPanel.getnBombs()) * 100 /
                     (cellsPerLine * cellsPerColumn - nBombs);
             DataManager.insertHighscore(new Highscore(0, "", new Date().toLocaleString(), time, percent), level);
         } else {
             cellsPanel.showCurrentAndNeighbourCellsIfHidden(cell.getxOcc(), cell.getyOcc(), cell);
             int nCellsToWin = cellsPerLine * cellsPerColumn - nBombs;
-            if (cellsPanel.getDiscoveredCells() == nCellsToWin) {
+            if (cellsPanel.getnDiscoveredCells() == nCellsToWin) {
                 CellsPanel.setWon(true);
                 JOptionPane.showMessageDialog(cellsPanel, Labels.GAMEWON);
                 time = System.currentTimeMillis() - time;

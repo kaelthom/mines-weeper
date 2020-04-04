@@ -22,7 +22,7 @@ public class DeminorGamePropertiesFactory {
     }
 
     private static DeminorGameProperties initDeminorGameProperties() {
-        gameProperties = new DeminorGameProperties(DeminorGameProperties.getInitialLevel());
+        gameProperties = new DeminorGameProperties();
         return gameProperties;
     }
 

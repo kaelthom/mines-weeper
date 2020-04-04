@@ -88,17 +88,15 @@ public class HighscoreDBDAO {
         }
     }
 
-    private boolean addHighscore(Highscore highscore, int level, Highscore maxHighscore) {
+    private void addHighscore(Highscore highscore, int level, Highscore maxHighscore) {
         try (Connection conn = ConnexionFactory.getConnectionInstance()) {
             if (maxHighscore != null) {
                 deleteHighscore(maxHighscore, conn, level);
             }
             insertHighscore(highscore, level, conn);
-            return true;
         } catch (SQLException | PropertyVetoException e) {
             LOGGER.error("Error while inserting highscore.", e);
         }
-        return false;
     }
 
     private void insertHighscore(Highscore highscore, int level, Connection conn)

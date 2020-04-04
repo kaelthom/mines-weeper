@@ -27,23 +27,22 @@ public class OptionsLevelPanel extends JPanel implements ActionListener {
             Labels.OPTIONS_LEVEL_EXPERT,
             Labels.OPTIONS_LEVEL_CUSTOM
     };
-    private static int[] mnemonicByLevel = {KeyEvent.VK_E, KeyEvent.VK_I, KeyEvent.VK_H, KeyEvent.VK_C};
-    private static int[] bombsByLevel = {10, 40, 300, 0};
-    private static int[] deminorCellsPerWidthByLevel = {10, 15, 40, 0};
-    private static int[] deminorCellsPerHeightByLevel = {10, 15, 40, 0};
-    private List<JRadioButton> levelButtons = new ArrayList<>();
+    private static final int[] DEMINOR_CELLS_PER_WIDTH_BY_LEVEL = {10, 15, 40, 0};
+    private static final int[] DEMINOR_CELLS_PER_HEIGHT_BY_LEVEL = {10, 15, 40, 0};
+    private static final int[] MNEMONIC_BY_LEVEL = {KeyEvent.VK_E, KeyEvent.VK_I, KeyEvent.VK_H, KeyEvent.VK_C};
+    private static final int[] BOMBS_BY_LEVEL = {10, 40, 300, 0};
 
-    private ButtonGroup group;
     private int level;
 
     public OptionsLevelPanel() {
         super();
         setLayout(new GridLayout(4, 1));
 
-        group = new ButtonGroup();
+        ButtonGroup group = new ButtonGroup();
+        List<JRadioButton> levelButtons = new ArrayList<>();
         for (int iLevel = 0; iLevel < LEVEL_LABEL.length; iLevel++) {
-            JRadioButton levelButton = new JRadioButton(deminorCellsPerWidthByLevel[iLevel] + "x" + deminorCellsPerHeightByLevel[iLevel] + " " + bombsByLevel[iLevel] + " bombs " + LEVEL_LABEL[iLevel]);
-            levelButton.setMnemonic(mnemonicByLevel[iLevel]);
+            JRadioButton levelButton = new JRadioButton(DEMINOR_CELLS_PER_WIDTH_BY_LEVEL[iLevel] + "x" + DEMINOR_CELLS_PER_HEIGHT_BY_LEVEL[iLevel] + " " + BOMBS_BY_LEVEL[iLevel] + " bombs " + LEVEL_LABEL[iLevel]);
+            levelButton.setMnemonic(MNEMONIC_BY_LEVEL[iLevel]);
             levelButton.addActionListener(this);
             levelButton.setActionCommand(LEVEL_LABEL[iLevel]);
             levelButtons.add(levelButton);
@@ -57,41 +56,15 @@ public class OptionsLevelPanel extends JPanel implements ActionListener {
     }
 
     public static int[] getDeminorCellsPerWidthByLevel() {
-        return deminorCellsPerWidthByLevel;
-    }
-
-    public static void setDeminorCellsPerWidthByLevel(
-            int[] deminorCellsPerWidthByLevel) {
-        OptionsLevelPanel.deminorCellsPerWidthByLevel = deminorCellsPerWidthByLevel;
+        return DEMINOR_CELLS_PER_WIDTH_BY_LEVEL;
     }
 
     public static int[] getBombsByLevel() {
-        return bombsByLevel;
-    }
-
-    public static void setBombsByLevel(int[] bombsByLevel) {
-        OptionsLevelPanel.bombsByLevel = bombsByLevel;
+        return BOMBS_BY_LEVEL;
     }
 
     public static int[] getDeminorCellsPerHeightByLevel() {
-        return deminorCellsPerHeightByLevel;
-    }
-
-    public static void setDeminorCellsPerHeightByLevel(
-            int[] deminorCellsPerHeightByLevel) {
-        OptionsLevelPanel.deminorCellsPerHeightByLevel = deminorCellsPerHeightByLevel;
-    }
-
-    public static String[] getLevelLabel() {
-        return LEVEL_LABEL;
-    }
-
-    public ButtonGroup getGroup() {
-        return group;
-    }
-
-    public void setGroup(ButtonGroup group) {
-        this.group = group;
+        return DEMINOR_CELLS_PER_HEIGHT_BY_LEVEL;
     }
 
     @Override

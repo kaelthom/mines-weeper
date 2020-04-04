@@ -39,8 +39,4 @@ public class HighscoreView extends JPanel {
                 });
     }
 
-    public static JFrame getFrame() {
-        return frame;
-    }
-
 }

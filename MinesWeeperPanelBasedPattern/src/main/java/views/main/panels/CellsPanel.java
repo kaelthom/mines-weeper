@@ -16,11 +16,11 @@ public class CellsPanel extends JPanel {
     private static int nBombs;
     private static boolean lost;
     private static boolean won;
-    private List<Cell> cells = new ArrayList<>();
-    private List<Integer> minedCells = new ArrayList<>();
-    private int discoveredCells;
+    private List<Cell> cells;
+    private List<Integer> minedCells;
+    private int nDiscoveredCells;
 
-    public CellsPanel(int cellsPerLine, int cellsPerColumn, int nBombs) {
+    CellsPanel(int cellsPerLine, int cellsPerColumn, int nBombs) {
         super();
 
         int cellWidth = DeminorPanelProperties.getCellWidth();
@@ -36,7 +36,7 @@ public class CellsPanel extends JPanel {
         setCellsPerLine(cellsPerLine);
         setLost(false);
         setWon(false);
-        setDiscoveredCells(0);
+        setnDiscoveredCells(0);
         setnBombs(nBombs);
 
         int buttonsPanelXMargin = DeminorPanelProperties.getButtonsPanelXMargin();
@@ -61,7 +61,8 @@ public class CellsPanel extends JPanel {
                 cell.setMargin(m);
                 getCells().add(cell);
                 if (cell.isMined()) {
-                    minedCells.add(index);
+                    getMinedCells().add(index);
+                    getMinedCells().add(index);
                     nRemainingBombs--;
                 }
                 nRemainingCells--;
@@ -88,19 +89,11 @@ public class CellsPanel extends JPanel {
         return new Rectangle(minesPanelX, minesPanelY, minesPanelWidth, minesPanelHeight);
     }
 
-    public static int getCellsPerLine() {
-        return cellsPerLine;
-    }
-
-    public static void setCellsPerLine(int cellsPerWidth) {
+    private static void setCellsPerLine(int cellsPerWidth) {
         CellsPanel.cellsPerLine = cellsPerWidth;
     }
 
-    public static int getCellsPerColumn() {
-        return cellsPerColumn;
-    }
-
-    public static void setCellsPerColumn(int cellsPerHeight) {
+    private static void setCellsPerColumn(int cellsPerHeight) {
         CellsPanel.cellsPerColumn = cellsPerHeight;
     }
 
@@ -108,11 +101,11 @@ public class CellsPanel extends JPanel {
         return nBombs;
     }
 
-    public static void setnBombs(int nBombs) {
+    private static void setnBombs(int nBombs) {
         CellsPanel.nBombs = nBombs;
     }
 
-    public static boolean isLost() {
+    static boolean isLost() {
         return lost;
     }
 
@@ -120,7 +113,7 @@ public class CellsPanel extends JPanel {
         CellsPanel.lost = lost;
     }
 
-    public static boolean isWon() {
+    static boolean isWon() {
         return won;
     }
 
@@ -129,20 +122,14 @@ public class CellsPanel extends JPanel {
     }
 
     public List<Cell> getCells() {
+        if (cells == null) {
+            cells = new ArrayList<>();
+        }
         return cells;
     }
 
-    public void setButtons(List<Cell> buttons) {
-        this.cells = buttons;
-    }
-
-    public int getCellIndex(int x, int y) {
+    private int getCellIndex(int x, int y) {
         return y * cellsPerLine + x;
-
-    }
-
-    public Point getCellPosition(int index) {
-        return new Point(index % cellsPerLine, index / cellsPerLine);
 
     }
 
@@ -176,7 +163,7 @@ public class CellsPanel extends JPanel {
                 getCells().get(getCellIndex(columnIndex, lineIndex)).isMined()) cell.incrementNBombsaround();
     }
 
-    public void showNeighbourBlankCells(int currentColumnIndex, int currentLineIndex) {
+    private void showNeighbourBlankCells(int currentColumnIndex, int currentLineIndex) {
         int leftColumnIndex = currentColumnIndex - 1;
         int rightColumnIndex = currentColumnIndex + 1;
         int aboveLineIndex = currentLineIndex - 1;
@@ -209,29 +196,28 @@ public class CellsPanel extends JPanel {
     public void showCurrentAndNeighbourCellsIfHidden(int iOcc, int jOcc, Cell currentCell) {
         if (currentCell.isHidden()) {
             currentCell.showCell(this);
-            if (currentCell.getnBombsaround() == 0 && !currentCell.isMined()) {
+            if (currentCell.getnBombsAround() == 0 && !currentCell.isMined()) {
                 showNeighbourBlankCells(iOcc, jOcc);
             }
         }
     }
 
     public List<Integer> getMinedCells() {
+        if (minedCells == null) {
+            minedCells = new ArrayList<>();
+        }
         return minedCells;
     }
 
-    public void setMinedCells(List<Integer> minedCells) {
-        this.minedCells = minedCells;
+    public int getnDiscoveredCells() {
+        return nDiscoveredCells;
     }
 
-    public int getDiscoveredCells() {
-        return discoveredCells;
+    private void setnDiscoveredCells(int nDiscoveredCells) {
+        this.nDiscoveredCells = nDiscoveredCells;
     }
 
-    public void setDiscoveredCells(int discoveredCells) {
-        this.discoveredCells = discoveredCells;
-    }
-
-    public void incrementDiscoveredCells() {
-        discoveredCells++;
+    void incrementDiscoveredCells() {
+        nDiscoveredCells++;
     }
 }

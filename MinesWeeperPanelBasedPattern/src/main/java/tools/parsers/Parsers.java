@@ -7,6 +7,7 @@ import tools.parsers.csv.CsvParser;
 
 public class Parsers {
 
+    private static final String CSV_SEPARATOR = ";";
     private static final Logger LOGGER = LoggerFactory.getLogger(Parsers.class);
     private static CsvParser<Highscore> csvHighscoreParser;
 
@@ -18,23 +19,22 @@ public class Parsers {
         return csvHighscoreParser == null ? createCsvParser() : csvHighscoreParser;
     }
 
-    public static void setCsvHighscoreParser(CsvParser<Highscore> csvHighscoreParser) {
+    private static void setCsvHighscoreParser(CsvParser<Highscore> csvHighscoreParser) {
         Parsers.csvHighscoreParser = csvHighscoreParser;
     }
 
-    public static int init() {
+    public static void init() {
         createCsvParser();
-        return 0;
     }
 
     private static CsvParser<Highscore> createCsvParser() {
-        CsvParser<Highscore> csvParser = null;
+        csvHighscoreParser = null;
         try {
-            csvParser = new CsvParser<>(Highscore.class, ";");
+            setCsvHighscoreParser(new CsvParser<>(Highscore.class, CSV_SEPARATOR));
         } catch (Exception e) {
             LOGGER.error("Error while creating CSV parser", e);
         }
 
-        return csvParser;
+        return csvHighscoreParser;
     }
 }

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class HighscoreCSVFileDAO {
 
-    public static final int HIGHSCORES_MAX_SIZE = 10;
+    private static final int HIGHSCORES_MAX_SIZE = 10;
     private static final String HIGHSCORES_FILE_PATH = "highscores/highscore_";
     private static final String CSV_EXTENSION = ".csv";
     private static final Logger LOGGER = LoggerFactory.getLogger(HighscoreCSVFileDAO.class);
@@ -56,12 +56,11 @@ public class HighscoreCSVFileDAO {
         csvHighscoreParser.unParse(highscores, highscoresFilePath);
     }
 
-    public boolean addHighscore(List<Highscore> highscores, Highscore highscore, Highscore maxHighscore) {
+    private void addHighscore(List<Highscore> highscores, Highscore highscore, Highscore maxHighscore) {
         if (maxHighscore != null) {
             highscores.remove(maxHighscore);
         }
         highscores.add(highscore);
-        return true;
     }
 
 }

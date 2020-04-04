@@ -7,8 +7,11 @@ public class Profiles {
 
     public static final String ADMIN_USER = "ADMIN_USER";
     private static final String DEFAULT_USER = "DEFAULT_USER";
+    private static final Map<String, String[]> rightsPerProfile = createRightsMap();
 
-    public static final Map<String, String[]> rightsPerProfile = createRightsMap();
+    private Profiles() {
+        //prevent from being called from outside
+    }
 
     private static Map<String, String[]> createRightsMap() {
         Map<String, String[]> rightsMap = new HashMap<>();
@@ -22,5 +25,9 @@ public class Profiles {
                         Rights.GET_OPTIONS_MENU,
                         Rights.GET_GAME_MENU});
         return rightsMap;
+    }
+
+    public static Map<String, String[]> getRightsPerProfile() {
+        return rightsPerProfile;
     }
 }

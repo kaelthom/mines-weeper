@@ -30,28 +30,23 @@ public class OptionsView extends JPanel implements ActionListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(OptionsView.class);
     private static final long serialVersionUID = 0xd9a497f118f4e396L;
     private static JFrame frame;
-    private static int frameWidth;
-    private static int frameHeight;
-    private static int frameX;
-    private static int frameY;
     private static Rectangle frameBounds;
 
     static {
-        frameWidth = 500;
-        frameHeight = 500;
-        frameX = 0;
-        frameY = 0;
+        int frameWidth = 500;
+        int frameHeight = 500;
+        int frameX = 0;
+        int frameY = 0;
         frameBounds = new Rectangle(frameX, frameY, frameWidth, frameHeight);
     }
 
     private OptionsLevelPanel optionsLevelPanel;
-    private CustomLevelPanel customPanel;
 
     public OptionsView() {
         setLayout(new GridLayout(3, 1, 20, 20));
         optionsLevelPanel = new OptionsLevelPanel();
         add(optionsLevelPanel);
-        customPanel = new CustomLevelPanel();
+        CustomLevelPanel customPanel = new CustomLevelPanel();
         customPanel.createCustomPanel();
         add(customPanel);
         JButton buttonOK = new JButton("OK");
@@ -61,7 +56,7 @@ public class OptionsView extends JPanel implements ActionListener {
     }
 
     private static void createAndShowGUI(JPanel panel) {
-        frame = new JFrame(Labels.OPTIONS_TITLE);
+        setFrame(new JFrame(Labels.OPTIONS_TITLE));
         frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         frame.setBounds(frameBounds);
         frame.add(panel);
@@ -79,7 +74,7 @@ public class OptionsView extends JPanel implements ActionListener {
         return frame;
     }
 
-    public static void setFrame(JFrame frame) {
+    private static void setFrame(JFrame frame) {
         OptionsView.frame = frame;
     }
 

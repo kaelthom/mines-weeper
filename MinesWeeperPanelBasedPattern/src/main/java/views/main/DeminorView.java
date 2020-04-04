@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tools.parsers.Parsers;
 import views.main.menu.MainMenu;
-import views.main.panels.CellsPanel;
 import views.main.panels.DeminorPanel;
 
 import javax.swing.*;
@@ -34,7 +33,6 @@ public class DeminorView extends JPanel implements ActionListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(DeminorView.class);
     private static final long serialVersionUID = 1L;
     private static JFrame frame;
-    private static CellsPanel cellsPanel;
     private static DeminorPanel deminorPanel;
 
     public static void createDeminorPanel(DeminorGameProperties gameProperties) {
@@ -56,7 +54,7 @@ public class DeminorView extends JPanel implements ActionListener {
     }
 
     private static void createAndShowGUI(List<String> userRights) {
-        frame = new JFrame(Labels.DEMINOR_TITLE);
+        setFrame(new JFrame(Labels.DEMINOR_TITLE));
 
         javax.swing.JMenuBar menubar = (new MainMenu(userRights)).getMenuBar();
         frame.setJMenuBar(menubar);
@@ -72,7 +70,7 @@ public class DeminorView extends JPanel implements ActionListener {
 
     public static void main(String[] args) {
         String userProfile = Profiles.ADMIN_USER;
-        String[] userRights = Profiles.rightsPerProfile.get(userProfile);
+        String[] userRights = Profiles.getRightsPerProfile().get(userProfile);
 
         Parsers.init();
 
@@ -84,19 +82,11 @@ public class DeminorView extends JPanel implements ActionListener {
         });
     }
 
-    public static CellsPanel getCellsPanel() {
-        return cellsPanel;
-    }
-
-    public static void setCellsPanel(CellsPanel cellsPanel) {
-        DeminorView.cellsPanel = cellsPanel;
-    }
-
     public static JFrame getFrame() {
         return frame;
     }
 
-    public static void setFrame(JFrame frame) {
+    private static void setFrame(JFrame frame) {
         DeminorView.frame = frame;
     }
 
@@ -110,7 +100,7 @@ public class DeminorView extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("OK")) {
-            LOGGER.info("Hello!!!!!");
+            LOGGER.info("OK clicked.");
         }
     }
 

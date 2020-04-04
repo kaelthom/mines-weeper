@@ -11,20 +11,17 @@ import java.util.Objects;
 
 public class Highscore implements Comparable<Highscore> {
 
-    @CsvColumn(column = 1)
-    public Long id;
-
+    // fields are public for reflective treatment in CsvParser
     @CsvColumn(column = 0)
     public String name;
-
     @CsvColumn(column = 2)
     public String date;
-
     @CsvColumn(column = 4)
     public long score;
-
     @CsvColumn(column = 3)
     public int percent;
+    @CsvColumn(column = 1)
+    public Long id;
 
     public Highscore() {
 

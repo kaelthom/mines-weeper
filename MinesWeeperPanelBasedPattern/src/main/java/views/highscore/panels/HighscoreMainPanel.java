@@ -30,12 +30,12 @@ public class HighscoreMainPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int level = 0;
-        if (e.getActionCommand().equals("easy")) {
+        int level = 3;
+        if (e.getActionCommand().equals(HighscoreMainLevelPanel.EASY_LEVEL)) {
             level = 0;
-        } else if (e.getActionCommand().equals("medium")) {
+        } else if (e.getActionCommand().equals(HighscoreMainLevelPanel.MEDIUM_LEVEL)) {
             level = 1;
-        } else if (e.getActionCommand().equals("expert")) {
+        } else if (e.getActionCommand().equals(HighscoreMainLevelPanel.EXPERT_LEVEL)) {
             level = 2;
         }
         highscorePanel.setVisible(false);

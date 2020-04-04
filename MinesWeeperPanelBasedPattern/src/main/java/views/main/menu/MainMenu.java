@@ -94,11 +94,11 @@ public class MainMenu implements ActionListener {
         return menuBar;
     }
 
-    public void setMenuBar(JMenuBar menuBar) {
+    private void setMenuBar(JMenuBar menuBar) {
         this.menuBar = menuBar;
     }
 
-    public void setMenuBar(List<String> userRights) {
+    private void setMenuBar(List<String> userRights) {
         for (int i = 0; i < items.length; i++) {
             for (int j = 0; j < items[i].length; j++) {
                 if (userRights.contains(rights[i])) {
@@ -110,7 +110,7 @@ public class MainMenu implements ActionListener {
             }
         }
 
-        menuBar = new JMenuBar();
+        setMenuBar(new JMenuBar());
         for (int iMenu = 0; iMenu < menus.length; iMenu++) {
             if (userRights.contains(rights[iMenu])) {
                 menus[iMenu].setMnemonic(menus[iMenu].getText().charAt(0));
@@ -123,25 +123,35 @@ public class MainMenu implements ActionListener {
         LOGGER.info("actionPerformed from MainMenu called!");
         LOGGER.info("actionCommand : {}", e.getActionCommand());
 
-        if (e.getActionCommand().equals("GameClose"))
-            System.exit(0);
-        else if (e.getActionCommand().equals("GameOptions")) {
-            JFrame optionsFrame = OptionsView.getFrame();
-            if (optionsFrame == null)
-                OptionsView.launchFrame(new OptionsView());
-            else
-                optionsFrame.setVisible(true);
-        } else if (e.getActionCommand().equals("GameNew")) {
-            NewGameActionInput input = new NewGameActionInput(DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance());
-            new NewGameAction().execute(input);
-        } else if (e.getActionCommand().equals("OptionsHighscores")) {
-            int level = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance().getLevel();
-            HighscoreView.launchFrame(new HighscoreView(level));
-        } else if (e.getActionCommand().equals("AdministrationExtract highscores from CSV file to DB")) {
-            //TODO : correct this why inject null
-            new ExtractCSVtoDBAction().execute(null);
-        } else if (e.getActionCommand().equals("AdministrationExtract highscores from DB to CSV file")) {
-            new ExtractDBtoCSVAction().execute(null);
+        switch (e.getActionCommand()) {
+            case "GameClose":
+                System.exit(0);
+                break;
+            case "GameOptions":
+                JFrame optionsFrame = OptionsView.getFrame();
+                if (optionsFrame == null) {
+                    OptionsView.launchFrame(new OptionsView());
+                } else {
+                    optionsFrame.setVisible(true);
+                }
+                break;
+            case "GameNew":
+                NewGameActionInput input = new NewGameActionInput(DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance());
+                new NewGameAction().execute(input);
+                break;
+            case "OptionsHighscores":
+                int level = DeminorGamePropertiesFactory.getDeminorGamePropertiesInstance().getLevel();
+                HighscoreView.launchFrame(new HighscoreView(level));
+                break;
+            case "AdministrationExtract highscores from CSV file to DB":
+                //TODO : correct this why inject null
+                new ExtractCSVtoDBAction().execute(null);
+                break;
+            case "AdministrationExtract highscores from DB to CSV file":
+                new ExtractDBtoCSVAction().execute(null);
+                break;
+            default:
+                LOGGER.error("Action Command [{}] not handled", e.getActionCommand());
         }
     }
 }

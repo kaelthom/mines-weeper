@@ -3,7 +3,10 @@ package views.highscore.panels;
 import javax.swing.*;
 import java.awt.*;
 
-public class HighscoreMainLevelPanel extends JPanel {
+class HighscoreMainLevelPanel extends JPanel {
+    static final String EASY_LEVEL = "easy";
+    static final String MEDIUM_LEVEL = "medium";
+    static final String EXPERT_LEVEL = "expert";
     private static final long serialVersionUID = 1L;
     private HighscoreLevelPanel highscoreLevelEasyPanel;
     private HighscoreLevelPanel highscoreLevelMediumPanel;
@@ -11,41 +14,41 @@ public class HighscoreMainLevelPanel extends JPanel {
 
     private HighscoreMainLevelPanel() {
         setLayout(new GridLayout(1, 3));
-        highscoreLevelEasyPanel = HighscoreLevelPanel.createPanel("easy");
-        highscoreLevelMediumPanel = HighscoreLevelPanel.createPanel("medium");
-        highscoreLevelExpertPanel = HighscoreLevelPanel.createPanel("expert");
+        setHighscoreLevelEasyPanel(HighscoreLevelPanel.createPanel(EASY_LEVEL));
+        setHighscoreLevelMediumPanel(HighscoreLevelPanel.createPanel(MEDIUM_LEVEL));
+        setHighscoreLevelExpertPanel(HighscoreLevelPanel.createPanel(EXPERT_LEVEL));
         add(highscoreLevelEasyPanel);
         add(highscoreLevelMediumPanel);
         add(highscoreLevelExpertPanel);
     }
 
-    public static HighscoreMainLevelPanel createPanel() {
+    static HighscoreMainLevelPanel createPanel() {
         return new HighscoreMainLevelPanel();
     }
 
-    public HighscoreLevelPanel getHighscoreLevelEasyPanel() {
+    HighscoreLevelPanel getHighscoreLevelEasyPanel() {
         return highscoreLevelEasyPanel;
     }
 
-    public void setHighscoreLevelEasyPanel(
+    private void setHighscoreLevelEasyPanel(
             HighscoreLevelPanel highscoreLevelEasyPanel) {
         this.highscoreLevelEasyPanel = highscoreLevelEasyPanel;
     }
 
-    public HighscoreLevelPanel getHighscoreLevelMediumPanel() {
+    HighscoreLevelPanel getHighscoreLevelMediumPanel() {
         return highscoreLevelMediumPanel;
     }
 
-    public void setHighscoreLevelMediumPanel(
+    private void setHighscoreLevelMediumPanel(
             HighscoreLevelPanel highscoreLevelMediumPanel) {
         this.highscoreLevelMediumPanel = highscoreLevelMediumPanel;
     }
 
-    public HighscoreLevelPanel getHighscoreLevelExpertPanel() {
+    HighscoreLevelPanel getHighscoreLevelExpertPanel() {
         return highscoreLevelExpertPanel;
     }
 
-    public void setHighscoreLevelExpertPanel(
+    private void setHighscoreLevelExpertPanel(
             HighscoreLevelPanel highscoreLevelExpertPanel) {
         this.highscoreLevelExpertPanel = highscoreLevelExpertPanel;
     }

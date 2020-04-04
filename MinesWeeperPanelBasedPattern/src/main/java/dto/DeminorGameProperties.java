@@ -1,11 +1,12 @@
 package dto;
 
+import constants.Levels;
 import views.options.panels.CustomLevelPanel;
 import views.options.panels.OptionsLevelPanel;
 
 public class DeminorGameProperties {
 
-    private static int initialLevel = 0;
+    private static int initialLevel = Levels.EASY;
 
     private int nBombs;
 
@@ -18,6 +19,11 @@ public class DeminorGameProperties {
     private long time;
 
     private int percent;
+
+    public DeminorGameProperties() {
+        this(initialLevel);
+        setInitialLevel(initialLevel);
+    }
 
     public DeminorGameProperties(int level) {
         this.level = level;
@@ -35,23 +41,23 @@ public class DeminorGameProperties {
         return initialLevel;
     }
 
-    public static void setInitialLevel(int initialLevel) {
+    private static void setInitialLevel(int initialLevel) {
         DeminorGameProperties.initialLevel = initialLevel;
     }
 
-    public void calculateGamePropertiesFromLevel() {
+    void calculateGamePropertiesFromLevel() {
         this.cellsPerLine = 0;
         this.cellsPerColumn = 0;
         this.nBombs = 0;
 
         if (level >= 0 && level <= 2) {
-            this.cellsPerLine = OptionsLevelPanel.getDeminorCellsPerWidthByLevel()[this.level];
-            this.cellsPerColumn = OptionsLevelPanel.getDeminorCellsPerHeightByLevel()[this.level];
-            this.nBombs = OptionsLevelPanel.getBombsByLevel()[this.level];
+            setCellsPerLine(OptionsLevelPanel.getDeminorCellsPerWidthByLevel()[this.level]);
+            setCellsPerColumn(OptionsLevelPanel.getDeminorCellsPerHeightByLevel()[this.level]);
+            setnBombs(OptionsLevelPanel.getBombsByLevel()[this.level]);
         } else {
-            this.cellsPerLine = Integer.parseInt(CustomLevelPanel.getCellsPerWidthTextField().getText());
-            this.cellsPerColumn = Integer.parseInt(CustomLevelPanel.getCellsPerColumnTextField().getText());
-            this.nBombs = Integer.parseInt(CustomLevelPanel.getnBombsTextField().getText());
+            setCellsPerLine(Integer.parseInt(CustomLevelPanel.getCellsPerWidthTextField().getText()));
+            setCellsPerColumn(Integer.parseInt(CustomLevelPanel.getCellsPerColumnTextField().getText()));
+            setnBombs(Integer.parseInt(CustomLevelPanel.getnBombsTextField().getText()));
         }
 
     }
@@ -60,7 +66,7 @@ public class DeminorGameProperties {
         return nBombs;
     }
 
-    public void setnBombs(int nBombs) {
+    private void setnBombs(int nBombs) {
         this.nBombs = nBombs;
     }
 
@@ -76,7 +82,7 @@ public class DeminorGameProperties {
         return cellsPerLine;
     }
 
-    public void setCellsPerLine(int cellsPerLine) {
+    private void setCellsPerLine(int cellsPerLine) {
         this.cellsPerLine = cellsPerLine;
     }
 
@@ -84,7 +90,7 @@ public class DeminorGameProperties {
         return cellsPerColumn;
     }
 
-    public void setCellsPerColumn(int cellsPerColumn) {
+    private void setCellsPerColumn(int cellsPerColumn) {
         this.cellsPerColumn = cellsPerColumn;
     }
 

@@ -36,7 +36,7 @@ public class ExtractDBtoCSVAction implements GenericAbstractInputObjectAction<Ex
                     LOGGER.info(HIGHSCORE_MESSAGE, iHighscore, SCORE, highscore.getScore());
                     LOGGER.info(HIGHSCORE_MESSAGE, iHighscore, PERCENT, highscore.getName());
                 }
-                String highscoresFilePath = String.format("/highscore_%d.csv", iLevel);
+                String highscoresFilePath = String.format("highscores/highscore_%d.csv", iLevel);
 
                 LOGGER.info(UNPARSE_MESSAGE, highscoresFilePath);
                 csvHighscoreParser.unParse(highscores, String.format(highscoresFilePath, iLevel));

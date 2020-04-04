@@ -22,7 +22,7 @@ public final class LanguageFactory {
 
         setCountry(languageResourceBundle.getString("country"));
         LOGGER.info(country);
-        locale = new Locale(language, country);
+        setLocale(new Locale(language, country));
     }
 
     public static void initLanguage() {
@@ -36,11 +36,7 @@ public final class LanguageFactory {
         return instance;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
+    private void setLanguage(String language) {
         this.language = language;
     }
 
@@ -48,15 +44,11 @@ public final class LanguageFactory {
         return locale;
     }
 
-    public void setLocale(Locale locale) {
+    private void setLocale(Locale locale) {
         this.locale = locale;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
+    private void setCountry(String country) {
         this.country = country;
     }
 

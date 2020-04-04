@@ -32,7 +32,7 @@ public class CustomLevelPanel extends JPanel {
         return cellsPerColumnTextField;
     }
 
-    public static void setCellsPerColumnTextField(JTextField cellsPerColumnTextField) {
+    private static void setCellsPerColumnTextField(JTextField cellsPerColumnTextField) {
         CustomLevelPanel.cellsPerColumnTextField = cellsPerColumnTextField;
     }
 
@@ -40,7 +40,7 @@ public class CustomLevelPanel extends JPanel {
         return cellsPerWidthTextField;
     }
 
-    public static void setCellsPerWidthTextField(JTextField cellsPerWidthTextField) {
+    private static void setCellsPerWidthTextField(JTextField cellsPerWidthTextField) {
         CustomLevelPanel.cellsPerWidthTextField = cellsPerWidthTextField;
     }
 
@@ -48,31 +48,31 @@ public class CustomLevelPanel extends JPanel {
         return nBombsTextField;
     }
 
-    public static void setnBombsTextField(JTextField nBombsTextField) {
+    private static void setnBombsTextField(JTextField nBombsTextField) {
         CustomLevelPanel.nBombsTextField = nBombsTextField;
     }
 
-    public static int getCellsPerColumn() {
+    private static int getCellsPerColumn() {
         return cellsPerColumn;
     }
 
-    public static void setCellsPerColumn(int cellsPerColumn) {
+    private static void setCellsPerColumn(int cellsPerColumn) {
         CustomLevelPanel.cellsPerColumn = cellsPerColumn;
     }
 
-    public static int getCellsPerWidth() {
+    private static int getCellsPerWidth() {
         return cellsPerWidth;
     }
 
-    public static void setCellsPerWidth(int cellsPerWidth) {
+    private static void setCellsPerWidth(int cellsPerWidth) {
         CustomLevelPanel.cellsPerWidth = cellsPerWidth;
     }
 
-    public static int getnBombs() {
+    private static int getnBombs() {
         return nBombs;
     }
 
-    public static void setnBombs(int nBombs) {
+    private static void setnBombs(int nBombs) {
         CustomLevelPanel.nBombs = nBombs;
     }
 

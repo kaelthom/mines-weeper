@@ -25,7 +25,7 @@ public class CsvParserTest {
     private CsvParser<Highscore> csvParser = null;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         csvParser = new CsvParser<>(Highscore.class, ";");
     }
 
@@ -72,7 +72,7 @@ public class CsvParserTest {
     private List<Highscore> givenInputHighScores() {
         Highscore inputHighscore = new Highscore();
         inputHighscore.setDate(LocalDateTime.of(2020, 11, 25, 10, 0, 0).toString());
-        inputHighscore.setId(1l);
+        inputHighscore.setId(1L);
         inputHighscore.setName("Toto");
         inputHighscore.setPercent(100);
         inputHighscore.setScore(25);
