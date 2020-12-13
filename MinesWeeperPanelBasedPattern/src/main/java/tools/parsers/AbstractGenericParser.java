@@ -1,9 +1,11 @@
 package tools.parsers;
 
-public abstract class AbstractGenericParser<T extends Object,V> {
+import java.lang.reflect.InvocationTargetException;
 
-	public abstract V unParse(T obj) throws IllegalArgumentException, IllegalAccessException;
+public interface AbstractGenericParser<T, V> {
 
-	public abstract T parse(V obj) throws InstantiationException, IllegalAccessException;
+    V unParse(T obj) throws IllegalAccessException;
+
+    T parse(V obj) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException;
 
 }

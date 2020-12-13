@@ -4,18 +4,18 @@ import views.main.panels.Cell;
 
 public class RightClickActionInput {
 
-	private Cell cell;
+    private Cell cell;
 
-	public RightClickActionInput(Cell cell) {
-		this.cell = cell;
-	}
+    public RightClickActionInput(Cell cell) {
+        setCell(cell);
+    }
 
-	public Cell getCell() {
-		return cell;
-	}
+    Cell getCell() {
+        return cell;
+    }
 
-	public void setCell(Cell cell) {
-		this.cell = cell;
-	}
-	
+    private void setCell(Cell cell) {
+        this.cell = cell;
+    }
+
 }

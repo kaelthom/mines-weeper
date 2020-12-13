@@ -1,7 +1,7 @@
 package actions;
 
-public abstract class GenericAbstractInputObjectAction<T> {
-	
-	public abstract int execute(T input);
-	
+public interface GenericAbstractInputObjectAction<T> {
+
+    int execute(T input);
+
 }

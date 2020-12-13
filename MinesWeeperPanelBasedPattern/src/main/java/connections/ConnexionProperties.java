@@ -7,17 +7,20 @@ package connections;
 
 import java.util.ResourceBundle;
 
-public class ConnexionProperties
-{
+public class ConnexionProperties {
 
-    public final static String DBMS = ResourceBundle.getBundle("connections").getString("dbms");
-    public final static String SERVER_NAME = ResourceBundle.getBundle("connections").getString("servername");
-    public final static String PORT_NUMBER = ResourceBundle.getBundle("connections").getString("portnumber");
-    public final static String DB_NAME = ResourceBundle.getBundle("connections").getString("dbname");
-    public final static String USER_NAME = ResourceBundle.getBundle("connections").getString("username");
-    public final static String PASSWORD = ResourceBundle.getBundle("connections").getString("password");
-    public final static int MIN_POOL_SIZE = Integer.parseInt(ResourceBundle.getBundle("connections").getString("minpoolsize"));
-    public final static int MAX_POOL_SIZE = Integer.parseInt(ResourceBundle.getBundle("connections").getString("maxpoolsize"));
-    public final static int ACQUIRE_INCREMENT = Integer.parseInt(ResourceBundle.getBundle("connections").getString("acquireincrement"));
+    private static final ResourceBundle CONNECTIONS_RESOURCE_BUNDLE = ResourceBundle.getBundle("connections");
+    static final String SERVER_NAME = CONNECTIONS_RESOURCE_BUNDLE.getString("servername");
+    static final String PORT_NUMBER = CONNECTIONS_RESOURCE_BUNDLE.getString("portnumber");
+    static final String DB_NAME = CONNECTIONS_RESOURCE_BUNDLE.getString("dbname");
+    static final String USER_NAME = CONNECTIONS_RESOURCE_BUNDLE.getString("username");
+    static final String PASSWORD = CONNECTIONS_RESOURCE_BUNDLE.getString("password");
+    static final String DBMS = CONNECTIONS_RESOURCE_BUNDLE.getString("dbms");
+    static final int MIN_POOL_SIZE = Integer.parseInt(CONNECTIONS_RESOURCE_BUNDLE.getString("minpoolsize"));
+    static final int MAX_POOL_SIZE = Integer.parseInt(CONNECTIONS_RESOURCE_BUNDLE.getString("maxpoolsize"));
+    static final int ACQUIRE_INCREMENT = Integer.parseInt(CONNECTIONS_RESOURCE_BUNDLE.getString("acquireincrement"));
+
+    private ConnexionProperties() {
+    }
 
 }

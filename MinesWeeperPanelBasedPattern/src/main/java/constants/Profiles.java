@@ -5,22 +5,29 @@ import java.util.Map;
 
 public class Profiles {
 
-	public final static String ADMIN_USER =  "ADMIN_USER";
-	public final static String DEFAULT_USER =  "DEFAULT_USER";
+    public static final String ADMIN_USER = "ADMIN_USER";
+    private static final String DEFAULT_USER = "DEFAULT_USER";
+    private static final Map<String, String[]> rightsPerProfile = createRightsMap();
 
-	public final static Map<String,String[]> rightsPerProfile = createRightsMap();
+    private Profiles() {
+        //prevent from being called from outside
+    }
 
-	private final static Map<String, String[]> createRightsMap() {
-		Map<String, String[]> rightsMap = new HashMap<String, String[]>();
-		rightsMap.put(ADMIN_USER, 
-				new String[]{
-						Rights.GET_ADMIN_MENU,
-						Rights.GET_OPTIONS_MENU,
-						Rights.GET_GAME_MENU});
-		rightsMap.put(DEFAULT_USER, 
-				new String[]{
-						Rights.GET_OPTIONS_MENU,
-						Rights.GET_GAME_MENU});
-		return rightsMap;
-	}
+    private static Map<String, String[]> createRightsMap() {
+        Map<String, String[]> rightsMap = new HashMap<>();
+        rightsMap.put(ADMIN_USER,
+                new String[]{
+                        Rights.GET_ADMIN_MENU,
+                        Rights.GET_OPTIONS_MENU,
+                        Rights.GET_GAME_MENU});
+        rightsMap.put(DEFAULT_USER,
+                new String[]{
+                        Rights.GET_OPTIONS_MENU,
+                        Rights.GET_GAME_MENU});
+        return rightsMap;
+    }
+
+    public static Map<String, String[]> getRightsPerProfile() {
+        return rightsPerProfile;
+    }
 }

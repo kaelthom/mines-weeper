@@ -3,19 +3,19 @@ package actions.optionssubmit;
 import dto.DeminorGameProperties;
 
 public class OptionsSubmitActionInput {
-	
-	public OptionsSubmitActionInput(DeminorGameProperties properties) {
-		this.gameProperties = properties;
-	}
 
-	private DeminorGameProperties gameProperties;
-	
-	public DeminorGameProperties getGameProperties() {
-		return gameProperties;
-	}
+    private DeminorGameProperties gameProperties;
 
-	public void setGameProperties(DeminorGameProperties properties) {
-		this.gameProperties = properties;
-	}
+    public OptionsSubmitActionInput(DeminorGameProperties properties) {
+        setGameProperties(properties);
+    }
+
+    DeminorGameProperties getGameProperties() {
+        return gameProperties;
+    }
+
+    private void setGameProperties(DeminorGameProperties properties) {
+        this.gameProperties = properties;
+    }
 
 }

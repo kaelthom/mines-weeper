@@ -4,18 +4,18 @@ import java.io.File;
 
 public class ExtractCSVtoDBActionInput {
 
-	private File csvFile;
+    private File csvFile;
 
-	public ExtractCSVtoDBActionInput(File csvFile) {
-		this.setCsvFile(csvFile);
-	}
+    public ExtractCSVtoDBActionInput(File csvFile) {
+        this.setCsvFile(csvFile);
+    }
 
-	public File getCsvFile() {
-		return csvFile;
-	}
+    File getCsvFile() {
+        return csvFile;
+    }
 
-	public void setCsvFile(File csvFile) {
-		this.csvFile = csvFile;
-	}
+    private void setCsvFile(File csvFile) {
+        this.csvFile = csvFile;
+    }
 
 }

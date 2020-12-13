@@ -8,32 +8,27 @@ package dto;
 // Referenced classes of package connexions:
 //            ConnexionProperties
 
-public class DeminorGamePropertiesFactory
-{
-
-    private DeminorGamePropertiesFactory()
-    {
-    }
-
-    public static DeminorGameProperties getDeminorGamePropertiesInstance()
-    {
-        gamePropertiesFactory = gamePropertiesFactory == null?new DeminorGamePropertiesFactory():gamePropertiesFactory;
-        return gameProperties == null? initDeminorGameProperties():gameProperties;
-    }
-
-    private static DeminorGameProperties initDeminorGameProperties()
-    {
-    	gameProperties = new DeminorGameProperties(DeminorGameProperties.getInitialLevel());
-        return gameProperties;
-    }
-
-    public static void updateDeminorGameProperties(DeminorGameProperties gameProperties)
-    {
-    	gameProperties.calculateGamePropertiesFromLevel();
-    	DeminorGamePropertiesFactory.gameProperties = gameProperties;
-    }
+public class DeminorGamePropertiesFactory {
 
     private static DeminorGamePropertiesFactory gamePropertiesFactory = null;
     private static DeminorGameProperties gameProperties = null;
+
+    private DeminorGamePropertiesFactory() {
+    }
+
+    public static DeminorGameProperties getDeminorGamePropertiesInstance() {
+        gamePropertiesFactory = gamePropertiesFactory == null ? new DeminorGamePropertiesFactory() : gamePropertiesFactory;
+        return gameProperties == null ? initDeminorGameProperties() : gameProperties;
+    }
+
+    private static DeminorGameProperties initDeminorGameProperties() {
+        gameProperties = new DeminorGameProperties();
+        return gameProperties;
+    }
+
+    public static void updateDeminorGameProperties(DeminorGameProperties gameProperties) {
+        gameProperties.calculateGamePropertiesFromLevel();
+        DeminorGamePropertiesFactory.gameProperties = gameProperties;
+    }
 
 }

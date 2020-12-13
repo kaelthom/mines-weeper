@@ -7,89 +7,99 @@ package datas;
 
 import tools.parsers.csv.CsvColumn;
 
+import java.util.Objects;
+
 public class Highscore implements Comparable<Highscore> {
 
-	@CsvColumn(column = 1)
-	public Long id;
+    // fields are public for reflective treatment in CsvParser
+    @CsvColumn(column = 0)
+    public String name;
+    @CsvColumn(column = 2)
+    public String date;
+    @CsvColumn(column = 4)
+    public long score;
+    @CsvColumn(column = 3)
+    public int percent;
+    @CsvColumn(column = 1)
+    public Long id;
 
-	@CsvColumn(column = 0)
-	public String name;
+    public Highscore() {
 
-	@CsvColumn(column = 2)
-	public String date;
+    }
 
-	@CsvColumn(column = 4)
-	public long score;
+    public Highscore(long id, String name, String date, long score, int percent) {
+        this.id = id;
+        this.date = date;
+        this.name = name;
+        this.score = score;
+        this.percent = percent;
+    }
 
-	@CsvColumn(column = 3)
-	public int percent;
+    public int getPercent() {
+        return percent;
+    }
 
-	public Highscore() {
-		
-	}
+    public void setPercent(int percent) {
+        this.percent = percent;
+    }
 
-	public Highscore(long id, String name, String date, long score, int percent) {
-		this.id = id;
-		this.date = date;
-		this.name = name;
-		this.score = score;
-		this.percent = percent;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getPercent() {
-		return percent;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setPercent(int percent) {
-		this.percent = percent;
-	}
+    public String getDate() {
+        return date;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public long getScore() {
+        return score;
+    }
 
-	public String getDate() {
-		return date;
-	}
+    public void setScore(long score) {
+        this.score = score;
+    }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public long getScore() {
-		return score;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setScore(long score) {
-		this.score = score;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Highscore highscore = (Highscore) o;
+        return score == highscore.score &&
+                percent == highscore.percent &&
+                Objects.equals(id, highscore.id) &&
+                Objects.equals(name, highscore.name) &&
+                Objects.equals(date, highscore.date);
+    }
 
-	public Long getId() {
-		return id;
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, date, score, percent);
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Override
-	public int compareTo(Highscore highscore) {
-		if (this.percent < highscore.percent) {
-			return 1;
-		} else if (this.percent > highscore.percent) {
-			return -1;
-		} else {
-			if (this.score < highscore.score) {
-				return -1;
-			} else if (this.score > highscore.score) {
-				return 1;
-			} else {
-				return 0;
-			}
-		}
-	}
+    @Override
+    public int compareTo(Highscore highscore) {
+        if (this.percent < highscore.percent) {
+            return 1;
+        } else if (this.percent > highscore.percent) {
+            return -1;
+        } else {
+            return Long.compare(this.score, highscore.score);
+        }
+    }
 }
