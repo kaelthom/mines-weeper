@@ -1,0 +1,7 @@
+/MinesWeeper.jar
+MinesWeeperPanelBasedPattern/bin/
+MinesWeeperPanelBasedPattern/*.log
+MinesWeeperPanelBasedPattern/target/
+MinesWeeperPanelBasedPattern/.project
+MinesWeeperPanelBasedPattern/.classpath
+.idea/
