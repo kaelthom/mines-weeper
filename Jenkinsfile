@@ -10,7 +10,7 @@ pipeline {
                 bat 'java --version'
                 echo "Database engine is ${DB_ENGINE}"
                 echo "DISABLE_AUTH is ${DISABLE_AUTH}"
-                bat 'printenv'
+                bat 'mvn install'
             }
         }
     }

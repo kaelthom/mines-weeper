@@ -31,7 +31,7 @@ public class CsvParserTest {
 
     @Test
     public void parse() {
-        File example1InputFile = new File("src/test/java/tools/parsers/csv/test/highscore_example_input_2.csv");
+        File example1InputFile = new File("MinesWeeperPanelBasedPattern/src/test/java/tools/parsers/csv/test/highscore_example_input_2.csv");
 
         LOGGER.info(example1InputFile.getAbsolutePath());
         try {
@@ -55,7 +55,7 @@ public class CsvParserTest {
     public void unParse() {
         List<Highscore> inputHighscores = givenInputHighScores();
 
-        String example1OutputFilePath = "target/test-classes/highscore_example_output_1";
+        String example1OutputFilePath = "MinesWeeperPanelBasedPattern/target/test-classes/highscore_example_output_1";
         File outputPath = csvParser.unParse(inputHighscores, example1OutputFilePath);
         List<String> outputLines = null;
         // read file into stream, try-with-resources

@@ -23,7 +23,7 @@ import java.util.List;
 public class HighscoreCSVFileDAO {
 
     private static final int HIGHSCORES_MAX_SIZE = 10;
-    private static final String HIGHSCORES_FILE_PATH = "highscores/highscore_";
+    private static final String HIGHSCORES_FILE_PATH = "MinesWeeperPanelBasedPattern/highscores/highscore_";
     private static final String CSV_EXTENSION = ".csv";
     private static final Logger LOGGER = LoggerFactory.getLogger(HighscoreCSVFileDAO.class);
 
