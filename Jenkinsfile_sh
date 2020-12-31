@@ -1,5 +1,6 @@
 pipeline {
-    agent any
+    agent docker { image 'adoptopenjdk:11-jre-hotspot' }
+
     environment {
         DISABLE_AUTH = 'true'
         DB_ENGINE    = 'sqlite'
