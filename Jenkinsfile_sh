@@ -11,7 +11,7 @@ pipeline {
         DB_ENGINE    = 'sqlite'
     }
     stages {
-        stage('build Maven') {
+        stage('install node') {
             steps {
                 sh 'mvn install'
                 sh 'java -version'
@@ -19,10 +19,12 @@ pipeline {
                 echo "DISABLE_AUTH is ${DISABLE_AUTH}"
             }
         }
-        stage('build npm') {
+        stage('build Maven') {
             steps {
-                sh 'node -v'
-                sh 'npm -v'
+                sh 'mvn install'
+                sh 'java -version'
+                echo "Database engine is ${DB_ENGINE}"
+                echo "DISABLE_AUTH is ${DISABLE_AUTH}"
             }
         }
     }
