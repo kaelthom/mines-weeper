@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo $PATH
                 withMaven(maven : 'Maven-3.6.3') {
-                    sh './mvn install'
+                    sh 'mvn install'
                 }
                 sh 'java --version'
                 echo "Database engine is ${DB_ENGINE}"
