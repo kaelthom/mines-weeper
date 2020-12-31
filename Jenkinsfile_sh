@@ -1,8 +1,8 @@
 pipeline {
     tools{
-        mvn 'Maven-3.6.3'
+        maven 'Maven-3.6.3'
         jdk 'JDK8-221'
-        docker 'Docker'
+        dockerTool 'Docker'
     }
     agent {
         docker { image 'adoptopenjdk:11-jre-hotspot' }
