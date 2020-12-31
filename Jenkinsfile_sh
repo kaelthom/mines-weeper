@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('build Maven') {
             steps {
-                withMaven(maven : 'mvn-3.6.3') {
+                withMaven(maven : 'Maven-3.6.3') {
                     sh './mvn install'
                 }
                 sh 'java --version'
