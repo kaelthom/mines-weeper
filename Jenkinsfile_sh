@@ -1,4 +1,9 @@
 pipeline {
+    tools{
+        mvn 'Maven-3.6.3'
+        jdk 'JDK8-221'
+        docker 'Docker'
+    }
     agent {
         docker { image 'adoptopenjdk:11-jre-hotspot' }
     }
@@ -10,10 +15,12 @@ pipeline {
     stages {
         stage('build Maven') {
             steps {
+                withMaven(maven : 'mvn-3.6.3') {
+                    sh './mvn install'
+                }
                 sh 'java --version'
                 echo "Database engine is ${DB_ENGINE}"
                 echo "DISABLE_AUTH is ${DISABLE_AUTH}"
-                sh './mvn install'
             }
         }
         stage('build npm') {
