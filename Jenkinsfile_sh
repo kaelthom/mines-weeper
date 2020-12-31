@@ -4,9 +4,7 @@ pipeline {
         jdk 'JDK8-221'
         dockerTool 'Docker'
     }
-    agent {
-        docker { image 'adoptopenjdk:11-jre-hotspot' }
-    }
+    agent any
 
     environment {
         DISABLE_AUTH = 'true'
