@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('build Maven') {
             steps {
-                echo $Path
+                echo $PATH
                 withMaven(maven : 'Maven-3.6.3') {
                     sh './mvn install'
                 }
