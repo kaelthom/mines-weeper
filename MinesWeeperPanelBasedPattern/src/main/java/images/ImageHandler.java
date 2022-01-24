@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class ImageHandler {
 
-    private static final String IMAGES_FILES_PATH = "src/main/resources/images/";
+    private static final String IMAGES_FILES_PATH = "MinesWeeperPanelBasedPattern\\src\\main\\resources\\images\\";
     private static ImageIcon bombIcon;
     private static ImageIcon flagIcon;
     private static ImageIcon hiddenIcon;
