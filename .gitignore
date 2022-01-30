@@ -5,3 +5,5 @@ MinesWeeperPanelBasedPattern/target/
 MinesWeeperPanelBasedPattern/.project
 MinesWeeperPanelBasedPattern/.classpath
 .idea/
+target/
+derby.log
