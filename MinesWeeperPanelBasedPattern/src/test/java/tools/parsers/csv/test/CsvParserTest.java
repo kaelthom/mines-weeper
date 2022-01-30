@@ -1,8 +1,8 @@
 package tools.parsers.csv.test;
 
 import datas.Highscore;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tools.parsers.csv.CsvParser;
@@ -24,7 +24,7 @@ public class CsvParserTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(CsvParserTest.class);
     private CsvParser<Highscore> csvParser = null;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         csvParser = new CsvParser<>(Highscore.class, ";");
     }

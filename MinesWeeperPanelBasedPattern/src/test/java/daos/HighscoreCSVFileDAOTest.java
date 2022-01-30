@@ -1,15 +1,24 @@
 package daos;
 
 import datas.Highscore;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HighscoreCSVFileDAOTest {
+
+    @BeforeAll
+    static void setUp() throws Exception {
+
+    }
+
+    @AfterAll
+    static void tearDown() throws Exception {
+    }
 
     @Test
     public void getHighscoreList() {
@@ -18,14 +27,5 @@ public class HighscoreCSVFileDAOTest {
         assertThat(expectedHighscores).isNotNull();
         assertThat(expectedHighscores).hasSize(10);
 
-    }
-
-    @Before
-    public void setUp() throws Exception {
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
     }
 }
