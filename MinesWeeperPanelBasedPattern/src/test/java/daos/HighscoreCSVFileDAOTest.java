@@ -9,23 +9,24 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HighscoreCSVFileDAOTest {
+class HighscoreCSVFileDAOTest {
 
     @BeforeAll
-    static void setUp() throws Exception {
+    static void setUp() {
 
     }
 
     @AfterAll
-    static void tearDown() throws Exception {
+    static void tearDown() {
     }
 
     @Test
-    public void getHighscoreList() {
+    void getHighscoreList() {
         List<Highscore> expectedHighscores = new HighscoreCSVFileDAO().getHighscoreList(0);
 
-        assertThat(expectedHighscores).isNotNull();
-        assertThat(expectedHighscores).hasSize(10);
+        assertThat(expectedHighscores)
+                .isNotNull()
+                .hasSize(10);
 
     }
 }

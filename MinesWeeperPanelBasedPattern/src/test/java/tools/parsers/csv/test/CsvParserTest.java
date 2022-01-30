@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CsvParserTest {
+class CsvParserTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CsvParserTest.class);
     private CsvParser<Highscore> csvParser = null;
@@ -30,7 +30,7 @@ public class CsvParserTest {
     }
 
     @Test
-    public void parse() {
+    void parse() {
         File example1InputFile = new File("MinesWeeperPanelBasedPattern/src/test/java/tools/parsers/csv/test/highscore_example_input_2.csv");
 
         LOGGER.info(example1InputFile.getAbsolutePath());
@@ -52,7 +52,7 @@ public class CsvParserTest {
     }
 
     @Test
-    public void unParse() {
+    void unParse() {
         List<Highscore> inputHighscores = givenInputHighScores();
 
         String example1OutputFilePath = "MinesWeeperPanelBasedPattern/target/test-classes/highscore_example_output_1";
@@ -65,8 +65,12 @@ public class CsvParserTest {
             LOGGER.error("Error while parsing CSV file", e);
         }
 
-        assertThat(outputLines).hasSize(1);
-        assertThat(outputLines.get(0)).isEqualTo("Toto;1;2020-11-25T10:00;100;25;");
+        assertThat(outputLines)
+                .isNotNull()
+                .hasSize(1);
+        assertThat(outputLines.get(0))
+                .isNotNull()
+                .isEqualTo("Toto;1;2020-11-25T10:00;100;25;");
     }
 
     private List<Highscore> givenInputHighScores() {
